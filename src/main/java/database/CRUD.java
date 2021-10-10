@@ -95,7 +95,7 @@ public class CRUD {
 
     public void obtenerUnDisco(String documentoID) 
     {
-        DocumentReference docRef = bd.collection("Discos").document("documentoID");
+        DocumentReference docRef = bd.collection("Discos").document(documentoID);
         // asynchronously retrieve the document
         ApiFuture<DocumentSnapshot> future = docRef.get();
         // ...
