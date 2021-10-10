@@ -20,6 +20,17 @@ public class Disco {
         this.vendedor = vendedor;
     }
 
+    public Disco()
+    {
+        nombre="";
+        artista="";
+        publicacion=0;
+        formato="";
+        precio=0;
+        cantidad=0;
+        vendedor=null;
+    }
+
     public String getNombre() {
         return nombre;
     }

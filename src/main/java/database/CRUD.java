@@ -95,7 +95,7 @@ public class CRUD {
 
     public void obtenerUnDisco(String documentoID) throws InterruptedException, ExecutionException
     {
-        DocumentReference docRef = bd.collection("Discos").document("documentoID");
+        DocumentReference docRef = bd.collection("Discos").document(documentoID);
         // asynchronously retrieve the document
         ApiFuture<DocumentSnapshot> future = docRef.get();
         // ...
@@ -108,15 +108,19 @@ public class CRUD {
         }
     }
 
-    public void obtenerColeccionDiscos() throws InterruptedException, ExecutionException
+    public void obtenerColeccionDiscos()
     {
         //asynchronously retrieve all documents
         ApiFuture<QuerySnapshot> future = bd.collection("Discos").get();
         // future.get() blocks on response
-        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
-        for (QueryDocumentSnapshot document : documents) {
-            System.out.println(document.getId() + " => " + document.toObject(Disco.class));
-            obtenerUnDisco(document.getId());
+        try{
+            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            for (QueryDocumentSnapshot document : documents) {
+                System.out.println(document.getId() + " => " + document.toObject(Disco.class));
+                obtenerUnDisco(document.getId());
+            }
+        } catch(ExecutionException | InterruptedException e){
+            e.printStackTrace();
         }
     }
 
