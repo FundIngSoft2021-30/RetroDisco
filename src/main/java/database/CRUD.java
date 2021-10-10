@@ -65,7 +65,7 @@ public class CRUD {
         docDisco.put("formato", disc.getFormato());
         docDisco.put("precio", disc.getPrecio());
         docDisco.put("cantidad", disc.getCantidad());
-        docDisco.put("vendedor", disc.getVendedor().getUsername());
+        docDisco.put("vendedor", disc.getVendedor());
         ApiFuture<WriteResult> future = bd.collection("Discos").document(UUID.randomUUID().toString()).set(docDisco);
         try {
             System.out.println("Disco agregado : " + future.get().getUpdateTime());
@@ -93,19 +93,14 @@ public class CRUD {
         return true;
     }
 
-    public void obtenerUnDisco(String documentoID) 
+    public void obtenerUnDisco(String documentoID) throws InterruptedException, ExecutionException
     {
         DocumentReference docRef = bd.collection("Discos").document(documentoID);
         // asynchronously retrieve the document
         ApiFuture<DocumentSnapshot> future = docRef.get();
         // ...
         // future.get() blocks on response
-        DocumentSnapshot documento = null;
-        try {
-            documento = future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
+        DocumentSnapshot documento = future.get();
         if (documento.exists()) {
         System.out.println("Document data: " + documento.getData());
         } else {
@@ -118,15 +113,14 @@ public class CRUD {
         //asynchronously retrieve all documents
         ApiFuture<QuerySnapshot> future = bd.collection("Discos").get();
         // future.get() blocks on response
-        List<QueryDocumentSnapshot> documents = null;
-        try {
-            documents = future.get().getDocuments();
-        } catch (InterruptedException | ExecutionException e) {
+        try{
+            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            for (QueryDocumentSnapshot document : documents) {
+                System.out.println(document.getId() + " => " + document.toObject(Disco.class));
+                obtenerUnDisco(document.getId());
+            }
+        } catch(ExecutionException | InterruptedException e){
             e.printStackTrace();
-        }
-        for (QueryDocumentSnapshot document : documents) {
-            System.out.println(document.getId() + " => " + document.toObject(Disco.class));
-            obtenerUnDisco(document.getId());
         }
     }
 

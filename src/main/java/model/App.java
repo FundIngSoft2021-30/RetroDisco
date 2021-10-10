@@ -17,5 +17,6 @@ public class App
         {
             System.out.println("Se agregó el usuario correctamente.");
         }*/
+        bd.obtenerColeccionDiscos();
     }
 }
