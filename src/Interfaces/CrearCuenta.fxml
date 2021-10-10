@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="310.0">
+         <children>
+            <Label alignment="TOP_LEFT" text="  Crear Cuenta" textAlignment="CENTER">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <Label>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label text=" Usuario">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtUser" onKeyTyped="#eventKey">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <Label text=" Correo">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtUser1" onKeyTyped="#eventKey">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <Label text=" Contraseña">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="txtPassword" onKeyTyped="#eventKey">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </PasswordField>
+            <Label>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="   ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" text="Regresar">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Label text="                  ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" text="Crear Cuenta">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="containerRight" alignment="CENTER" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #3F50DF;">
+         <children>
+            <ImageView fitHeight="232.0" fitWidth="294.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@LogoRD.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+   </children>
+</HBox>
