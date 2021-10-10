@@ -7,14 +7,17 @@ public class Disco {
     private String formato;
     private int precio;
     private int cantidad;
+    private Usuario vendedor;
     
-    public Disco(String nombre, String artista, int publicacion, String formato, int precio, int cantidad) {
+    public Disco(String nombre, String artista, int publicacion, String formato, int precio, int cantidad,
+            Usuario vendedor) {
         this.nombre = nombre;
         this.artista = artista;
         this.publicacion = publicacion;
         this.formato = formato;
         this.precio = precio;
         this.cantidad = cantidad;
+        this.vendedor = vendedor;
     }
 
     public String getNombre() {
@@ -64,6 +67,12 @@ public class Disco {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
-    
+
+    public Usuario getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Usuario vendedor) {
+        this.vendedor = vendedor;
+    }
 }
