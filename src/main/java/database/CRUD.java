@@ -93,14 +93,19 @@ public class CRUD {
         return true;
     }
 
-    public void obtenerUnDisco(String documentoID) throws InterruptedException, ExecutionException
+    public void obtenerUnDisco(String documentoID) 
     {
         DocumentReference docRef = bd.collection("Discos").document("documentoID");
         // asynchronously retrieve the document
         ApiFuture<DocumentSnapshot> future = docRef.get();
         // ...
         // future.get() blocks on response
-        DocumentSnapshot documento = future.get();
+        DocumentSnapshot documento = null;
+        try {
+            documento = future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
         if (documento.exists()) {
         System.out.println("Document data: " + documento.getData());
         } else {
@@ -108,12 +113,17 @@ public class CRUD {
         }
     }
 
-    public void obtenerColeccionDiscos() throws InterruptedException, ExecutionException
+    public void obtenerColeccionDiscos()
     {
         //asynchronously retrieve all documents
         ApiFuture<QuerySnapshot> future = bd.collection("Discos").get();
         // future.get() blocks on response
-        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        List<QueryDocumentSnapshot> documents = null;
+        try {
+            documents = future.get().getDocuments();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
         for (QueryDocumentSnapshot document : documents) {
             System.out.println(document.getId() + " => " + document.toObject(Disco.class));
             obtenerUnDisco(document.getId());
