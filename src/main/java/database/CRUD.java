@@ -59,7 +59,7 @@ public class CRUD {
 
 
 
-    public boolean existeUsername(String username)
+    public static boolean existeUsername(String username)
     {
         boolean existe = false;
         DocumentReference docRef = bd.collection("Usuarios").document(username);
@@ -79,7 +79,7 @@ public class CRUD {
         return existe;
     }
 
-    public boolean autenticarPassword(String username, String password)
+    public static boolean autenticarPassword(String username, String password)
     {
         boolean retorno = false;
 
