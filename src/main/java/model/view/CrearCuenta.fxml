@@ -104,7 +104,7 @@
          <children>
             <ImageView fitHeight="232.0" fitWidth="294.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@LogoRD.png" />
+                  <Image url="@íconos/LogoRD.png" />
                </image>
             </ImageView>
          </children>

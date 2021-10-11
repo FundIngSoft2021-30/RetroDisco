@@ -4,6 +4,8 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -36,6 +38,21 @@
                   </VBox>
                   <Label layoutX="435.0" layoutY="267.0" prefHeight="23.0" prefWidth="40.0" text="Total:" />
                   <Label fx:id="total" layoutX="471.0" layoutY="270.0" text="20.000" />
+                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="470.0" layoutY="28.0">
+                     <image>
+                        <Image url="@íconos/Cuenta_i.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="501.0" layoutY="25.0">
+                     <image>
+                        <Image url="@íconos/campana_i.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="531.0" layoutY="25.0">
+                     <image>
+                        <Image url="@íconos/Ayuda_i.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
         </content>
