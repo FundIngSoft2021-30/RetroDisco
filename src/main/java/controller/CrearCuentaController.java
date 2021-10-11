@@ -1,12 +1,13 @@
 package controller;
 
+import database.CRUD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import model.Usuario;
 
 public class CrearCuentaController {
 
@@ -33,12 +34,8 @@ public class CrearCuentaController {
 
     @FXML
     void CrearCuenta(ActionEvent event) {
-        
-    }
-
-    @FXML
-    void eventKey(KeyEvent event) {
-
+        Usuario usuario1=new Usuario(txtNombre.getText(), txtApellido.getText(), txtUsername.getText(), txtPassword.getText());
+        CRUD.agregarUsuario(usuario1);
     }
 
     @FXML
@@ -47,4 +44,3 @@ public class CrearCuentaController {
     }
 
 }
-

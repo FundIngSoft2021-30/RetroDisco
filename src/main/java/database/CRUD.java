@@ -40,7 +40,7 @@ public class CRUD {
     }
 
     
-    public boolean agregarUsuario(Usuario user)
+    public static boolean agregarUsuario(Usuario user)
     {
         Map<String, Object> docUsuario = new HashMap<>();
         docUsuario.put("nombre", user.getNombre());
@@ -134,7 +134,7 @@ public class CRUD {
 
     }
 
-    public boolean agregarDisco(Disco disc)
+    public static boolean agregarDisco(Disco disc)
     {
         Map<String, Object> docDisco = new HashMap<>();
         docDisco.put("nombre", disc.getNombre());
@@ -155,7 +155,7 @@ public class CRUD {
         return true;
     }
     
-    public boolean agregarCalificacion(Calificacion review)
+    public static boolean agregarCalificacion(Calificacion review)
     {
         Map<String, Object> docCalificacion = new HashMap<>();
         docCalificacion.put("comentario", review.getComentario());

@@ -25,7 +25,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="txtNombre" onKeyTyped="#eventKey">
+            <TextField fx:id="txtNombre">
                <font>
                   <Font size="18.0" />
                </font>
@@ -35,7 +35,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="txtApellido" onKeyTyped="#eventKey">
+            <TextField fx:id="txtApellido">
                <font>
                   <Font size="18.0" />
                </font>
@@ -45,7 +45,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <PasswordField fx:id="txtUsername" onKeyTyped="#eventKey">
+            <PasswordField fx:id="txtUsername">
                <font>
                   <Font size="18.0" />
                </font>
@@ -55,7 +55,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <PasswordField fx:id="txtPassword" layoutX="10.0" layoutY="236.0" onKeyTyped="#eventKey">
+            <PasswordField fx:id="txtPassword" layoutX="10.0" layoutY="236.0">
                <font>
                   <Font size="18.0" />
                </font>
