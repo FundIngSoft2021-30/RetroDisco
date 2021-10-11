@@ -12,10 +12,10 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //CRUD bd=new CRUD();
-        Parent root = FXMLLoader.load(Thread.currentThread().getContextClassLoader().getResource("CrearCuenta.fxml"));//FXMLLoader.load(getClass().getResource("view/CrearCuenta.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/VerInfo.fxml"));
         
         Scene scene = new Scene(root);
-        
+        stage.setTitle("Inicio  - RetroDisco");
         stage.setScene(scene);
         stage.show();
     }

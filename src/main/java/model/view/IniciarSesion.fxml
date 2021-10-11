@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox prefHeight="503.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IniciarSesionController">
+   <children>
+      <VBox fx:id="containerLeft" alignment="CENTER" prefWidth="427.0" HBox.hgrow="ALWAYS">
+         <children>
+            <Label text="Iniciar Sesión">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Usuario">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="txtUsuario" onKeyTyped="#eventKey">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <Label text="Contraseña">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="txtContraseña" onKeyTyped="#eventKey">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </PasswordField>
+               </children>
+               <VBox.margin>
+                  <Insets left="30.0" right="30.0" />
+               </VBox.margin>
+            </VBox>
+            <Pane prefHeight="121.0" prefWidth="427.0">
+               <children>
+                  <Button fx:id="BotonIngresar" layoutX="32.0" layoutY="17.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#IniciarSesion" text="Ingresar">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="BotonIngresar1" layoutX="195.0" layoutY="17.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#IniciarSesion" text="Iniciar como Invitado">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </children>
+
+      </VBox>
+      <VBox fx:id="containerRight" alignment="CENTER" prefWidth="427.0" style="-fx-background-color: #3F50DF;" HBox.hgrow="ALWAYS">
+         <children>
+            <ImageView fitHeight="300.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@LogoRD.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+   </children>
+</HBox>

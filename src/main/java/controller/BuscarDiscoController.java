@@ -1,9 +1,10 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import java.awt.event.*;
 
 public class BuscarDiscoController {
 
@@ -11,10 +12,13 @@ public class BuscarDiscoController {
     private Button CerrarSesion;
 
     @FXML
-    private TextField nombreDisco;
+    private Button buscarDisco;
 
     @FXML
-    private Button buscarDisco;
+    private ComboBox<?> filtro;
+
+    @FXML
+    private TextField nombreDisco;
 
     @FXML
     void buscarDisco(ActionEvent event) {
@@ -27,4 +31,3 @@ public class BuscarDiscoController {
     }
 
 }
-

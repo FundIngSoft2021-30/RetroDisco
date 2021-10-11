@@ -1,26 +1,20 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import java.awt.event.*;
+import javafx.scene.control.Label;
 
 public class CarritoDeComprasController {
-
-    @FXML
-    private Button regresarAbusqeda;
 
     @FXML
     private Button pagar;
 
     @FXML
-    private CheckBox Disco1;
+    private Button regresarAbusqeda;
 
     @FXML
-    private CheckBox Disco2;
-
-    @FXML
-    private CheckBox Disco3;
+    private Label total;
 
     @FXML
     void RegresaInterfazBusqueda(ActionEvent event) {
@@ -28,7 +22,17 @@ public class CarritoDeComprasController {
     }
 
     @FXML
+    void eliminarDiscos(ActionEvent event) {
+
+    }
+
+    @FXML
     void pagarCarrito(ActionEvent event) {
+
+    }
+
+    @FXML
+    void vaciarCarrito(ActionEvent event) {
 
     }
 

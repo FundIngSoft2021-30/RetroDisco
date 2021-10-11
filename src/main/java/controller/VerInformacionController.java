@@ -1,20 +1,23 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import java.awt.event.*;
 
 public class VerInformacionController {
 
     @FXML
-    private Label nombreDisco;
+    private Button AgruegarAlCarrito;
 
     @FXML
     private Label NombreArtista;
 
     @FXML
-    private Label ano;
+    private Button Regresar;
+
+    @FXML
+    private Label anio;
 
     @FXML
     private Label formato;
@@ -23,13 +26,10 @@ public class VerInformacionController {
     private Label genero;
 
     @FXML
+    private Label nombreDisco;
+
+    @FXML
     private Label precio;
-
-    @FXML
-    private Button Regresar;
-
-    @FXML
-    private Button AgruegarAlCarrito;
 
     @FXML
     void AgruegarACarrito(ActionEvent event) {
@@ -37,7 +37,7 @@ public class VerInformacionController {
     }
 
     @FXML
-    void RegresarABUsqueda(ActionEvent event) {
+    void RegresarABusqueda(ActionEvent event) {
 
     }
 

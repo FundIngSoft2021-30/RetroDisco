@@ -25,7 +25,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="txtNombre">
+            <TextField fx:id="txtNombre" onKeyTyped="#eventKey">
                <font>
                   <Font size="18.0" />
                </font>
