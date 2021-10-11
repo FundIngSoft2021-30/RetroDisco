@@ -8,48 +8,72 @@
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="400.0" prefWidth="310.0">
+      <VBox prefHeight="272.0" prefWidth="302.0">
          <children>
             <Label alignment="TOP_LEFT" text="  Crear Cuenta" textAlignment="CENTER">
                <font>
                   <Font size="40.0" />
                </font>
             </Label>
+            <Label text="Nombre">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNombre" onKeyTyped="#eventKey">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <Label text="Apellido">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtApellido" onKeyTyped="#eventKey">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <Label text="Username">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="txtUsername" onKeyTyped="#eventKey">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </PasswordField>
+            <Label text="Contraseña">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="txtPassword" layoutX="10.0" layoutY="236.0" onKeyTyped="#eventKey">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </PasswordField>
             <Label>
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label text=" Usuario">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtUser" onKeyTyped="#eventKey">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </TextField>
-            <Label text=" Correo">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtUser1" onKeyTyped="#eventKey">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </TextField>
-            <Label text=" Contraseña">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <PasswordField fx:id="txtPassword" onKeyTyped="#eventKey">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </PasswordField>
+            <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
+               <items>
+                  <Button fx:id="botonRegresar" mnemonicParsing="false" onAction="#regresarInicio" text="Regresar">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="crearCuenta" mnemonicParsing="false" onAction="#CrearCuenta" text="Crear Cuenta">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </items>
+            </SplitPane>
             <Label>
                <font>
                   <Font size="20.0" />
@@ -62,21 +86,11 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" text="Regresar">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
                   <Label text="                  ">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" text="Crear Cuenta">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
                </children>
             </HBox>
          </children>

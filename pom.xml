@@ -47,6 +47,16 @@
         <artifactId>firebase-admin</artifactId>
         <version>8.1.0</version>
     </dependency>
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-fxml</artifactId>
+        <version>18-ea+4</version>
+    </dependency>
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-controls</artifactId>
+        <version>18-ea+4</version>
+    </dependency>
   </dependencies>
 
   <build>
