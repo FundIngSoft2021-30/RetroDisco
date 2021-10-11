@@ -66,6 +66,7 @@ public class CRUD {
         docDisco.put("precio", disc.getPrecio());
         docDisco.put("cantidad", disc.getCantidad());
         docDisco.put("vendedor", disc.getVendedor());
+        docDisco.put("genero", disc.getGenero());
         ApiFuture<WriteResult> future = bd.collection("Discos").document(UUID.randomUUID().toString()).set(docDisco);
         try {
             System.out.println("Disco agregado : " + future.get().getUpdateTime());
