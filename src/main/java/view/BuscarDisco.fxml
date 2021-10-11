@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="400.0" prefWidth="209.0">
          <children>
-            <Button blendMode="LIGHTEN" layoutX="31.0" layoutY="316.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="121.0" text="Regresar" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="CerrarSesion" blendMode="LIGHTEN" layoutX="31.0" layoutY="316.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="44.0" prefWidth="121.0" text="Cerrar sesion" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -35,13 +40,13 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <TextField layoutX="-147.0" layoutY="48.0" prefHeight="25.0" prefWidth="347.0" />
+            <TextField fx:id="nombreDisco" layoutX="-147.0" layoutY="48.0" prefHeight="25.0" prefWidth="347.0" />
             <ImageView fitHeight="232.0" fitWidth="294.0" layoutX="128.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@LogoRD.png" />
                </image>
             </ImageView>
-            <Button layoutX="18.0" layoutY="94.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="121.0" text="Buscar" />
+            <Button fx:id="buscarDisco" layoutX="18.0" layoutY="94.0" mnemonicParsing="false" onAction="#buscarDisco" prefHeight="44.0" prefWidth="121.0" text="Buscar" />
          </children>
          <effect>
             <Bloom threshold="1.0" />

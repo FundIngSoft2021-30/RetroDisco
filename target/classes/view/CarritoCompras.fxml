@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ScrollPane prefHeight="400.0" prefWidth="602.0">
         <content>
@@ -18,11 +21,11 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Button layoutX="34.0" layoutY="342.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Regresar" />
-                  <Button layoutX="384.0" layoutY="342.0" mnemonicParsing="false" text="Proceder al pago" />
-                  <CheckBox layoutX="14.0" layoutY="78.0" mnemonicParsing="false" text="Item1" />
-                  <CheckBox layoutX="14.0" layoutY="159.0" mnemonicParsing="false" text="Item2" />
-                  <CheckBox layoutX="14.0" layoutY="240.0" mnemonicParsing="false" text="Item3" />
+                  <Button fx:id="regresarAbusqeda" layoutX="34.0" layoutY="342.0" mnemonicParsing="false" onAction="#RegresaInterfazBusqueda" prefHeight="25.0" prefWidth="91.0" text="Regresar" />
+                  <Button fx:id="pagar" layoutX="384.0" layoutY="342.0" mnemonicParsing="false" onAction="#pagarCarrito" text="Proceder al pago" />
+                  <CheckBox fx:id="Disco1" layoutX="14.0" layoutY="78.0" mnemonicParsing="false" text="Item1" />
+                  <CheckBox fx:id="Disco2" layoutX="14.0" layoutY="159.0" mnemonicParsing="false" text="Item2" />
+                  <CheckBox fx:id="Disco3" layoutX="14.0" layoutY="240.0" mnemonicParsing="false" text="Item3" />
                   <ImageView fitHeight="60.0" fitWidth="117.0" layoutX="85.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fitHeight="60.0" fitWidth="117.0" layoutX="79.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fitHeight="60.0" fitWidth="117.0" layoutX="85.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true" />
