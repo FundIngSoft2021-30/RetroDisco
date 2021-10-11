@@ -5,11 +5,11 @@ public class Disco {
     private String artista;
     private int publicacion;
     private String formato;
-    private int precio;
+    private double precio;
     private int cantidad;
     private String vendedor;
     
-    public Disco(String nombre, String artista, int publicacion, String formato, int precio, int cantidad,
+    public Disco(String nombre, String artista, int publicacion, String formato, double precio, int cantidad,
             String vendedor) {
         this.nombre = nombre;
         this.artista = artista;
@@ -63,11 +63,11 @@ public class Disco {
         this.formato = formato;
     }
 
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
