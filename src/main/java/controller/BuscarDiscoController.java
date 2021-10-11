@@ -22,7 +22,7 @@ public class BuscarDiscoController {
 
     @FXML
     void buscarDisco(ActionEvent event) {
-
+        
     }
 
     @FXML

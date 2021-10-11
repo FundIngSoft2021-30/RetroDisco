@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "model.App",
+            "projectName": "RetroDisco"
+        },
+        {
+            "type": "java",
             "name": "Lanzar RetroDisco",
             "request": "launch",
             "mainClass": "model.AppLauncher",

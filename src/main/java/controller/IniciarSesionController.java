@@ -5,16 +5,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
 public class IniciarSesionController {
 
     @FXML
-    private Button BotonIngresar;
+    private Button Cuenta;
 
     @FXML
-    private Button BotonIngresar1;
+    private Button Ingresar;
+
+    @FXML
+    private Button Invitado;
 
     @FXML
     private VBox containerLeft;
@@ -34,7 +36,12 @@ public class IniciarSesionController {
     }
 
     @FXML
-    void eventKey(KeyEvent event) {
+    void crearCuenta(ActionEvent event) {
+        
+    }
+
+    @FXML
+    void iniciarInvitado(ActionEvent event) {
 
     }
 

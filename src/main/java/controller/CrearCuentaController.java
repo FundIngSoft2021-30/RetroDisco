@@ -33,7 +33,7 @@ public class CrearCuentaController {
 
     @FXML
     void CrearCuenta(ActionEvent event) {
-
+        
     }
 
     @FXML

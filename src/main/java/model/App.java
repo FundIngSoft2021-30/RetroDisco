@@ -11,13 +11,14 @@ public class App extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        //CRUD bd=new CRUD();
-        Parent root = FXMLLoader.load(getClass().getResource("view/VerInfo.fxml"));
+        CRUD bd=new CRUD();
+        Parent root = FXMLLoader.load(getClass().getResource("view/IniciarSesion.fxml"));
         
         Scene scene = new Scene(root);
         stage.setTitle("Inicio  - RetroDisco");
         stage.setScene(scene);
         stage.show();
+        bd.obtenerColeccionDiscos();
     }
 
     /**
@@ -26,5 +27,7 @@ public class App extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    
     
 }

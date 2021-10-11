@@ -31,7 +31,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="txtUsuario" onKeyTyped="#eventKey">
+                  <TextField fx:id="txtUsuario">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -44,7 +44,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="txtContraseña" onKeyTyped="#eventKey">
+                  <PasswordField fx:id="txtContraseña">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -56,16 +56,17 @@
             </VBox>
             <Pane prefHeight="121.0" prefWidth="427.0">
                <children>
-                  <Button fx:id="BotonIngresar" layoutX="32.0" layoutY="17.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#IniciarSesion" text="Ingresar">
+                  <Button fx:id="Ingresar" layoutX="32.0" layoutY="17.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#IniciarSesion" text="Ingresar">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="BotonIngresar1" layoutX="195.0" layoutY="17.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#IniciarSesion" text="Iniciar como Invitado">
+                  <Button fx:id="Invitado" layoutX="195.0" layoutY="17.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#iniciarInvitado" text="Iniciar como Invitado">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
+                  <Button fx:id="Cuenta" layoutX="195.0" layoutY="74.0" mnemonicParsing="false" onAction="#crearCuenta" prefHeight="39.0" prefWidth="212.0" text="Crear Cuenta" />
                </children>
             </Pane>
          </children>
