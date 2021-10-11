@@ -11,8 +11,8 @@ public class App extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        CRUD bd=new CRUD();
-        Parent root = FXMLLoader.load(getClass().getResource("CrearCuenta.fxml"));
+        //CRUD bd=new CRUD();
+        Parent root = FXMLLoader.load(Thread.currentThread().getContextClassLoader().getResource("CrearCuenta.fxml"));//FXMLLoader.load(getClass().getResource("view/CrearCuenta.fxml"));
         
         Scene scene = new Scene(root);
         
