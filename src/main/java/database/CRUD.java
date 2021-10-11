@@ -39,6 +39,7 @@ public class CRUD {
         return true;
     }
 
+    
     public boolean agregarUsuario(Usuario user)
     {
         Map<String, Object> docUsuario = new HashMap<>();
@@ -46,7 +47,7 @@ public class CRUD {
         docUsuario.put("apellido", user.getApellido());
         docUsuario.put("username", user.getUsername());
         docUsuario.put("password", user.getPassword());
-        ApiFuture<WriteResult> future = bd.collection("Usuarios").document(UUID.randomUUID().toString()).set(docUsuario);
+        ApiFuture<WriteResult> future = bd.collection("Usuarios").document(user.getUsername()).set(docUsuario);
         try {
             System.out.println("usuario agregado : " + future.get().getUpdateTime());
         } catch (InterruptedException | ExecutionException e) {
@@ -54,6 +55,83 @@ public class CRUD {
             return false;
         }
         return true;
+    }
+
+
+    public boolean existeUsername(String username)
+    {
+        boolean existe = false;
+        ApiFuture<QuerySnapshot> querySnapshot = bd.collection("Usuarios").whereEqualTo("username", username).get();
+        List<QueryDocumentSnapshot> documentos = null;
+        try {
+            documentos = querySnapshot.get().getDocuments();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        if(documentos.size()==1)
+        {
+            existe = true;
+        }
+        return existe;
+    }
+
+    public boolean autenticarPassword(String username, String password)
+    {
+        boolean retorno = false;
+
+        ApiFuture<QuerySnapshot> querySnapshot = bd.collection("Usuarios").whereEqualTo("username", username).get();
+        List<QueryDocumentSnapshot> documentos = null;
+        
+        try {
+            documentos = querySnapshot.get().getDocuments();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        if(documentos.size()==1)
+        {
+            for (DocumentSnapshot document : documentos) {
+                String c = document.getData().get("contraseña").toString();
+                if(password.equals(c)){
+                    retorno = true;
+                }
+            }
+        }
+
+        return retorno;
+    }
+
+    public void probarUserMetodos()
+    {
+        if(existeUsername("LuisM-cpu")==true)
+        {
+            System.out.println("LuisM-cpu Bien");
+        }
+        else{
+            System.out.println("LuisM-cpu mal");
+        }
+        if(existeUsername("username")==false)
+        {
+            System.out.println("username bien");
+        }
+        else{
+            System.out.println("username mal");
+        }
+
+        if(autenticarPassword("LuisM-cpu", "genericpw")==true){
+            System.out.println("Comprueba bien la contraseña correcta");
+        }
+        else{
+            System.out.println("Comprueba mal la contraseña correcta");        
+        }
+
+        if(autenticarPassword("LuisM-cpu", "password")==false){
+            System.out.println("Comprueba bien la contraseña incorrecta");
+        }
+        else{
+            System.out.println("Comprueba mal la contraseña correcta");        
+        }
+
     }
 
     public boolean agregarDisco(Disco disc)
@@ -76,7 +154,7 @@ public class CRUD {
         }
         return true;
     }
-
+    
     public boolean agregarCalificacion(Calificacion review)
     {
         Map<String, Object> docCalificacion = new HashMap<>();
