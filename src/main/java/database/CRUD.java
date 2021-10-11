@@ -111,17 +111,20 @@ public class CRUD {
     public void obtenerColeccionDiscos()
     {
         //asynchronously retrieve all documents
+        Map<String, Disco> coleccionDiscos = new HashMap<String, Disco>();
         ApiFuture<QuerySnapshot> future = bd.collection("Discos").get();
         // future.get() blocks on response
         try{
             List<QueryDocumentSnapshot> documents = future.get().getDocuments();
             for (QueryDocumentSnapshot document : documents) {
                 System.out.println(document.getId() + " => " + document.toObject(Disco.class));
+                coleccionDiscos.put(document.getId(), document.toObject(Disco.class));
                 obtenerUnDisco(document.getId());
             }
         } catch(ExecutionException | InterruptedException e){
             e.printStackTrace();
         }
+        //return coleccionDiscos;
     }
 
 }

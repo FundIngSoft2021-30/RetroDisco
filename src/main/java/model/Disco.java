@@ -8,9 +8,10 @@ public class Disco {
     private double precio;
     private int cantidad;
     private String vendedor;
+    private String genero;
     
     public Disco(String nombre, String artista, int publicacion, String formato, double precio, int cantidad,
-            String vendedor) {
+            String vendedor, String genero) {
         this.nombre = nombre;
         this.artista = artista;
         this.publicacion = publicacion;
@@ -18,6 +19,7 @@ public class Disco {
         this.precio = precio;
         this.cantidad = cantidad;
         this.vendedor = vendedor;
+        this.genero = genero;
     }
 
     public Disco()
@@ -29,6 +31,7 @@ public class Disco {
         precio=0;
         cantidad=0;
         vendedor="";
+        genero="";
     }
 
     public String getNombre() {
@@ -85,5 +88,13 @@ public class Disco {
 
     public void setVendedor(String vendedor) {
         this.vendedor = vendedor;
+    }
+    
+    public String getGenero(){
+        return genero;
+    }
+
+    public void setGenero(String genero){
+        this.genero = genero;
     }
 }
