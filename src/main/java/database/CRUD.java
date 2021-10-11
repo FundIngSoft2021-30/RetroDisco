@@ -58,19 +58,23 @@ public class CRUD {
     }
 
 
+
     public boolean existeUsername(String username)
     {
         boolean existe = false;
-        ApiFuture<QuerySnapshot> querySnapshot = bd.collection("Usuarios").whereEqualTo("username", username).get();
-        List<QueryDocumentSnapshot> documentos = null;
+        DocumentReference docRef = bd.collection("Usuarios").document(username);
+        ApiFuture<DocumentSnapshot> future = docRef.get();
+        
         try {
-            documentos = querySnapshot.get().getDocuments();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
-        if(documentos.size()==1)
-        {
-            existe = true;
+            DocumentSnapshot document = future.get();
+            if (document.exists()) {
+                System.out.println("El usuario existe ");
+                existe = true;
+              } else {
+                System.out.println("El usuario no existe");
+              }
+        } catch (InterruptedException | ExecutionException e1) {
+            e1.printStackTrace();
         }
         return existe;
     }
@@ -79,23 +83,18 @@ public class CRUD {
     {
         boolean retorno = false;
 
-        ApiFuture<QuerySnapshot> querySnapshot = bd.collection("Usuarios").whereEqualTo("username", username).get();
-        List<QueryDocumentSnapshot> documentos = null;
-        
-        try {
-            documentos = querySnapshot.get().getDocuments();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
+        DocumentReference docRef = bd.collection("Usuarios").document(username);
+        ApiFuture<DocumentSnapshot> future = docRef.get();
 
-        if(documentos.size()==1)
-        {
-            for (DocumentSnapshot document : documentos) {
-                String c = document.getData().get("contraseña").toString();
-                if(password.equals(c)){
-                    retorno = true;
-                }
-            }
+        try {
+            DocumentSnapshot document = future.get();
+            if (document.exists()) {
+                retorno =password.equals(document.getData().get("password"));                
+              } else {
+                System.out.println("El usuario no fue encontrado");
+              }
+        } catch (InterruptedException | ExecutionException e1) {
+            e1.printStackTrace();
         }
 
         return retorno;
