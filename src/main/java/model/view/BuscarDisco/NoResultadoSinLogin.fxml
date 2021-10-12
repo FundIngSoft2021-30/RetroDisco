@@ -34,6 +34,11 @@
                   <Image url="@../íconos/Ayuda_i.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="113.0" fitWidth="426.0" layoutX="76.0" layoutY="200.0">
+               <image>
+                  <Image url="@../íconos/NoResultados.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

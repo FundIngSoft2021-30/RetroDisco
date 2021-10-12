@@ -55,7 +55,7 @@
             </Button>
             <ImageView accessibleRole="BUTTON" fitHeight="32.0" fitWidth="36.0" layoutX="147.0" layoutY="141.0">
                <image>
-                  <Image url="@íconos/Buscar_i.png" />
+                  <Image url="@../íconos/Buscar_i.png" />
                </image>
             </ImageView>
          </children>
@@ -73,22 +73,22 @@
             </VBox>
             <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="56.0" layoutY="8.0">
                <image>
-                  <Image url="@íconos/Carrito_i.png" />
+                  <Image url="@../íconos/Carrito_i.png" />
                </image>
             </ImageView>
             <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="13.0" layoutY="8.0">
                <image>
-                  <Image url="@íconos/Cuenta_i.png" />
+                  <Image url="@../íconos/Cuenta_i.png" />
                </image>
             </ImageView>
             <ImageView accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="99.0" layoutY="5.0">
                <image>
-                  <Image url="@íconos/campana_i.png" />
+                  <Image url="@../íconos/campana_i.png" />
                </image>
             </ImageView>
             <ImageView accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="142.0" layoutY="5.0">
                <image>
-                  <Image url="@íconos/Ayuda_i.png" />
+                  <Image url="@../íconos/Ayuda_i.png" />
                </image>
             </ImageView>
          </children>
