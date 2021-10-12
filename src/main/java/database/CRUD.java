@@ -1,6 +1,8 @@
 package database;
 
 import model.*;
+
+import java.text.Normalizer;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
@@ -186,7 +188,7 @@ public class CRUD {
         }
     }
 
-    public void obtenerColeccionDiscos()
+    public Map<String, Disco> obtenerColeccionDiscos()
     {
         //asynchronously retrieve all documents
         Map<String, Disco> coleccionDiscos = new HashMap<String, Disco>();
@@ -202,7 +204,156 @@ public class CRUD {
         } catch(ExecutionException | InterruptedException e){
             e.printStackTrace();
         }
-        //return coleccionDiscos;
+        return coleccionDiscos;
+    }
+
+    
+    public String arreglarCadena(String cadena){
+        cadena = Normalizer.normalize(cadena, Normalizer.Form.NFD);
+        cadena = cadena.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+        String retorno = cadena.toUpperCase();
+        return retorno;
+    }
+
+    public boolean contenidas(String A, String B)
+    {
+        boolean retorno = false;
+        if(A.indexOf(B)!=-1){
+            retorno = true;
+        }else if(B.indexOf(A) != -1){
+            retorno = true;
+        }
+        return retorno;
+    }
+
+
+    public Set<String> compararStrMap(String termino, Map<String, String> mapa)
+    {
+        Set<String> Coincidencias = new HashSet<String>();
+        Set<String> keys = mapa.keySet();
+        String terminoArreglado, categoriaArreglada;
+        terminoArreglado = arreglarCadena(termino);        
+        for (String key : keys) {
+            categoriaArreglada = arreglarCadena(mapa.get(key));
+            if(terminoArreglado.equals(categoriaArreglada)==true)
+            {
+                if (Coincidencias.contains(key)==false){
+                    Coincidencias.add(key);
+                }                
+            }
+            else if(contenidas(terminoArreglado, categoriaArreglada)==true){
+                if (Coincidencias.contains(key)==false){
+                    Coincidencias.add(key);
+                }
+            }
+        }
+        return Coincidencias;       
+    }
+
+
+    public Map<String, Disco> buscarDiscoCategoria(String terminoBusqueda, String categoria){
+        Map<String, Disco> resultados = new HashMap<>();
+        Set<String> idResultados = new HashSet<>();
+
+        Map<String, Disco> coleccionDiscos = obtenerColeccionDiscos();
+        Set<String> idDiscos = coleccionDiscos.keySet();
+
+        Map<String, String> mapaComparar = new HashMap<String, String>();
+        
+        switch(categoria){
+            case "nombre" :
+                for (String key : idDiscos) {
+                    mapaComparar.put(key, coleccionDiscos.get(key).getNombre());
+                }
+                break;
+            case "artista" :
+                for (String key : idDiscos) {
+                    mapaComparar.put(key, coleccionDiscos.get(key).getArtista());
+                }
+                break;
+            case "formato" :
+                for (String key : idDiscos) {
+                    mapaComparar.put(key, coleccionDiscos.get(key).getFormato());
+                }
+                break;
+            case "vendedor" :
+                for (String key : idDiscos) {
+                    mapaComparar.put(key, coleccionDiscos.get(key).getVendedor());
+                }
+                break;
+            case "genero" :
+                for (String key : idDiscos) {
+                    mapaComparar.put(key, coleccionDiscos.get(key).getGenero());
+                }
+                break;
+            default: System.out.println("categoría invalida");
+        }
+        
+        idResultados = compararStrMap(terminoBusqueda, mapaComparar);
+        for (String id : idResultados) {
+            resultados.put(id, coleccionDiscos.get(id));
+        }
+
+        return resultados;
+
+    }
+
+	public Map<String, Disco> busquedaGeneral(String terminoBusqueda){
+        Map<String, Disco> resultados = new HashMap<>();
+
+        Map<String, Disco> resultadosNombre = buscarDiscoCategoria(terminoBusqueda, "nombre");
+        Map<String, Disco> resultadosArtista = buscarDiscoCategoria(terminoBusqueda, "artista");
+        Map<String, Disco> resultadosFormato = buscarDiscoCategoria(terminoBusqueda, "formato");
+        Map<String, Disco> resultadosVendedor = buscarDiscoCategoria(terminoBusqueda, "vendedor");
+        Map<String, Disco> resultadosGenero = buscarDiscoCategoria(terminoBusqueda, "genero");
+
+        Set<String> idResultados = new HashSet<>();
+        if(resultadosNombre.size()>0){
+            idResultados = resultadosNombre.keySet();
+            for (String id : idResultados) {
+                if(resultados.containsKey(id)==false){
+                    resultados.put(id, resultadosNombre.get(id));
+                }
+            }
+        }
+
+        if(resultadosArtista.size()>0){
+            idResultados = resultadosArtista.keySet();
+            for (String id : idResultados) {
+                if(resultados.containsKey(id)==false){
+                    resultados.put(id, resultadosArtista.get(id));
+                }
+            }
+        }
+
+        if(resultadosFormato.size()>0){
+            idResultados = resultadosFormato.keySet();
+            for (String id : idResultados) {
+                if(resultados.containsKey(id)==false){
+                    resultados.put(id, resultadosFormato.get(id));
+                }
+            }
+        }
+
+        if(resultadosVendedor.size()>0){
+            idResultados = resultadosVendedor.keySet();
+            for (String id : idResultados) {
+                if(resultados.containsKey(id)==false){
+                    resultados.put(id, resultadosVendedor.get(id));
+                }
+            }
+        }
+
+        if(resultadosGenero.size()>0){
+            idResultados = resultadosGenero.keySet();
+            for (String id : idResultados) {
+                if(resultados.containsKey(id)==false){
+                    resultados.put(id, resultadosGenero.get(id));
+                }
+            }
+        }
+
+        return resultados;
     }
     
 
