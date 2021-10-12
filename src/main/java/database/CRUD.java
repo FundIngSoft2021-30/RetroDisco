@@ -49,9 +49,13 @@ public class CRUD {
         docUsuario.put("apellido", user.getApellido());
         docUsuario.put("username", user.getUsername());
         docUsuario.put("password", user.getPassword());
+        if(existeUsername(user.getUsername()))
+        {
+            return false;
+        }
         ApiFuture<WriteResult> future = bd.collection("Usuarios").document(user.getUsername()).set(docUsuario);
         try {
-            System.out.println("usuario agregado : " + future.get().getUpdateTime());
+            System.out.println("Usuarios Update : " + future.get().getUpdateTime());
         } catch (InterruptedException | ExecutionException e) {
             //e.printStackTrace();
             return false;
@@ -70,10 +74,8 @@ public class CRUD {
         try {
             DocumentSnapshot document = future.get();
             if (document.exists()) {
-                System.out.println("El usuario existe ");
+                //System.out.println("El usuario existe ");
                 existe = true;
-              } else {
-                System.out.println("El usuario no existe");
               }
         } catch (InterruptedException | ExecutionException e1) {
             e1.printStackTrace();

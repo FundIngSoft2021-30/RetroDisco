@@ -41,7 +41,13 @@ public class CrearCuentaController {
     @FXML
     void CrearCuenta(ActionEvent event) {
         Usuario usuario1=new Usuario(txtNombre.getText(), txtApellido.getText(), txtUsername.getText(), txtPassword.getText());
-        CRUD.agregarUsuario(usuario1);
+        boolean agregado=CRUD.agregarUsuario(usuario1);
+        if(agregado)
+        {
+            System.out.println("El usuario "+usuario1.getUsername()+" se agrego correctamente.");
+        }else{
+            System.out.println("El username "+usuario1.getUsername()+" ya se encuentra en uso.");
+        }
     }
 
     @FXML
