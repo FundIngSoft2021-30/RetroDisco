@@ -36,6 +36,26 @@
                   <Image url="@../../../Documents/GitHub/RetroDisco/src/Interfaces/LogoRD.png" />
                </image>
             </ImageView>
+            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="457.0" layoutY="25.0">
+               <image>
+                  <Image url="@íconos/Carrito_i.png" />
+               </image>
+            </ImageView>
+            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="487.0" layoutY="25.0">
+               <image>
+                  <Image url="@íconos/Cuenta_i.png" />
+               </image>
+            </ImageView>
+            <ImageView accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="517.0" layoutY="21.0">
+               <image>
+                  <Image url="@íconos/campana_i.png" />
+               </image>
+            </ImageView>
+            <ImageView accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="547.0" layoutY="21.0">
+               <image>
+                  <Image url="@íconos/Ayuda_i.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>
