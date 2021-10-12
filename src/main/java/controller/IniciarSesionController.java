@@ -1,11 +1,17 @@
 package controller;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class IniciarSesionController {
 
@@ -36,8 +42,15 @@ public class IniciarSesionController {
     }
 
     @FXML
-    void crearCuenta(ActionEvent event) {
-        
+    void crearCuenta(ActionEvent event) throws IOException {
+        Stage stage= (Stage)Cuenta.getScene().getWindow();
+        stage.close();
+        Parent root = FXMLLoader.load(getClass().getResource("../view/CrearCuenta.fxml"));
+        stage.close();
+        Scene scene = new Scene(root);
+        stage.setTitle("Crear Cuenta - RetroDisco");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
