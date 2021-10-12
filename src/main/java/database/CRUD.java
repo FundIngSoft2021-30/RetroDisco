@@ -173,19 +173,29 @@ public class CRUD {
         return true;
     }
 
-    public void obtenerUnDisco(String documentoID) throws InterruptedException, ExecutionException
+    public Disco obtenerUnDisco(String documentoID)
     {
+        Disco retorno = null;
         DocumentReference docRef = bd.collection("Discos").document(documentoID);
         // asynchronously retrieve the document
         ApiFuture<DocumentSnapshot> future = docRef.get();
         // ...
         // future.get() blocks on response
-        DocumentSnapshot documento = future.get();
-        if (documento.exists()) {
-        System.out.println("Document data: " + documento.getData());
-        } else {
-        System.out.println("No such document!");
+        DocumentSnapshot documento;
+        try {
+            documento = future.get();
+            if (documento.exists()) {
+                retorno = documento.toObject(Disco.class);
+                System.out.println("Document data: " + documento.getData());
+            } else {
+                System.out.println("No such document!");
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
         }
+
+        return retorno;
+        
     }
 
     public Map<String, Disco> obtenerColeccionDiscos()
