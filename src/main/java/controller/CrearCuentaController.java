@@ -9,11 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import model.Usuario;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
 
 public class CrearCuentaController {
 
@@ -36,7 +38,10 @@ public class CrearCuentaController {
     private PasswordField txtPassword;
 
     @FXML
-    private PasswordField txtUsername;
+    private TextField txtUsername;
+
+    @FXML
+    private Label errorCrearCuenta;
 
     @FXML
     void CrearCuenta(ActionEvent event) {
@@ -44,9 +49,11 @@ public class CrearCuentaController {
         boolean agregado=CRUD.agregarUsuario(usuario1);
         if(agregado)
         {
-            System.out.println("El usuario "+usuario1.getUsername()+" se agrego correctamente.");
+            errorCrearCuenta.setTextFill(Paint.valueOf("#40d222"));
+            errorCrearCuenta.setText("Usuario "+txtUsername.getText()+" creado correctamente.");
         }else{
-            System.out.println("El username "+usuario1.getUsername()+" ya se encuentra en uso.");
+            errorCrearCuenta.setTextFill(Paint.valueOf("#ef2121"));
+            errorCrearCuenta.setText("El username "+txtUsername.getText()+" ya se encuentra en uso.");
         }
     }
 

@@ -45,11 +45,11 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <PasswordField fx:id="txtUsername">
+            <TextField fx:id="txtUsername" layoutX="10.0" layoutY="167.0">
                <font>
                   <Font size="18.0" />
                </font>
-            </PasswordField>
+            </TextField>
             <Label text="Contraseña">
                <font>
                   <Font size="20.0" />
@@ -60,11 +60,7 @@
                   <Font size="18.0" />
                </font>
             </PasswordField>
-            <Label>
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
+            <Label fx:id="errorCrearCuenta" />
             <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
                <items>
                   <Button fx:id="botonRegresar" mnemonicParsing="false" onAction="#regresarInicio" text="Regresar">
@@ -79,11 +75,6 @@
                   </Button>
                </items>
             </SplitPane>
-            <Label>
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="   ">
@@ -104,7 +95,7 @@
          <children>
             <ImageView fitHeight="232.0" fitWidth="294.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@íconos/LogoRD.png" />
+                  <Image url="@iconos/LogoRD.png" />
                </image>
             </ImageView>
          </children>

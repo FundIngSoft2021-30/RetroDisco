@@ -6,16 +6,9 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch App",
+            "name": "Iniciar RetroDisco",
             "request": "launch",
-            "mainClass": "model.App",
-            "projectName": "RetroDisco"
-        },
-        {
-            "type": "java",
-            "name": "Lanzar RetroDisco",
-            "request": "launch",
-            "mainClass": "model.AppLauncher",
+            "mainClass": "controller.AppLauncher",
             "projectName": "RetroDisco"
         }
     ]
