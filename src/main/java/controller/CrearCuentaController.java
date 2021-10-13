@@ -45,6 +45,28 @@ public class CrearCuentaController {
 
     @FXML
     void CrearCuenta(ActionEvent event) {
+        if(txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty()
+         || txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()){
+            errorCrearCuenta.setTextFill(Paint.valueOf("#ef2121"));
+            errorCrearCuenta.setText("Ingrese todos los datos para poder crear su cuenta.");
+            if(txtNombre.getText().isEmpty())
+            {
+                txtNombre.setPromptText("Ingrese su nombre.");
+            }
+            if(txtApellido.getText().isEmpty())
+            {
+                txtApellido.setPromptText("Ingrese su apellido.");
+            }
+            if(txtUsername.getText().isEmpty())
+            {
+                txtUsername.setPromptText("Ingrese su username.");
+            }
+            if(txtPassword.getText().isEmpty())
+            {
+                txtPassword.setPromptText("Ingrese su contraseña.");
+            }
+            return;
+        }
         Usuario usuario1=new Usuario(txtNombre.getText(), txtApellido.getText(), txtUsername.getText(), txtPassword.getText());
         boolean agregado=CRUD.agregarUsuario(usuario1);
         if(agregado)

@@ -58,8 +58,15 @@ public class IniciarSesionController {
     }
 
     @FXML
-    void iniciarInvitado(ActionEvent event) {
-
+    void iniciarInvitado(ActionEvent event) throws IOException {
+        Stage stage= (Stage)Invitado.getScene().getWindow();
+        stage.close();
+        Parent root = FXMLLoader.load(getClass().getResource("../view/BuscarDiscoSinLogin.fxml"));
+        stage.close();
+        Scene scene = new Scene(root);
+        stage.setTitle("Buscador - RetroDisco");
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

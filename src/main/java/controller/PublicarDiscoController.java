@@ -1,37 +1,35 @@
 package controller;
 
-//import model.*;
-//import database.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.event.ActionEvent;
 
 public class PublicarDiscoController {
 
     @FXML
-    private Button Publicar;
+    private Button cancelar;
 
     @FXML
-    private Button Cancelar;
+    private TextField formato;
 
     @FXML
-    private TextField NombreDisco;
+    private TextField genero;
 
     @FXML
-    private TextField NombreArtista;
+    private TextField nombreartista;
 
     @FXML
-    private TextField Anio;
+    private TextField nombredisco;
 
     @FXML
-    private TextField Formato;
+    private TextField precio;
 
     @FXML
-    private TextField Genero;
+    private TextField publicacion;
 
     @FXML
-    private TextField Precio;
+    private Button publicar;
 
     @FXML
     void VolverInicio(ActionEvent event) {
@@ -40,10 +38,6 @@ public class PublicarDiscoController {
 
     @FXML
     void publicarDisco(ActionEvent event) {
-
-    /*Disco Disco1= new Disco(String NombreDisco.getText(),NombreArtista.getText(), int publicacion, Formato.getText(),Precio.getText(), int cantidad,
-        String vendedor, Genero.getText());
-        CRUD.agregarDisco(Disco1);*/
 
     }
 

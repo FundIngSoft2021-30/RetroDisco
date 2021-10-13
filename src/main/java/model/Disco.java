@@ -97,4 +97,8 @@ public class Disco {
     public void setGenero(String genero){
         this.genero = genero;
     }
+
+    public String toString(){
+        return this.artista+" - "+this.nombre;
+    }
 }

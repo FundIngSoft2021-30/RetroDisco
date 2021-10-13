@@ -16,10 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class BuscarDiscoController {
-
-    @FXML
-    private Button CerrarSesion;
+public class BuscarSinLoginController {
 
     @FXML
     private ImageView ayuda;
@@ -28,50 +25,47 @@ public class BuscarDiscoController {
     private ImageView buscar;
 
     @FXML
-    private ImageView carrito;
+    private Button crearCuenta;
 
     @FXML
     private ComboBox<String> filtro;
 
     @FXML
-    private TextField nombreDisco;
+    private Button iniciarSesion;
 
     @FXML
-    private ImageView notificaciones;
+    private TextField nombreDisco;
 
     @FXML
     private ListView<Disco> resultados;
 
     @FXML
-    private ImageView usuario;
-
-    @FXML
-    private Button vender;
-
-    @FXML
     void buscarDisco(MouseEvent event) {
-
+        /*Prueba de buscador y resultados.
+        resultados.getItems().add(new Disco("august", "LuisM-cpu", 2021, "CD", 20000, 1, "LuisM-cpu", "Folk"));
+        resultados.getItems().toString();*/
     }
 
     @FXML
-    void cerrarSesion(ActionEvent event) throws IOException {
-        Stage stage= (Stage)CerrarSesion.getScene().getWindow();
+    void crearCuenta(ActionEvent event) throws IOException {
+        Stage stage= (Stage)crearCuenta.getScene().getWindow();
         stage.close();
-        Parent root = FXMLLoader.load(getClass().getResource("../view/IniciarSesion.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../view/CrearCuenta.fxml"));
+        stage.close();
         Scene scene = new Scene(root);
-        stage.setTitle("Iniciar Sesion  - RetroDisco");
+        stage.setTitle("Crear Cuenta - RetroDisco");
         stage.setScene(scene);
         stage.show();
     }
 
     @FXML
-    void venderDisco(ActionEvent event) throws IOException {
-        Stage stage= (Stage)vender.getScene().getWindow();
+    void iniciarSesion(ActionEvent event) throws IOException {
+        Stage stage= (Stage)iniciarSesion.getScene().getWindow();
         stage.close();
-        Parent root = FXMLLoader.load(getClass().getResource("../view/PublicarDisco.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../view/IniciarSesion.fxml"));
         stage.close();
         Scene scene = new Scene(root);
-        stage.setTitle("Publicar Disco - RetroDisco");
+        stage.setTitle("Iniciar Sesión - RetroDisco");
         stage.setScene(scene);
         stage.show();
     }
@@ -82,22 +76,7 @@ public class BuscarDiscoController {
     }
 
     @FXML
-    void verCarrito(MouseEvent event) {
-
-    }
-
-    @FXML
     void verDisco(MouseEvent event) {
-
-    }
-
-    @FXML
-    void verNotificaciones(MouseEvent event) {
-
-    }
-
-    @FXML
-    void verUsuario(MouseEvent event) {
 
     }
 
