@@ -57,7 +57,7 @@
                   <Image url="@iconos/Ayuda_i.png" />
                </image>
             </ImageView>
-            <Spinner fx:id="cantidad" editable="true" layoutX="87.0" layoutY="257.0" prefHeight="25.0" prefWidth="45.0" />
+            <Spinner fx:id="cantidad" editable="true" layoutX="87.0" layoutY="257.0" prefHeight="25.0" prefWidth="73.0" />
             <Label layoutX="21.0" layoutY="261.0" text="Cantidad:" />
          </children>
       </Pane>

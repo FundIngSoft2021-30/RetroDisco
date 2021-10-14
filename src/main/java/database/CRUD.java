@@ -104,39 +104,6 @@ public class CRUD {
         return retorno;
     }
 
-    public void probarUserMetodos()
-    {
-        if(existeUsername("LuisM-cpu")==true)
-        {
-            System.out.println("LuisM-cpu Bien");
-        }
-        else{
-            System.out.println("LuisM-cpu mal");
-        }
-        if(existeUsername("username")==false)
-        {
-            System.out.println("username bien");
-        }
-        else{
-            System.out.println("username mal");
-        }
-
-        if(autenticarPassword("LuisM-cpu", "genericpw")==true){
-            System.out.println("Comprueba bien la contraseña correcta");
-        }
-        else{
-            System.out.println("Comprueba mal la contraseña correcta");        
-        }
-
-        if(autenticarPassword("LuisM-cpu", "password")==false){
-            System.out.println("Comprueba bien la contraseña incorrecta");
-        }
-        else{
-            System.out.println("Comprueba mal la contraseña correcta");        
-        }
-
-    }
-
     public static boolean agregarDisco(Disco disc)
     {
         Map<String, Object> docDisco = new HashMap<>();
@@ -167,7 +134,7 @@ public class CRUD {
         docCalificacion.put("usuario", review.getUsuario().getUsername());
         ApiFuture<WriteResult> future = bd.collection("Calificaciones").document(UUID.randomUUID().toString()).set(docCalificacion);
         try {
-            System.out.println("Calificacion agregada : " + future.get().getUpdateTime());
+            System.out.println("Calificaciones update : " + future.get().getUpdateTime());
         } catch (InterruptedException | ExecutionException e) {
             //e.printStackTrace();
             return false;
@@ -175,7 +142,7 @@ public class CRUD {
         return true;
     }
 
-    public Disco obtenerUnDisco(String documentoID)
+    public static Disco obtenerUnDisco(String documentoID)
     {
         Disco retorno = null;
         DocumentReference docRef = bd.collection("Discos").document(documentoID);
@@ -188,7 +155,7 @@ public class CRUD {
             documento = future.get();
             if (documento.exists()) {
                 retorno = documento.toObject(Disco.class);
-                System.out.println("Document data: " + documento.getData());
+                //System.out.println("Document data: " + documento.getData());
             } else {
                 System.out.println("No such document!");
             }
@@ -200,7 +167,7 @@ public class CRUD {
         
     }
 
-    public Map<String, Disco> obtenerColeccionDiscos()
+    public static Map<String, Disco> obtenerColeccionDiscos()
     {
         //asynchronously retrieve all documents
         Map<String, Disco> coleccionDiscos = new HashMap<String, Disco>();
@@ -209,7 +176,7 @@ public class CRUD {
         try{
             List<QueryDocumentSnapshot> documents = future.get().getDocuments();
             for (QueryDocumentSnapshot document : documents) {
-                System.out.println(document.getId() + " => " + document.toObject(Disco.class));
+                //System.out.println(document.getId() + " => " + document.toObject(Disco.class));
                 coleccionDiscos.put(document.getId(), document.toObject(Disco.class));
                 obtenerUnDisco(document.getId());
             }
@@ -220,14 +187,14 @@ public class CRUD {
     }
 
     
-    public String arreglarCadena(String cadena){
+    public static String arreglarCadena(String cadena){
         cadena = Normalizer.normalize(cadena, Normalizer.Form.NFD);
         cadena = cadena.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
         String retorno = cadena.toUpperCase();
         return retorno;
     }
 
-    public boolean contenidas(String A, String B)
+    public static boolean contenidas(String A, String B)
     {
         boolean retorno = false;
         if(A.indexOf(B)!=-1){
@@ -239,7 +206,7 @@ public class CRUD {
     }
 
 
-    public Set<String> compararStrMap(String termino, Map<String, String> mapa)
+    public static Set<String> compararStrMap(String termino, Map<String, String> mapa)
     {
         Set<String> Coincidencias = new HashSet<String>();
         Set<String> keys = mapa.keySet();
@@ -263,7 +230,7 @@ public class CRUD {
     }
 
 
-    public Map<String, Disco> buscarDiscoCategoria(String terminoBusqueda, String categoria){
+    public static Map<String, Disco> buscarDiscoCategoria(String terminoBusqueda, String categoria){
         Map<String, Disco> resultados = new HashMap<>();
         Set<String> idResultados = new HashSet<>();
 
@@ -310,7 +277,7 @@ public class CRUD {
 
     }
 
-	public Map<String, Disco> busquedaGeneral(String terminoBusqueda){
+	public static Map<String, Disco> busquedaGeneral(String terminoBusqueda){
         Map<String, Disco> resultados = new HashMap<>();
 
         Map<String, Disco> resultadosNombre = buscarDiscoCategoria(terminoBusqueda, "nombre");

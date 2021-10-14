@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -12,6 +13,10 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.Initializable;
+//import javafx.fxml.FXMLLoader;
+//import javafx.scene.Parent;
+//import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class VerInformacionController implements Initializable{
 
@@ -60,8 +65,9 @@ public class VerInformacionController implements Initializable{
     }
 
     @FXML
-    void regresarBusqueda(ActionEvent event) {
-
+    void regresarBusqueda(ActionEvent event) throws IOException {
+        Stage stage= (Stage)regresar.getScene().getWindow();
+        stage.close();
     }
 
     @FXML

@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 
+import javafx.scene.image.Image;
+import database.CRUD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import java.util.*;
 
 public class BuscarSinLoginController {
 
@@ -41,9 +44,16 @@ public class BuscarSinLoginController {
 
     @FXML
     void buscarDisco(MouseEvent event) {
-        //Prueba de buscador y resultados.
-        resultados.getItems().add(new Disco("august", "LuisM-cpu", 2021, "CD", 20000, 3, "LuisM-cpu", "Folk"));
-        //resultados.getItems().toString();
+        if(nombreDisco.getText().isEmpty()){
+            resultados.getItems().clear();
+        }else{
+            Map<String,Disco> resultadoBusqueda = CRUD.busquedaGeneral(nombreDisco.getText());
+            ArrayList<Disco> discos = new ArrayList<Disco>(resultadoBusqueda.values());
+            resultados.getItems().clear();
+            for (Disco discoA : discos) {
+                resultados.getItems().add(discoA);            
+            }
+        }
     }
 
     @FXML
@@ -79,11 +89,11 @@ public class BuscarSinLoginController {
         if(resultados.getSelectionModel().getSelectedItem()!=null)
         {
             AppLauncher.setDiscoActual(resultados.getSelectionModel().getSelectedItem());
-            Stage stage= (Stage)resultados.getScene().getWindow();
-            stage.close();
+            Stage stage= new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("../view/VerInfo.fxml"));
             Scene scene = new Scene(root);
             stage.setTitle(AppLauncher.getDiscoActual().toString());
+            stage.getIcons().add(new Image("file:src\\main\\java\\view\\iconos\\Buscar_i.png"));
             stage.setScene(scene);
             stage.show();
         }
