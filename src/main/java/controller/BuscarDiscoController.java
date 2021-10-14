@@ -1,7 +1,7 @@
 package controller;
 
 import java.io.IOException;
-
+import database.CRUD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -50,7 +50,6 @@ public class BuscarDiscoController {
 
     @FXML
     void buscarDisco(MouseEvent event) {
-
     }
 
     @FXML

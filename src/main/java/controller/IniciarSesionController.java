@@ -41,8 +41,15 @@ public class IniciarSesionController {
     private Label errorLogin;
 
     @FXML
-    void IniciarSesion(ActionEvent event) {
-
+    void IniciarSesion(ActionEvent event) throws IOException{
+        Stage stage=(Stage) Ingresar.getScene().getWindow();
+        stage.close();
+        Parent root=FXMLLoader.load(getClass().getResource("../view/IniciarSesion.fxml"));
+        stage.close();
+        Scene scene = new Scene(root);
+        stage.setTitle("Sesion iniciada - RetroDisco");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
