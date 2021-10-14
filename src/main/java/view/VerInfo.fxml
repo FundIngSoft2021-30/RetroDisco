@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -24,38 +25,40 @@
             <Label layoutX="25.0" layoutY="207.0" text="Género:" />
             <Label layoutX="28.0" layoutY="243.0" text="Precio:" />
             <Label fx:id="nombreDisco" layoutX="88.0" layoutY="76.0" text="NombreDisco" />
-            <Label fx:id="NombreArtista" layoutX="88.0" layoutY="108.0" text="Artista" />
+            <Label fx:id="nombreArtista" layoutX="88.0" layoutY="108.0" text="Artista" />
             <Label fx:id="anio" layoutX="88.0" layoutY="143.0" text="Año" />
             <Label fx:id="formato" layoutX="88.0" layoutY="173.0" text="Formato" />
             <Label fx:id="genero" layoutX="88.0" layoutY="207.0" text="Género" />
             <Label fx:id="precio" layoutX="88.0" layoutY="243.0" text="Precio" />
-            <Button fx:id="Regresar" layoutX="41.0" layoutY="316.0" mnemonicParsing="false" onAction="#RegresarABusqueda" text="Regresar" />
-            <Button fx:id="AgruegarAlCarrito" layoutX="42.0" layoutY="349.0" mnemonicParsing="false" onAction="#AgruegarACarrito" text="Agregar al Carrito" />
+            <Button fx:id="regresar" layoutX="41.0" layoutY="316.0" mnemonicParsing="false" onAction="#regresarBusqueda" text="Regresar" />
+            <Button fx:id="agregarCarrito" layoutX="42.0" layoutY="349.0" mnemonicParsing="false" onAction="#agregarCarrito" text="Agregar al Carrito" />
             <ImageView fitHeight="184.0" fitWidth="192.0" layoutX="296.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../Documents/GitHub/RetroDisco/src/Interfaces/LogoRD.png" />
+                  <Image url="@iconos/LogoRD.png" />
                </image>
             </ImageView>
-            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="457.0" layoutY="25.0">
+            <ImageView fx:id="carrito" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="457.0" layoutY="25.0" onMouseClicked="#verCarrito">
                <image>
-                  <Image url="@íconos/Carrito_i.png" />
+                  <Image url="@iconos/Carrito_i.png" />
                </image>
             </ImageView>
-            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="487.0" layoutY="25.0">
+            <ImageView fx:id="cuenta" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="487.0" layoutY="25.0" onMouseClicked="#verCuenta">
                <image>
-                  <Image url="@íconos/Cuenta_i.png" />
+                  <Image url="@iconos/Cuenta_i.png" />
                </image>
             </ImageView>
-            <ImageView accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="517.0" layoutY="21.0">
+            <ImageView fx:id="notificaciones" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="517.0" layoutY="21.0" onMouseClicked="#verNotificaciones">
                <image>
-                  <Image url="@íconos/campana_i.png" />
+                  <Image url="@iconos/campana_i.png" />
                </image>
             </ImageView>
-            <ImageView accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="547.0" layoutY="21.0">
+            <ImageView fx:id="ayuda" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="547.0" layoutY="21.0" onMouseClicked="#verAyuda">
                <image>
-                  <Image url="@íconos/Ayuda_i.png" />
+                  <Image url="@iconos/Ayuda_i.png" />
                </image>
             </ImageView>
+            <Spinner fx:id="cantidad" editable="true" layoutX="88.0" layoutY="278.0" prefHeight="25.0" prefWidth="45.0" />
+            <Label layoutX="28.0" layoutY="282.0" text="Cantidad:" />
          </children>
       </Pane>
    </children>

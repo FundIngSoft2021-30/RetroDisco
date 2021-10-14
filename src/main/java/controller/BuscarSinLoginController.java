@@ -41,9 +41,9 @@ public class BuscarSinLoginController {
 
     @FXML
     void buscarDisco(MouseEvent event) {
-        /*Prueba de buscador y resultados.
-        resultados.getItems().add(new Disco("august", "LuisM-cpu", 2021, "CD", 20000, 1, "LuisM-cpu", "Folk"));
-        resultados.getItems().toString();*/
+        //Prueba de buscador y resultados.
+        resultados.getItems().add(new Disco("august", "LuisM-cpu", 2021, "CD", 20000, 3, "LuisM-cpu", "Folk"));
+        //resultados.getItems().toString();
     }
 
     @FXML
@@ -63,7 +63,6 @@ public class BuscarSinLoginController {
         Stage stage= (Stage)iniciarSesion.getScene().getWindow();
         stage.close();
         Parent root = FXMLLoader.load(getClass().getResource("../view/IniciarSesion.fxml"));
-        stage.close();
         Scene scene = new Scene(root);
         stage.setTitle("Iniciar Sesión - RetroDisco");
         stage.setScene(scene);
@@ -76,8 +75,18 @@ public class BuscarSinLoginController {
     }
 
     @FXML
-    void verDisco(MouseEvent event) {
-
+    void verDisco(MouseEvent event) throws IOException {
+        if(resultados.getSelectionModel().getSelectedItem()!=null)
+        {
+            AppLauncher.setDiscoActual(resultados.getSelectionModel().getSelectedItem());
+            Stage stage= (Stage)resultados.getScene().getWindow();
+            stage.close();
+            Parent root = FXMLLoader.load(getClass().getResource("../view/VerInfo.fxml"));
+            Scene scene = new Scene(root);
+            stage.setTitle(AppLauncher.getDiscoActual().toString());
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
 }
