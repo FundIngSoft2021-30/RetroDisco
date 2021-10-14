@@ -20,18 +20,18 @@
             </Label>
             <Label layoutX="23.0" layoutY="76.0" text="Nombre:" />
             <Label layoutX="23.0" layoutY="108.0" text="Artista:" />
-            <Label layoutX="28.0" layoutY="143.0" text="Año: " />
-            <Label layoutX="26.0" layoutY="173.0" text="Formato:" />
-            <Label layoutX="25.0" layoutY="207.0" text="Género:" />
-            <Label layoutX="28.0" layoutY="243.0" text="Precio:" />
+            <Label layoutX="22.0" layoutY="143.0" text="Publicacion:" />
+            <Label layoutX="22.0" layoutY="173.0" text="Formato:" />
+            <Label layoutX="20.0" layoutY="207.0" text="Género:" />
+            <Label layoutX="23.0" layoutY="235.0" text="Precio:" />
             <Label fx:id="nombreDisco" layoutX="88.0" layoutY="76.0" text="NombreDisco" />
             <Label fx:id="nombreArtista" layoutX="88.0" layoutY="108.0" text="Artista" />
             <Label fx:id="anio" layoutX="88.0" layoutY="143.0" text="Año" />
             <Label fx:id="formato" layoutX="88.0" layoutY="173.0" text="Formato" />
             <Label fx:id="genero" layoutX="88.0" layoutY="207.0" text="Género" />
-            <Label fx:id="precio" layoutX="88.0" layoutY="243.0" text="Precio" />
-            <Button fx:id="regresar" layoutX="41.0" layoutY="316.0" mnemonicParsing="false" onAction="#regresarBusqueda" text="Regresar" />
-            <Button fx:id="agregarCarrito" layoutX="42.0" layoutY="349.0" mnemonicParsing="false" onAction="#agregarCarrito" text="Agregar al Carrito" />
+            <Label fx:id="precio" layoutX="87.0" layoutY="235.0" text="Precio" />
+            <Button fx:id="regresar" layoutX="22.0" layoutY="293.0" mnemonicParsing="false" onAction="#regresarBusqueda" text="Regresar" />
+            <Button fx:id="agregarCarrito" layoutX="102.0" layoutY="293.0" mnemonicParsing="false" onAction="#agregarCarrito" text="Agregar al Carrito" />
             <ImageView fitHeight="184.0" fitWidth="192.0" layoutX="296.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@iconos/LogoRD.png" />
@@ -57,8 +57,8 @@
                   <Image url="@iconos/Ayuda_i.png" />
                </image>
             </ImageView>
-            <Spinner fx:id="cantidad" editable="true" layoutX="88.0" layoutY="278.0" prefHeight="25.0" prefWidth="45.0" />
-            <Label layoutX="28.0" layoutY="282.0" text="Cantidad:" />
+            <Spinner fx:id="cantidad" editable="true" layoutX="87.0" layoutY="257.0" prefHeight="25.0" prefWidth="45.0" />
+            <Label layoutX="21.0" layoutY="261.0" text="Cantidad:" />
          </children>
       </Pane>
    </children>

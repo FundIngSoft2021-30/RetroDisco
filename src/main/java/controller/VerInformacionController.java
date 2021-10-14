@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.Initializable;
@@ -91,7 +92,8 @@ public class VerInformacionController implements Initializable{
         formato.setText(AppLauncher.getDiscoActual().getFormato());
         genero.setText(AppLauncher.getDiscoActual().getGenero());
         precio.setText(Double.toString(AppLauncher.getDiscoActual().getPrecio()));
-        cantidad = new Spinner<Integer>(1,AppLauncher.getDiscoActual().getCantidad(),1);
+        SpinnerValueFactory<Integer> valueFactory= new SpinnerValueFactory.IntegerSpinnerValueFactory(1, AppLauncher.getDiscoActual().getCantidad(), 1, 1);
+        cantidad.setValueFactory(valueFactory);
     }
 
 }

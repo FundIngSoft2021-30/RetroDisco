@@ -150,7 +150,7 @@ public class CRUD {
         docDisco.put("genero", disc.getGenero());
         ApiFuture<WriteResult> future = bd.collection("Discos").document(UUID.randomUUID().toString()).set(docDisco);
         try {
-            System.out.println("Disco agregado : " + future.get().getUpdateTime());
+            System.out.println("Discos update : " + future.get().getUpdateTime());
         } catch (InterruptedException | ExecutionException e) {
             //e.printStackTrace();
             return false;
