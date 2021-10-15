@@ -13,9 +13,9 @@ public class Disco {
     private String vendedor;
     private String genero;
     
-    public Disco(String nombre, String artista, int publicacion, String formato, double precio, int cantidad,
+    public Disco(String id,String nombre, String artista, int publicacion, String formato, double precio, int cantidad,
             String vendedor, String genero) {
-        this.id = UUID.randomUUID().toString();
+        this.id = id;
         this.nombre = nombre;
         this.artista = artista;
         this.publicacion = publicacion;
