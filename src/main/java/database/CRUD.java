@@ -64,6 +64,7 @@ public class CRUD {
         ApiFuture<WriteResult> future = bd.collection("Usuarios").document(user.getUsername()).set(docUsuario);
         try {
             System.out.println("Usuarios Update : " + future.get().getUpdateTime());
+            agregarCarrito(user.getUsername());
         } catch (InterruptedException | ExecutionException e) {
             //e.printStackTrace();
             return false;
@@ -149,7 +150,6 @@ public class CRUD {
     */
     public static boolean agregarDisco(Disco disc)
     {   
-        CollectionReference cr = bd.collection("");
         Map<String, Object> docDisco = new HashMap<>();
         docDisco.put("id", disc.getId());
         docDisco.put("nombre", disc.getNombre());
@@ -160,9 +160,7 @@ public class CRUD {
         docDisco.put("cantidad", disc.getCantidad());
         docDisco.put("vendedor", disc.getVendedor());
         docDisco.put("genero", disc.getGenero());
-        ArrayList<Disco> discosUsuario = obtenerDiscosUsuario(disc.getVendedor());
-        int cantDiscosUsuario = discosUsuario.size();
-        String idDisco = "Disco-"+disc.getVendedor()+cantDiscosUsuario;
+        
         ApiFuture<WriteResult> future = bd.collection("Discos").document(disc.getId()).set(docDisco);
         try {
             System.out.println("Discos update : " + future.get().getUpdateTime());
@@ -306,6 +304,7 @@ public class CRUD {
 
         Map<String, String> mapaComparar = new HashMap<String, String>();
         
+        
         switch(categoria){
             case "nombre" :
                 for (String key : idDiscos) {
@@ -420,11 +419,11 @@ public class CRUD {
             docDetalle.put("disco", detalleActual.getDisco().getId());
             docDetalle.put("cantidad", detalleActual.getUnidades());
             docDetalle.put("precioUnidad", detalleActual.getPrecioUnidad());
-            bd.collection("Ordenes").document(UUID.randomUUID().toString()).collection("detallesOrden").document("detalle_"+i).set(docDetalle);
+            bd.collection("Ordenes").document(idOrden).collection("detallesOrden").document("detalle_"+i).set(docDetalle);
         }
         
         try {
-            System.out.println("Usuarios Update : " + future.get().getUpdateTime());
+            System.out.println("Ordenes Update : " + future.get().getUpdateTime());
         } catch (InterruptedException | ExecutionException e) {
             //e.printStackTrace();
             return false;
@@ -459,8 +458,8 @@ public class CRUD {
             for(QueryDocumentSnapshot document: documents){
                 Usuario u = obtenerUsuario(document.getData().get("comprador").toString());
                 String f = document.getData().get("fecha").toString();
-                ApiFuture<QuerySnapshot> future = bd.collection("Ordenes").document(document.getId()).collection("detallesOrden").get();
                 
+                ApiFuture<QuerySnapshot> future = bd.collection("Ordenes").document(document.getId()).collection("detallesOrden").get();
                 ArrayList<DetalleOrden> detallesOrden = new ArrayList<>();
                 List<QueryDocumentSnapshot> detalles = future.get().getDocuments();
                 
@@ -489,4 +488,93 @@ public class CRUD {
         return ordenes;
     }
     
+    /*
+    * * * * * * METODOS CARRITO* * * * * * 
+    */
+    public static boolean agregarCarrito(String username){
+        Map<String, Object> docData = new HashMap<>();
+        docData.put("idCarrito", username);
+        docData.put("vacio", true);
+        ApiFuture<WriteResult> future = bd.collection("Carritos").document(username).set(docData);
+        
+        try {
+            System.out.println("Update time : " + future.get().getUpdateTime());
+        } catch (InterruptedException|ExecutionException ex) {
+            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
+    
+    public static Carrito obtenerCarrito(String username){
+        Carrito carrito = null;
+        DocumentReference docRef = bd.collection("Carritos").document(username);
+        ApiFuture<DocumentSnapshot> future = docRef.get();
+        try {
+            DocumentSnapshot document = future.get();
+            if(document.exists()){            
+                if(Boolean.parseBoolean(document.getData().get("vacio").toString())){
+                    carrito = new Carrito();
+                }else{
+                    ApiFuture<QuerySnapshot> futureDetalles = bd.collection("Carritos").document(username).collection("detallesOrden").get();
+                    ArrayList<DetalleOrden> detallesOrden = new ArrayList<>();
+                    List<QueryDocumentSnapshot> detalles = futureDetalles.get().getDocuments();
+
+                    for(QueryDocumentSnapshot detalle: detalles){
+                        Disco disco = obtenerUnDisco(detalle.getData().get("disco").toString());
+                        String unidadesString = detalle.getData().get("cantidad").toString();
+                        int unidades = Integer.parseInt(unidadesString) ;
+                        String precioUString = detalle.getData().get("precioUnidad").toString();
+                        double precioUnidad = Double.parseDouble(precioUString);
+                        DetalleOrden detalleActual = new DetalleOrden(disco,unidades, precioUnidad);
+                        detallesOrden.add(detalleActual);
+                    }
+
+                    carrito = new Carrito();
+                    carrito.setDiscos(detallesOrden);
+                }
+
+            }else{
+
+                return null;
+            }
+        } catch (InterruptedException|ExecutionException ex) {
+            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
+        return null;
+    }
+    
+    public static boolean actualizarCarrito(Carrito carrito, String username){
+        Map<String, Object> docCarrito = new HashMap<>();
+        docCarrito.put("idCarrito", username);
+        boolean vacio = true;
+        if(carrito.getDiscos().size()>0){
+            vacio = false;
+            docCarrito.put("vacio", false);
+        }else{
+            docCarrito.put("vacio", true);
+        }
+        ApiFuture<WriteResult> future = bd.collection("Carritos").document(username).set(docCarrito);
+        if(!vacio){
+            ArrayList<DetalleOrden> discos = carrito.getDiscos();
+            for(int i = 0; i<discos.size(); i++){
+                DetalleOrden detalleActual = discos.get(i);
+                Map<String, Object> docDetalle = new HashMap<>();
+                docDetalle.put("disco", detalleActual.getDisco().getId());
+                docDetalle.put("cantidad", detalleActual.getUnidades());
+                docDetalle.put("precioUnidad", detalleActual.getPrecioUnidad());
+                bd.collection("Carritos").document(username).collection("detallesOrden").document("detalle_"+i).set(docDetalle);
+            }
+        }
+        
+        try {
+            System.out.println("Carrito Update : " + future.get().getUpdateTime());
+        } catch (InterruptedException | ExecutionException e) {
+            //e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }
