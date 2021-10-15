@@ -16,12 +16,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
+import javafx.fxml.Initializable;
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.*;
 
-public class BuscarDiscoController {
+public class BuscarDiscoController implements Initializable{
 
     @FXML
-    private Button CerrarSesion;
+    private Button salir;
 
     @FXML
     private ImageView ayuda;
@@ -66,8 +69,9 @@ public class BuscarDiscoController {
 
     @FXML
     void cerrarSesion(ActionEvent event) throws IOException {
-        Stage stage= (Stage)CerrarSesion.getScene().getWindow();
+        Stage stage= (Stage)salir.getScene().getWindow();
         stage.close();
+        AppLauncher.setUsuarioActual(null);
         Parent root = FXMLLoader.load(getClass().getResource("../view/IniciarSesion.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Iniciar Sesion  - RetroDisco");
@@ -122,4 +126,11 @@ public class BuscarDiscoController {
 
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        filtro.getItems().add("Artista");
+        filtro.getItems().add("Genero");
+        filtro.getItems().add("Formato");
+        filtro.getItems().add("Nombre");
+    }
 }

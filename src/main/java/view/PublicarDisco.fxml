@@ -23,8 +23,8 @@
             <Label layoutX="206.0" layoutY="173.0" prefHeight="17.0" prefWidth="50.0" text="Formato" />
             <Label layoutX="86.0" layoutY="200.0" prefHeight="17.0" prefWidth="44.0" text="Genero" />
             <Label layoutX="89.0" layoutY="230.0" prefHeight="17.0" prefWidth="39.0" text="Precio" />
-            <Button fx:id="publicar" layoutX="248.0" layoutY="280.0" mnemonicParsing="false" onAction="#publicarDisco" text="Publicar Disco" />
-            <Button fx:id="cancelar" layoutX="156.0" layoutY="280.0" mnemonicParsing="false" onAction="#VolverInicio" text="Cancelar" />
+            <Button fx:id="publicar" layoutX="251.0" layoutY="293.0" mnemonicParsing="false" onAction="#publicarDisco" text="Publicar Disco" />
+            <Button fx:id="cancelar" layoutX="156.0" layoutY="293.0" mnemonicParsing="false" onAction="#VolverInicio" text="Cancelar" />
             <TextField fx:id="nombredisco" layoutX="156.0" layoutY="111.0" prefHeight="25.0" prefWidth="183.0" promptText="Ingrese el nombre del disco..." />
             <TextField fx:id="nombreartista" layoutX="156.0" layoutY="138.0" prefHeight="25.0" prefWidth="183.0" />
             <TextField fx:id="publicacion" layoutX="156.0" layoutY="169.0" prefHeight="25.0" prefWidth="39.0" />
@@ -32,6 +32,8 @@
             <TextField fx:id="genero" layoutX="156.0" layoutY="196.0" prefHeight="25.0" prefWidth="183.0" />
             <TextField fx:id="precio" layoutX="156.0" layoutY="226.0" prefHeight="25.0" prefWidth="183.0" />
             <ImageView fitHeight="183.0" fitWidth="200.0" layoutX="360.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="89.0" layoutY="261.0" prefHeight="17.0" prefWidth="50.0" text="Cantidad" />
+            <TextField fx:id="cantidad" layoutX="156.0" layoutY="257.0" prefHeight="25.0" prefWidth="183.0" />
          </children>
       </Pane>
       <Label text="Nombre" />

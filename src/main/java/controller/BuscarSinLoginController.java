@@ -17,9 +17,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.fxml.Initializable;
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.*;
 
-public class BuscarSinLoginController {
+public class BuscarSinLoginController implements Initializable{
 
     @FXML
     private ImageView ayuda;
@@ -99,4 +102,11 @@ public class BuscarSinLoginController {
         }
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        filtro.getItems().add("Artista");
+        filtro.getItems().add("Genero");
+        filtro.getItems().add("Formato");
+        filtro.getItems().add("Nombre");
+    }
 }
