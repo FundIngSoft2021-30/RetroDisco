@@ -8,11 +8,15 @@ import java.util.concurrent.ExecutionException;
 
 import com.google.cloud.firestore.WriteResult;
 import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CRUD {
 
@@ -42,6 +46,9 @@ public class CRUD {
     }
 
     
+    /*
+     * * * * * * * METODOS USUARIO * * * * * * * * * * * * *
+     */
     public static boolean agregarUsuario(Usuario user)
     {
         Map<String, Object> docUsuario = new HashMap<>();
@@ -49,6 +56,7 @@ public class CRUD {
         docUsuario.put("apellido", user.getApellido());
         docUsuario.put("username", user.getUsername());
         docUsuario.put("password", user.getPassword());
+        docUsuario.put("activo", user.isActivo());
         if(existeUsername(user.getUsername()))
         {
             return false;
@@ -63,7 +71,25 @@ public class CRUD {
         return true;
     }
 
-
+    public static Usuario obtenerUsuario(String username){
+        DocumentReference docRef = bd.collection("Usuarios").document(username);
+        ApiFuture<DocumentSnapshot> future = docRef.get();
+        
+        Usuario usuario = null;
+        
+        try {
+            DocumentSnapshot document = future.get();
+            if (document.exists()) {
+                //System.out.println("El usuario existe ");
+                usuario = document.toObject(Usuario.class);
+              }
+        } catch (InterruptedException | ExecutionException e1) {
+            e1.printStackTrace();
+            return null;
+        }
+        
+        return usuario;
+    }
 
     public static boolean existeUsername(String username)
     {
@@ -103,10 +129,29 @@ public class CRUD {
 
         return retorno;
     }
+    
+    public static boolean desactivarUsuarioBD(String username){
+        boolean r;
+        DocumentReference docRef = bd.collection("Usuarios").document(username);
+        ApiFuture<WriteResult> future = docRef.update("activo", false);
+        
+        try {
+            WriteResult result = future.get();
+            System.out.println("Write result: " + result);            
+        } catch (InterruptedException |ExecutionException ex) {
+            return false;
+        }
+        return true;
+    }
 
+    /*
+    * * * * * * * METODOS DISCO * * * * * * * * * * *
+    */
     public static boolean agregarDisco(Disco disc)
-    {
+    {   
+        CollectionReference cr = bd.collection("");
         Map<String, Object> docDisco = new HashMap<>();
+        docDisco.put("id", disc.getId());
         docDisco.put("nombre", disc.getNombre());
         docDisco.put("artista", disc.getArtista());
         docDisco.put("publicacion", disc.getPublicacion());
@@ -115,7 +160,10 @@ public class CRUD {
         docDisco.put("cantidad", disc.getCantidad());
         docDisco.put("vendedor", disc.getVendedor());
         docDisco.put("genero", disc.getGenero());
-        ApiFuture<WriteResult> future = bd.collection("Discos").document(UUID.randomUUID().toString()).set(docDisco);
+        ArrayList<Disco> discosUsuario = obtenerDiscosUsuario(disc.getVendedor());
+        int cantDiscosUsuario = discosUsuario.size();
+        String idDisco = "Disco-"+disc.getVendedor()+cantDiscosUsuario;
+        ApiFuture<WriteResult> future = bd.collection("Discos").document(disc.getId()).set(docDisco);
         try {
             System.out.println("Discos update : " + future.get().getUpdateTime());
         } catch (InterruptedException | ExecutionException e) {
@@ -125,11 +173,12 @@ public class CRUD {
         return true;
     }
     
+    
     public static boolean agregarCalificacion(Calificacion review)
     {
         Map<String, Object> docCalificacion = new HashMap<>();
         docCalificacion.put("comentario", review.getComentario());
-        docCalificacion.put("disco", review.getDisco().getNombre());
+        docCalificacion.put("disco", review.getDisco().getId());
         docCalificacion.put("nota", review.getNota());
         docCalificacion.put("usuario", review.getUsuario().getUsername());
         ApiFuture<WriteResult> future = bd.collection("Calificaciones").document(UUID.randomUUID().toString()).set(docCalificacion);
@@ -184,6 +233,24 @@ public class CRUD {
             e.printStackTrace();
         }
         return coleccionDiscos;
+    }
+    
+    public static ArrayList<Disco> obtenerDiscosUsuario(String username){
+        ArrayList<Disco> discos = new ArrayList<>();
+        Query query = bd.collection("Discos").whereEqualTo("vendedor", username);
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+        try{
+            List<QueryDocumentSnapshot> documents = querySnapshot.get().getDocuments();
+            for(QueryDocumentSnapshot d: documents){
+                discos.add(obtenerUnDisco(d.getId()));
+            }
+        }
+        catch(ExecutionException | InterruptedException e){
+            e.printStackTrace();
+            discos.clear();
+        }
+        
+        return discos;        
     }
 
     
@@ -335,5 +402,91 @@ public class CRUD {
         return resultados;
     }
     
-
+        /*
+    * * * * * * * METODOS ORDEN * * * * * * 
+    */
+    public static boolean agregarOrden(Orden orden){ 
+        Map<String, Object> docOrden = new HashMap<>();
+        docOrden.put("comprador", orden.getComprador().getUsername());
+        docOrden.put("fecha", orden.getFecha());
+        
+        String idOrden = UUID.randomUUID().toString();
+        ApiFuture<WriteResult> future = bd.collection("Ordenes").document(idOrden).set(docOrden);
+        
+        ArrayList<DetalleOrden> articulos = orden.getArticulos();
+        for(int i = 0; i<articulos.size(); i++){
+            DetalleOrden detalleActual = articulos.get(i);
+            Map<String, Object> docDetalle = new HashMap<>();
+            docDetalle.put("disco", detalleActual.getDisco().getId());
+            docDetalle.put("cantidad", detalleActual.getUnidades());
+            docDetalle.put("precioUnidad", detalleActual.getPrecioUnidad());
+            bd.collection("Ordenes").document(UUID.randomUUID().toString()).collection("detallesOrden").document("detalle_"+i).set(docDetalle);
+        }
+        
+        try {
+            System.out.println("Usuarios Update : " + future.get().getUpdateTime());
+        } catch (InterruptedException | ExecutionException e) {
+            //e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+        
+    }   
+    
+    public static void probarObtenerOrdenes(){
+        ArrayList<Orden> ordenesJuanito = obtenerOrdenesUsuario("Juanito");
+        if(ordenesJuanito.isEmpty()){
+            System.out.println("No lee las ordenes de Juanito");
+        }
+        else{
+            for(Orden o: ordenesJuanito){
+                System.out.println(o.toString());
+            }
+        }
+    }
+    
+    public static ArrayList<Orden> obtenerOrdenesUsuario(String username){
+        Query query = bd.collection("Ordenes").whereEqualTo("comprador", username);
+        ArrayList<Orden> ordenes = new ArrayList<>();
+        
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+        
+        
+        
+        try {
+            List<QueryDocumentSnapshot> documents = querySnapshot.get().getDocuments();
+            for(QueryDocumentSnapshot document: documents){
+                Usuario u = obtenerUsuario(document.getData().get("comprador").toString());
+                String f = document.getData().get("fecha").toString();
+                ApiFuture<QuerySnapshot> future = bd.collection("Ordenes").document(document.getId()).collection("detallesOrden").get();
+                
+                ArrayList<DetalleOrden> detallesOrden = new ArrayList<>();
+                List<QueryDocumentSnapshot> detalles = future.get().getDocuments();
+                
+                for(QueryDocumentSnapshot detalle: detalles){
+                    Disco disco = obtenerUnDisco(detalle.getData().get("disco").toString());
+                    String unidadesString = detalle.getData().get("cantidad").toString();
+                    int unidades = Integer.parseInt(unidadesString) ;
+                    String precioUString = detalle.getData().get("precioUnidad").toString();
+                    double precioUnidad = Double.parseDouble(precioUString);
+                    DetalleOrden detalleActual = new DetalleOrden(disco,unidades, precioUnidad);
+                    detallesOrden.add(detalleActual);
+                }
+                
+                
+                Orden orden = new Orden();
+                orden.setComprador(u);
+                orden.setFecha(f);
+                orden.setArticulos(detallesOrden);
+                
+                ordenes.add(orden);
+                
+            }
+        } catch (InterruptedException | ExecutionException ex) {
+            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ordenes;
+    }
+    
 }

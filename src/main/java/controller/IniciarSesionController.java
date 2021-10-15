@@ -1,5 +1,6 @@
 package controller;
 
+import database.CRUD;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class IniciarSesionController {
@@ -42,6 +44,35 @@ public class IniciarSesionController {
 
     @FXML
     void IniciarSesion(ActionEvent event) throws IOException{
+        String username = txtUsuario.getText().trim();
+        String password = txtContraseña.getText().trim();
+        if(txtUsuario.getText().isEmpty()||txtContraseña.getText().isEmpty()){
+            errorLogin.setTextFill(Paint.valueOf("#ef2121"));
+            errorLogin.setText("ESP Complete todos los espacios");
+        }else{
+            if(CRUD.existeUsername(username)){
+                if(CRUD.autenticarPassword(username, password)){
+                    
+                    AppLauncher.setUsuarioActual(CRUD.obtenerUsuario(username));
+                    Stage stage=(Stage) Ingresar.getScene().getWindow();
+                    stage.close();
+                    Parent root=FXMLLoader.load(getClass().getResource("../view/BuscarDisco.fxml"));
+                    stage.close();
+                    Scene scene = new Scene(root);
+                    stage.setTitle("Buscador - RetroDisco");
+                    stage.setScene(scene);
+                    stage.show();
+                    
+                }else{
+                    errorLogin.setTextFill(Paint.valueOf("#ef2121"));
+                    errorLogin.setText("C.I La contraseña es incorrecta");
+                }
+            }
+            else{
+                errorLogin.setTextFill(Paint.valueOf("#ef2121"));
+                errorLogin.setText("USU El usuario no existe");
+            }
+        }/*
         Stage stage=(Stage) Ingresar.getScene().getWindow();
         stage.close();
         Parent root=FXMLLoader.load(getClass().getResource("../view/IniciarSesion.fxml"));
@@ -49,7 +80,7 @@ public class IniciarSesionController {
         Scene scene = new Scene(root);
         stage.setTitle("Sesion iniciada - RetroDisco");
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
     }
 
     @FXML
@@ -66,6 +97,7 @@ public class IniciarSesionController {
 
     @FXML
     void iniciarInvitado(ActionEvent event) throws IOException {
+        AppLauncher.setUsuarioActual(null);
         Stage stage= (Stage)Invitado.getScene().getWindow();
         stage.close();
         Parent root = FXMLLoader.load(getClass().getResource("../view/BuscarDiscoSinLogin.fxml"));

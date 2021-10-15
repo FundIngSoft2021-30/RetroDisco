@@ -3,22 +3,47 @@ package model;
 import java.util.ArrayList;
 
 public class Carrito {
-    private ArrayList<Disco> discos;
-    private long totalPagar;
+    private ArrayList<DetalleOrden> discos;
+    
     public Carrito() {
-        this.discos.clear();
-        this.totalPagar = 0;
+        this.discos = new ArrayList<DetalleOrden>();
     }
-    public ArrayList<Disco> getDiscos() {
+    
+    public Carrito(ArrayList<DetalleOrden> discos) {
+        this.discos =discos;
+    }
+    
+    public ArrayList<DetalleOrden> getDiscos() {
         return discos;
     }
-    public void setDiscos(ArrayList<Disco> discos) {
+    public void setDiscos(ArrayList<DetalleOrden> discos) {
         this.discos = discos;
     }
-    public long getTotalPagar() {
-        return totalPagar;
+    
+    public boolean agregarDisco(DetalleOrden detalle){
+        if(discos.contains(detalle)){
+            return false;
+        }
+        else{
+            this.discos.add(detalle);
+            return true;
+        }        
     }
-    public void setTotalPagar(long totalPagar) {
-        this.totalPagar = totalPagar;
+    
+    public boolean quitarDisco (DetalleOrden detalle){
+        return this.discos.remove(detalle);
     }
+    
+    public void vaciarCarrito (){
+        discos.clear();
+    }
+    
+    public double getTotalPagar() {
+        double total = 0;
+        for(DetalleOrden d: this.getDiscos()){
+            total += (d.getPrecioUnidad()*d.getUnidades());
+        }
+        return total;
+    }
+    
 }

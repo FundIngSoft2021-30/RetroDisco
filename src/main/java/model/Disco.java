@@ -1,6 +1,9 @@
 package model;
 
+import java.util.UUID;
+
 public class Disco {
+    private String id;
     private String nombre;
     private String artista;
     private int publicacion;
@@ -12,6 +15,7 @@ public class Disco {
     
     public Disco(String nombre, String artista, int publicacion, String formato, double precio, int cantidad,
             String vendedor, String genero) {
+        this.id = UUID.randomUUID().toString();
         this.nombre = nombre;
         this.artista = artista;
         this.publicacion = publicacion;
@@ -34,6 +38,14 @@ public class Disco {
         genero="";
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     public String getNombre() {
         return nombre;
     }
