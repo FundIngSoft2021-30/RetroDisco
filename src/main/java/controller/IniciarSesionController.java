@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import model.Carrito;
 
 public class IniciarSesionController {
 
@@ -52,8 +53,19 @@ public class IniciarSesionController {
         }else{
             if(CRUD.existeUsername(username)){
                 if(CRUD.autenticarPassword(username, password)){
+                    Carrito carrito = CRUD.obtenerCarrito(username);
+                    if(carrito==null){
+                        CRUD.agregarCarrito(username);
+                        carrito=CRUD.obtenerCarrito(username);
+                    }
                     
                     AppLauncher.setUsuarioActual(CRUD.obtenerUsuario(username));
+                    AppLauncher.setCarritoActual(carrito);
+                    if(AppLauncher.getCarritoActual()!=null){
+                        System.out.println("El carrito no es nulo y su tamaño es "+AppLauncher.getCarritoActual().size());
+                    }else{
+                        System.out.println("El carrito es nulo");
+                    }
                     Stage stage=(Stage) Ingresar.getScene().getWindow();
                     stage.close();
                     Parent root=FXMLLoader.load(getClass().getResource("../view/BuscarDisco.fxml"));
