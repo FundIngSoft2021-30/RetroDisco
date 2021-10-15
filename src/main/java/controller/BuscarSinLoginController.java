@@ -47,15 +47,32 @@ public class BuscarSinLoginController implements Initializable{
 
     @FXML
     void buscarDisco(MouseEvent event) {
+        
+        
+        String c = filtro.getValue();
+        filtro.setValue(null);
         if(nombreDisco.getText().isEmpty()){
             resultados.getItems().clear();
         }else{
-            Map<String,Disco> resultadoBusqueda = CRUD.busquedaGeneral(nombreDisco.getText());
-            ArrayList<Disco> discos = new ArrayList<Disco>(resultadoBusqueda.values());
-            resultados.getItems().clear();
-            for (Disco discoA : discos) {
-                resultados.getItems().add(discoA);            
+            //Mensaje de buscando discos
+            Map<String,Disco> resultadoBusqueda = new HashMap<>(); 
+            if(filtro.getValue()==null){
+               resultadoBusqueda = CRUD.busquedaGeneral(nombreDisco.getText()); 
+            }else{
+                resultadoBusqueda = CRUD.buscarDiscoCategoria(nombreDisco.getText(), c);
             }
+            ArrayList<Disco> discos = new ArrayList<Disco>(resultadoBusqueda.values());
+            if(discos.isEmpty()){
+            
+                //Mensaje de error
+                
+            }else{
+                resultados.getItems().clear();
+                for (Disco discoA : discos) {
+                    resultados.getItems().add(discoA);            
+                }
+            }
+            
         }
     }
 
@@ -104,9 +121,9 @@ public class BuscarSinLoginController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        filtro.getItems().add("Artista");
-        filtro.getItems().add("Genero");
-        filtro.getItems().add("Formato");
-        filtro.getItems().add("Nombre");
+        filtro.getItems().add("artista");
+        filtro.getItems().add("genero");
+        filtro.getItems().add("formato");
+        filtro.getItems().add("nombre");
     }
 }
