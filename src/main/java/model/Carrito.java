@@ -38,12 +38,25 @@ public class Carrito {
         discos.clear();
     }
     
+    public boolean contieneDisco(Disco disco){
+        for(DetalleOrden detalle: this.discos){
+            if(detalle.getDisco().getId().equals(disco.getId())){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public double getTotalPagar() {
         double total = 0;
         for(DetalleOrden d: this.getDiscos()){
             total += (d.getPrecioUnidad()*d.getUnidades());
         }
         return total;
+    }
+    
+    public int size(){
+        return this.discos.size();
     }
     
 }
