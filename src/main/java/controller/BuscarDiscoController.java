@@ -55,15 +55,18 @@ public class BuscarDiscoController implements Initializable{
 
     @FXML
     void buscarDisco(MouseEvent event) {
+        resultados.getItems().clear();
         String c = filtro.getValue();
-        filtro.setValue(null);
+        
         if(nombreDisco.getText().isEmpty()){
             resultados.getItems().clear();
         }else{
             Map<String,Disco> resultadoBusqueda = new HashMap<>(); 
             if(filtro.getValue()==null){
+                System.out.println("Busqueda sin filtro");
                resultadoBusqueda = CRUD.busquedaGeneral(nombreDisco.getText()); 
             }else{
+                System.out.println("Busqueda con filtro");
                 resultadoBusqueda = CRUD.buscarDiscoCategoria(nombreDisco.getText(), c);
             }
             ArrayList<Disco> discos = new ArrayList<Disco>(resultadoBusqueda.values());
@@ -78,6 +81,7 @@ public class BuscarDiscoController implements Initializable{
                 }
             }
         }
+        filtro.setValue(null);
     }
 
     @FXML
