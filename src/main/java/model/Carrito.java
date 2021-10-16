@@ -59,4 +59,11 @@ public class Carrito {
         return this.discos.size();
     }
     
+    public String toString(){
+        String retorno = "";
+        for(DetalleOrden disco: discos){
+            retorno += disco.toString();
+        }
+        return retorno;
+    }
 }
