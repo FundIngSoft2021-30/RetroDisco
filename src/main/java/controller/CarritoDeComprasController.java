@@ -51,7 +51,18 @@ public class CarritoDeComprasController implements Initializable {
 
     @FXML
     void eliminarDiscos(ActionEvent event) {
-
+        if(resultados.getSelectionModel().getSelectedItem()!=null){
+            CRUD.vaciarCarrito(AppLauncher.getUsuarioActual().getUsername(),AppLauncher.getCarritoActual());
+            AppLauncher.getCarritoActual().getDiscos().remove(resultados.getSelectionModel().getSelectedIndex());
+            CRUD.actualizarCarrito(AppLauncher.getCarritoActual(), AppLauncher.getUsuarioActual().getUsername(), AppLauncher.getCarritoActual());
+            resultados.getItems().clear();
+            Double suma = Double.parseDouble("0");
+            for (DetalleOrden d : AppLauncher.getCarritoActual().getDiscos()) {
+                resultados.getItems().add(d);
+                suma+=(d.getPrecioUnidad()*d.getUnidades());
+            }
+            totalpago.setText(Double.toString(suma));
+        }
     }
 
     @FXML

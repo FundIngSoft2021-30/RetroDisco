@@ -23,7 +23,7 @@
                   </Label>
                   <Button fx:id="regresarAbusqeda" layoutX="34.0" layoutY="342.0" mnemonicParsing="false" onAction="#RegresaInterfazBusqueda" prefHeight="25.0" prefWidth="91.0" text="Regresar" />
                   <Button fx:id="pagar" layoutX="447.0" layoutY="342.0" mnemonicParsing="false" onAction="#pagarCarrito" text="Proceder al pago" />
-                  <Button fx:id="eliminarDiscos" layoutX="134.0" layoutY="342.0" mnemonicParsing="false" onAction="#eliminarDiscos" text="Eliminar discos" />
+                  <Button fx:id="eliminarDiscos" layoutX="134.0" layoutY="342.0" mnemonicParsing="false" onAction="#eliminarDiscos" text="Eliminar Disco" />
                   <Button fx:id="VaciarCarrito" layoutX="243.0" layoutY="342.0" mnemonicParsing="false" onAction="#vaciarCarrito" text="Vaciar Carrito" />
                   <Label layoutX="407.0" layoutY="131.0" prefHeight="23.0" prefWidth="40.0" text="Total: $" />
                   <Label fx:id="totalpago" layoutX="447.0" layoutY="134.0" prefHeight="17.0" prefWidth="129.0" />
