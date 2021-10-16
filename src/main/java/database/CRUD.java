@@ -513,8 +513,14 @@ public class CRUD {
         try {
             DocumentSnapshot document = future.get();
             if(document.exists()){            
-                if(Boolean.parseBoolean(document.getData().get("vacio").toString())){
+                if(Boolean.parseBoolean(document.getData().get("vacio").toString())){                    
+                    System.out.println("Documento "+username+" vacio");
                     carrito = new Carrito();
+                    if(carrito==null){
+                        System.out.println("En CRUD el carrito es nulo");
+                    }else{
+                        System.out.println("En CRUD el carrito no es nulo");
+                    }
                 }else{
                     ApiFuture<QuerySnapshot> futureDetalles = bd.collection("Carritos").document(username).collection("detallesOrden").get();
                     ArrayList<DetalleOrden> detallesOrden = new ArrayList<>();
@@ -543,19 +549,20 @@ public class CRUD {
             return null;
         }
         
-        return null;
+        return carrito;
     }
     
     public static boolean actualizarCarrito(Carrito carrito, String username){
         Map<String, Object> docCarrito = new HashMap<>();
         docCarrito.put("idCarrito", username);
         boolean vacio = true;
-        if(carrito.getDiscos().size()>0){
+        if(carrito.size()>0){
             vacio = false;
             docCarrito.put("vacio", false);
         }else{
             docCarrito.put("vacio", true);
         }
+        ApiFuture<WriteResult> borrarCarrito = bd.collection("Carritos").document(username).delete();
         ApiFuture<WriteResult> future = bd.collection("Carritos").document(username).set(docCarrito);
         if(!vacio){
             ArrayList<DetalleOrden> discos = carrito.getDiscos();
