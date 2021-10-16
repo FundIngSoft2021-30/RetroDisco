@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BuscarDiscoController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BuscarDiscoController">
    <children>
       <Pane prefHeight="400.0" prefWidth="209.0">
          <effect>
@@ -45,6 +45,9 @@
                <image>
                   <Image url="@iconos/Buscar_i.png" />
                </image>
+               <effect>
+                  <Blend />
+               </effect>
             </ImageView>
             <ListView fx:id="resultados" layoutY="186.0" onMouseClicked="#verDisco" prefHeight="200.0" prefWidth="200.0" />
          </children>

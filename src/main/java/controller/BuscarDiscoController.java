@@ -21,7 +21,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.*;
 
-public class BuscarDiscoController implements Initializable{
+public class BuscarDiscoController implements Initializable {
 
     @FXML
     private Button salir;
@@ -57,27 +57,27 @@ public class BuscarDiscoController implements Initializable{
     void buscarDisco(MouseEvent event) {
         resultados.getItems().clear();
         String c = filtro.getValue();
-        
-        if(nombreDisco.getText().isEmpty()){
+
+        if (nombreDisco.getText().isEmpty()) {
             resultados.getItems().clear();
-        }else{
-            Map<String,Disco> resultadoBusqueda = new HashMap<>(); 
-            if(filtro.getValue()==null){
+        } else {
+            Map<String, Disco> resultadoBusqueda = new HashMap<>();
+            if (filtro.getValue() == null) {
                 System.out.println("Busqueda sin filtro");
-               resultadoBusqueda = CRUD.busquedaGeneral(nombreDisco.getText()); 
-            }else{
+                resultadoBusqueda = CRUD.busquedaGeneral(nombreDisco.getText());
+            } else {
                 System.out.println("Busqueda con filtro");
                 resultadoBusqueda = CRUD.buscarDiscoCategoria(nombreDisco.getText(), c);
             }
             ArrayList<Disco> discos = new ArrayList<Disco>(resultadoBusqueda.values());
-            if(discos.isEmpty()){
-            
-                //Mensaje de error
-                
-            }else{
+            if (discos.isEmpty()) {
+
+                // Mensaje de error
+
+            } else {
                 resultados.getItems().clear();
                 for (Disco discoA : discos) {
-                    resultados.getItems().add(discoA);            
+                    resultados.getItems().add(discoA);
                 }
             }
         }
@@ -86,7 +86,7 @@ public class BuscarDiscoController implements Initializable{
 
     @FXML
     void cerrarSesion(ActionEvent event) throws IOException {
-        Stage stage= (Stage)salir.getScene().getWindow();
+        Stage stage = (Stage) salir.getScene().getWindow();
         stage.close();
         AppLauncher.setUsuarioActual(null);
         Parent root = FXMLLoader.load(getClass().getResource("../view/IniciarSesion.fxml"));
@@ -98,7 +98,7 @@ public class BuscarDiscoController implements Initializable{
 
     @FXML
     void venderDisco(ActionEvent event) throws IOException {
-        Stage stage= (Stage)vender.getScene().getWindow();
+        Stage stage = (Stage) vender.getScene().getWindow();
         stage.close();
         Parent root = FXMLLoader.load(getClass().getResource("../view/PublicarDisco.fxml"));
         stage.close();
@@ -114,16 +114,23 @@ public class BuscarDiscoController implements Initializable{
     }
 
     @FXML
-    void verCarrito(MouseEvent event) {
+    void verCarrito(MouseEvent event) throws IOException {
+        Stage stage = (Stage) carrito.getScene().getWindow();
+        stage.close();
+        Parent root = FXMLLoader.load(getClass().getResource("../view/CarritoCompras.fxml"));
+        stage.close();
+        Scene scene = new Scene(root);
+        stage.setTitle("Publicar Disco - RetroDisco");
+        stage.setScene(scene);
+        stage.show();
 
     }
 
     @FXML
     void verDisco(MouseEvent event) throws IOException {
-        if(resultados.getSelectionModel().getSelectedItem()!=null)
-        {
+        if (resultados.getSelectionModel().getSelectedItem() != null) {
             AppLauncher.setDiscoActual(resultados.getSelectionModel().getSelectedItem());
-            Stage stage= new Stage();
+            Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("../view/VerInfo.fxml"));
             Scene scene = new Scene(root);
             stage.setTitle(AppLauncher.getDiscoActual().toString());
