@@ -2,6 +2,7 @@ package controller;
 
 import database.CRUD;
 import model.Carrito;
+import model.DetalleOrden;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,16 +33,16 @@ public class CarritoDeComprasController implements Initializable {
     private Button VaciarCarrito;
 
     @FXML
-    private Label total;
+    private Label totalpago;
 
     @FXML
-    private ListView<Carrito> resultados;
+    private ListView<DetalleOrden> resultados;
 
     @FXML
     void RegresaInterfazBusqueda(ActionEvent event) throws IOException {
-        Stage stage=(Stage) regresarAbusqeda.getScene().getWindow();
+        Stage stage = (Stage) regresarAbusqeda.getScene().getWindow();
         stage.close();
-        Parent root=FXMLLoader.load(getClass().getResource("../view/BuscarDisco.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../view/BuscarDisco.fxml"));
         stage.close();
         Scene scene = new Scene(root);
         stage.setTitle("Buscador - RetroDisco");
@@ -66,6 +67,11 @@ public class CarritoDeComprasController implements Initializable {
         CRUD.actualizarCarrito(carrito, AppLauncher.getUsuarioActual().getUsername());
         AppLauncher.setCarritoActual(CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername()));
         resultados.getItems().clear();
+        /*
+         * totalpago.setText(
+         * String.valueOf(CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername
+         * ()).getTotalPagar()));
+         */
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Alerta!");
         alert.setHeaderText("Carrito vaciado");
@@ -74,8 +80,16 @@ public class CarritoDeComprasController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         AppLauncher.setCarritoActual(CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername()));
-        resultados.getItems().add(AppLauncher.getCarritoActual());
+        for (DetalleOrden d : AppLauncher.getCarritoActual().getDiscos()) {
+            resultados.getItems().add(d);
+        }
+        /*
+         * totalpago.setText(
+         * String.valueOf(CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername
+         * ()).getTotalPagar()));
+         */
     }
 
 }
