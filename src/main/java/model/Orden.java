@@ -46,7 +46,6 @@ public class Orden {
     }
     
     public String toString(){
-        double totalCompra = 0;
         String retorno = "";
         String user = "";
         double totalOrden = 0;
