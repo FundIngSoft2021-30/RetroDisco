@@ -71,31 +71,34 @@ public class VerInformacionController implements Initializable{
         if(AppLauncher.getDiscoActual().getCantidad()<1){
             return;
         }
-        
+        if(AppLauncher.getUsuarioActual() == null){
+            return;
+        }
+        int unidades = cantidad.getValue();
         Disco disco = AppLauncher.getDiscoActual();
         Carrito c = AppLauncher.getCarritoActual();
-        /*
-        Disco disco = new Disco();
+        DetalleOrden detalle = new DetalleOrden(disco,unidades,disco.getPrecio());
+        if(c!=null && detalle!=null){
+            System.out.println("Ni el carrito c es nulo, ni el detalle es nulo");
+            c.agregarDisco(detalle);
+            CRUD.actualizarCarrito(c, AppLauncher.getUsuarioActual().getUsername());
+            AppLauncher.setCarritoActual(c);
+            System.out.println("CRUD actualizada");
+            
+        }else{
+            System.out.println("El carrito c es nulo");
+        }
         
-        disco.setId(AppLauncher.getDiscoActual().getId());
-        disco.setNombre(AppLauncher.getDiscoActual().getNombre());
-        disco.setArtista(AppLauncher.getDiscoActual().getArtista());
-        disco.setPublicacion(AppLauncher.getDiscoActual().getPublicacion());
-        disco.setFormato(AppLauncher.getDiscoActual().getFormato());
-        disco.setGenero(AppLauncher.getDiscoActual().getGenero());
-        disco.setCantidad(AppLauncher.getDiscoActual().getCantidad());
-        disco.setVendedor(AppLauncher.getDiscoActual().getVendedor());
-        Carrito c = AppLauncher.getCarritoActual();*/
         
-        int unidades = cantidad.getValue();
+        
         //DetalleOrden detalle = new DetalleOrden(disco,unidades,disco.getPrecio());
         
 //        c.agregarDisco(detalle);
   //      System.out.println("agregar Disco a c");
         
         
-            c.agregarDisco( new DetalleOrden(disco,unidades,disco.getPrecio()));
-            System.out.println("Agregar disco a carrito actual");
+            //c.agregarDisco( new DetalleOrden(disco,unidades,disco.getPrecio()));
+            //System.out.println("Agregar disco a carrito actual");
         
     //        CRUD.actualizarCarrito(AppLauncher.getCarritoActual(), AppLauncher.getUsuarioActual().getUsername());
       //      System.out.println("crud actualizada");
