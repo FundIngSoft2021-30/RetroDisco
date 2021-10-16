@@ -63,6 +63,9 @@ public class IniciarSesionController {
                     AppLauncher.setCarritoActual(carrito);
                     if(AppLauncher.getCarritoActual()!=null){
                         System.out.println("El carrito no es nulo y su tamaño es "+AppLauncher.getCarritoActual().size());
+                        if(AppLauncher.getCarritoActual().size()>0){
+                            System.out.println(AppLauncher.getCarritoActual().toString());
+                        }
                     }else{
                         System.out.println("El carrito es nulo");
                     }
