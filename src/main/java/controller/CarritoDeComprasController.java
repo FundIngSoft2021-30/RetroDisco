@@ -67,11 +67,10 @@ public class CarritoDeComprasController implements Initializable {
         CRUD.actualizarCarrito(carrito, AppLauncher.getUsuarioActual().getUsername());
         AppLauncher.setCarritoActual(CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername()));
         resultados.getItems().clear();
-        /*
-         * totalpago.setText(
-         * String.valueOf(CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername
-         * ()).getTotalPagar()));
-         */
+
+        totalpago.setText(
+                String.valueOf(CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername()).getTotalPagar()));
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Alerta!");
         alert.setHeaderText("Carrito vaciado");
@@ -85,11 +84,10 @@ public class CarritoDeComprasController implements Initializable {
         for (DetalleOrden d : AppLauncher.getCarritoActual().getDiscos()) {
             resultados.getItems().add(d);
         }
-        /*
-         * totalpago.setText(
-         * String.valueOf(CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername
-         * ()).getTotalPagar()));
-         */
+
+        totalpago.setText(
+                String.valueOf(CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername()).getTotalPagar()));
+
     }
 
 }
