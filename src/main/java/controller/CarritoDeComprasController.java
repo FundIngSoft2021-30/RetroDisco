@@ -1,7 +1,6 @@
 package controller;
 
 import database.CRUD;
-import model.Carrito;
 import model.DetalleOrden;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -62,15 +61,10 @@ public class CarritoDeComprasController implements Initializable {
 
     @FXML
     void vaciarCarrito(ActionEvent event) {
-        Carrito carrito = new Carrito();
-        carrito.getDiscos().clear();
-        CRUD.actualizarCarrito(carrito, AppLauncher.getUsuarioActual().getUsername());
+        CRUD.vaciarCarrito(AppLauncher.getUsuarioActual().getUsername(),AppLauncher.getCarritoActual());
         AppLauncher.setCarritoActual(CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername()));
         resultados.getItems().clear();
-
-        totalpago.setText(
-                String.valueOf(CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername()).getTotalPagar()));
-
+        totalpago.setText("0");
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Alerta!");
         alert.setHeaderText("Carrito vaciado");
@@ -79,15 +73,13 @@ public class CarritoDeComprasController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        Double suma = Double.parseDouble("0");
         AppLauncher.setCarritoActual(CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername()));
         for (DetalleOrden d : AppLauncher.getCarritoActual().getDiscos()) {
             resultados.getItems().add(d);
+            suma+=(d.getPrecioUnidad()*d.getUnidades());
         }
-
-        totalpago.setText(
-                String.valueOf(CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername()).getTotalPagar()));
-
+        totalpago.setText(Double.toString(suma));
     }
 
 }

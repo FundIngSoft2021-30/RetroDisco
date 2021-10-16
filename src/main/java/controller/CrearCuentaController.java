@@ -73,6 +73,7 @@ public class CrearCuentaController {
         {
             errorCrearCuenta.setTextFill(Paint.valueOf("#40d222"));
             errorCrearCuenta.setText("Usuario "+txtUsername.getText()+" creado correctamente.");
+            CRUD.agregarCarrito(txtUsername.getText());
         }else{
             errorCrearCuenta.setTextFill(Paint.valueOf("#ef2121"));
             errorCrearCuenta.setText("El username "+txtUsername.getText()+" ya se encuentra en uso.");

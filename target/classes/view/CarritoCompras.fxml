@@ -8,10 +8,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CarritoDeComprasController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CarritoDeComprasController">
    <children>
       <ScrollPane prefHeight="400.0" prefWidth="602.0">
         <content>
@@ -26,8 +25,8 @@
                   <Button fx:id="pagar" layoutX="447.0" layoutY="342.0" mnemonicParsing="false" onAction="#pagarCarrito" text="Proceder al pago" />
                   <Button fx:id="eliminarDiscos" layoutX="134.0" layoutY="342.0" mnemonicParsing="false" onAction="#eliminarDiscos" text="Eliminar discos" />
                   <Button fx:id="VaciarCarrito" layoutX="243.0" layoutY="342.0" mnemonicParsing="false" onAction="#vaciarCarrito" text="Vaciar Carrito" />
-                  <Label layoutX="349.0" layoutY="131.0" prefHeight="23.0" prefWidth="40.0" text="Total:" />
-                  <Label fx:id="totalpago" layoutX="380.0" layoutY="134.0" prefHeight="17.0" prefWidth="129.0" />
+                  <Label layoutX="407.0" layoutY="131.0" prefHeight="23.0" prefWidth="40.0" text="Total: $" />
+                  <Label fx:id="totalpago" layoutX="447.0" layoutY="134.0" prefHeight="17.0" prefWidth="129.0" />
                   <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="470.0" layoutY="28.0">
                      <image>
                         <Image url="@iconos/Cuenta_i.png" />
@@ -43,11 +42,7 @@
                         <Image url="@iconos/Ayuda_i.png" />
                      </image>
                   </ImageView>
-                  <Pane layoutX="43.0" layoutY="67.0" prefHeight="261.0" prefWidth="255.0">
-                     <children>
-                        <ListView fx:id="resultados" layoutX="1.0" layoutY="-2.0" prefHeight="260.0" prefWidth="254.0" />
-                     </children>
-                  </Pane>
+                  <ListView fx:id="resultados" layoutX="41.0" layoutY="117.0" prefHeight="162.0" prefWidth="349.0" />
                </children>
             </AnchorPane>
         </content>

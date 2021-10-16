@@ -38,14 +38,14 @@ public class Carrito {
         discos.clear();
     }
     
-    public boolean contieneDisco(Disco disco){
+/*     public boolean contieneDisco(Disco disco){
         for(DetalleOrden detalle: this.discos){
             if(detalle.getDisco().getId().equals(disco.getId())){
                 return true;
             }
         }
         return false;
-    }
+    } */
     
     public double getTotalPagar() {
         double total = 0;

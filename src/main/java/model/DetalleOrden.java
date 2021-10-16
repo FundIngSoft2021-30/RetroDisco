@@ -6,7 +6,7 @@
 package model;
 
 public class DetalleOrden {
-    private Disco disco;
+    private String disco;
     private int unidades;
     private double precioUnidad;
 
@@ -16,13 +16,13 @@ public class DetalleOrden {
         precioUnidad = 0;
     }
 
-    public DetalleOrden(Disco disco, int unidades, double precioUnidad) {
+    public DetalleOrden(String disco, int unidades, double precioUnidad) {
         this.disco = disco;
         this.unidades = unidades;
         this.precioUnidad = precioUnidad;
     }
 
-    public Disco getDisco() {
+    public String getDisco() {
         return disco;
     }
 
@@ -34,7 +34,7 @@ public class DetalleOrden {
         return precioUnidad;
     }
 
-    public void setDisco(Disco disco) {
+    public void setDisco(String disco) {
         this.disco = disco;
     }
 
@@ -48,7 +48,7 @@ public class DetalleOrden {
 
     public String toString() {
         if (disco != null) {
-            return this.disco.getNombre() + " - " + this.precioUnidad + "$\n";
+            return this.disco + " - $" + this.precioUnidad+" - Cantidad: "+this.unidades;
         } else {
             return "La información de este disco no está disponible\n";
         }

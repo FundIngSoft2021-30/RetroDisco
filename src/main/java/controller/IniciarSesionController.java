@@ -54,21 +54,12 @@ public class IniciarSesionController {
             if(CRUD.existeUsername(username)){
                 if(CRUD.autenticarPassword(username, password)){
                     Carrito carrito = CRUD.obtenerCarrito(username);
-                    if(carrito==null){
+                    if(carrito.getDiscos().isEmpty()){
                         CRUD.agregarCarrito(username);
                         carrito=CRUD.obtenerCarrito(username);
                     }
-                    
                     AppLauncher.setUsuarioActual(CRUD.obtenerUsuario(username));
                     AppLauncher.setCarritoActual(carrito);
-                    if(AppLauncher.getCarritoActual()!=null){
-                        System.out.println("El carrito no es nulo y su tamaño es "+AppLauncher.getCarritoActual().size());
-                        if(AppLauncher.getCarritoActual().size()>0){
-                            System.out.println(AppLauncher.getCarritoActual().toString());
-                        }
-                    }else{
-                        System.out.println("El carrito es nulo");
-                    }
                     Stage stage=(Stage) Ingresar.getScene().getWindow();
                     stage.close();
                     Parent root=FXMLLoader.load(getClass().getResource("../view/BuscarDisco.fxml"));
@@ -87,15 +78,7 @@ public class IniciarSesionController {
                 errorLogin.setTextFill(Paint.valueOf("#ef2121"));
                 errorLogin.setText("USU El usuario no existe");
             }
-        }/*
-        Stage stage=(Stage) Ingresar.getScene().getWindow();
-        stage.close();
-        Parent root=FXMLLoader.load(getClass().getResource("../view/IniciarSesion.fxml"));
-        stage.close();
-        Scene scene = new Scene(root);
-        stage.setTitle("Sesion iniciada - RetroDisco");
-        stage.setScene(scene);
-        stage.show();*/
+        }
     }
 
     @FXML
@@ -113,6 +96,7 @@ public class IniciarSesionController {
     @FXML
     void iniciarInvitado(ActionEvent event) throws IOException {
         AppLauncher.setUsuarioActual(null);
+        AppLauncher.setCarritoActual(null);
         Stage stage= (Stage)Invitado.getScene().getWindow();
         stage.close();
         Parent root = FXMLLoader.load(getClass().getResource("../view/BuscarDiscoSinLogin.fxml"));

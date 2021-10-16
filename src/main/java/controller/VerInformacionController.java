@@ -1,10 +1,10 @@
 package controller;
 
-import database.CRUD;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import database.CRUD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +23,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Carrito;
 import model.DetalleOrden;
-import model.Disco;
 
 public class VerInformacionController implements Initializable{
 
@@ -68,43 +67,15 @@ public class VerInformacionController implements Initializable{
 
     @FXML
     void agregarCarrito(ActionEvent event) {
-        if(AppLauncher.getDiscoActual().getCantidad()<1){
-            return;
-        }
-        if(AppLauncher.getUsuarioActual() == null){
-            return;
-        }
         int unidades = cantidad.getValue();
-        Disco disco = AppLauncher.getDiscoActual();
+        String disco = AppLauncher.getDiscoActual().getNombre();
         Carrito c = AppLauncher.getCarritoActual();
-        DetalleOrden detalle = new DetalleOrden(disco,unidades,disco.getPrecio());
-        if(c!=null && detalle!=null){
-            System.out.println("Ni el carrito c es nulo, ni el detalle es nulo");
-            c.agregarDisco(detalle);
-            CRUD.actualizarCarrito(c, AppLauncher.getUsuarioActual().getUsername());
-            AppLauncher.setCarritoActual(c);
-            System.out.println("CRUD actualizada");
-            
-        }else{
-            System.out.println("El carrito c es nulo");
-        }
-        
-        
-        
-        //DetalleOrden detalle = new DetalleOrden(disco,unidades,disco.getPrecio());
-        
-//        c.agregarDisco(detalle);
-  //      System.out.println("agregar Disco a c");
-        
-        
-            //c.agregarDisco( new DetalleOrden(disco,unidades,disco.getPrecio()));
-            //System.out.println("Agregar disco a carrito actual");
-        
-    //        CRUD.actualizarCarrito(AppLauncher.getCarritoActual(), AppLauncher.getUsuarioActual().getUsername());
-      //      System.out.println("crud actualizada");
+        DetalleOrden detalle = new DetalleOrden(disco,unidades,Double.parseDouble(precio.getText()));
+        c.agregarDisco(detalle);
+        AppLauncher.setCarritoActual(c);
+        CRUD.actualizarCarrito(c, AppLauncher.getUsuarioActual().getUsername(),AppLauncher.getCarritoActual());
         Stage stage= (Stage)regresar.getScene().getWindow();
         stage.close();
-        
     }
 
     @FXML
@@ -120,14 +91,17 @@ public class VerInformacionController implements Initializable{
 
     @FXML
     void verCarrito(MouseEvent event) throws IOException {
-        Stage stage= (Stage)regresar.getScene().getWindow();
-        stage.close();
-        Parent root = FXMLLoader.load(getClass().getResource("../view/CarritoCompras.fxml"));
-        stage.close();
-        Scene scene = new Scene(root);
-        stage.setTitle("Carrito de compras - RetroDisco");
-        stage.setScene(scene);
-        stage.show();
+        if(AppLauncher.getUsuarioActual()!=null)
+        {
+            Stage stage= (Stage)regresar.getScene().getWindow();
+            stage.close();
+            Parent root = FXMLLoader.load(getClass().getResource("../view/CarritoCompras.fxml"));
+            stage.close();
+            Scene scene = new Scene(root);
+            stage.setTitle("Carrito de compras - RetroDisco");
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     @FXML
@@ -152,8 +126,12 @@ public class VerInformacionController implements Initializable{
         if(AppLauncher.getDiscoActual().getCantidad()>0){
             valueFactory= new SpinnerValueFactory.IntegerSpinnerValueFactory(1, AppLauncher.getDiscoActual().getCantidad(), 1, 1);
         }
-        
         cantidad.setValueFactory(valueFactory);
+        if(AppLauncher.getUsuarioActual()==null){
+            agregarCarrito.setDisable(true);
+        }else{
+            agregarCarrito.setDisable(false);
+        }
     }
 
 }

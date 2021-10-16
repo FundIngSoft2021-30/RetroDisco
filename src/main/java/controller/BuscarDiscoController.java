@@ -89,6 +89,7 @@ public class BuscarDiscoController implements Initializable {
         Stage stage = (Stage) salir.getScene().getWindow();
         stage.close();
         AppLauncher.setUsuarioActual(null);
+        AppLauncher.setCarritoActual(null);
         Parent root = FXMLLoader.load(getClass().getResource("../view/IniciarSesion.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Iniciar Sesion  - RetroDisco");

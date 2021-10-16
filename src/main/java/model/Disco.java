@@ -11,6 +11,7 @@ public class Disco {
     private String vendedor;
     private String genero;
     
+    //Constructor del disco
     public Disco(String id,String nombre, String artista, int publicacion, String formato, double precio, int cantidad,
             String vendedor, String genero) {
         this.id = id;
@@ -24,6 +25,7 @@ public class Disco {
         this.genero = genero;
     }
 
+    //Constructor de disco vacío.
     public Disco()
     {
         nombre="";
