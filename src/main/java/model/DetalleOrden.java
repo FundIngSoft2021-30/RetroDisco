@@ -5,10 +5,7 @@
  */
 package model;
 
-/**
- *
- * @author aulasingenieria
- */
+
 public class DetalleOrden {
     private Disco disco;
     private int unidades;

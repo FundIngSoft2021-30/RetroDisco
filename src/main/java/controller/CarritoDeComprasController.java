@@ -8,9 +8,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.fxml.Initializable;
+import java.io.IOException;
 import java.net.URL;
 import javafx.scene.control.Alert;
 import java.util.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class CarritoDeComprasController implements Initializable {
 
@@ -33,8 +38,15 @@ public class CarritoDeComprasController implements Initializable {
     private ListView<Carrito> resultados;
 
     @FXML
-    void RegresaInterfazBusqueda(ActionEvent event) {
-
+    void RegresaInterfazBusqueda(ActionEvent event) throws IOException {
+        Stage stage=(Stage) regresarAbusqeda.getScene().getWindow();
+        stage.close();
+        Parent root=FXMLLoader.load(getClass().getResource("../view/BuscarDisco.fxml"));
+        stage.close();
+        Scene scene = new Scene(root);
+        stage.setTitle("Buscador - RetroDisco");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -50,27 +62,20 @@ public class CarritoDeComprasController implements Initializable {
     @FXML
     void vaciarCarrito(ActionEvent event) {
         Carrito carrito = new Carrito();
-        carrito.setDiscos(null);
+        carrito.getDiscos().clear();
         CRUD.actualizarCarrito(carrito, AppLauncher.getUsuarioActual().getUsername());
+        AppLauncher.setCarritoActual(CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername()));
         resultados.getItems().clear();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Alerta!");
         alert.setHeaderText("Carrito vaciado");
         alert.showAndWait();
-
     }
-
-    /*
-     * @FXML void verDisco(MouseEvent event) {
-     * 
-     * }
-     */
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Carrito carrito = CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername());
-        resultados.getItems().add(carrito);
-
+        AppLauncher.setCarritoActual(CRUD.obtenerCarrito(AppLauncher.getUsuarioActual().getUsername()));
+        resultados.getItems().add(AppLauncher.getCarritoActual());
     }
 
 }

@@ -1,7 +1,5 @@
 package model;
 
-import java.util.UUID;
-
 public class Disco {
     private String id;
     private String nombre;

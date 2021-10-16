@@ -120,7 +120,7 @@ public class BuscarDiscoController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("../view/CarritoCompras.fxml"));
         stage.close();
         Scene scene = new Scene(root);
-        stage.setTitle("Publicar Disco - RetroDisco");
+        stage.setTitle("Carrito de Compras - RetroDisco");
         stage.setScene(scene);
         stage.show();
 
