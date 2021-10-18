@@ -20,14 +20,15 @@ public class Carrito {
         this.discos = discos;
     }
     
-    public boolean agregarDisco(DetalleOrden detalle){
-        if(discos.contains(detalle)){
+    public void agregarDisco(DetalleOrden detalle){
+        this.discos.add(detalle);
+        /*if(discos.contains(detalle)){
             return false;
         }
         else{
             this.discos.add(detalle);
             return true;
-        }        
+        }*/        
     }
     
     public boolean quitarDisco (DetalleOrden detalle){
