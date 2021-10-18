@@ -217,6 +217,7 @@ public class CRUD {
     public static Map<String, Disco> obtenerColeccionDiscos()
     {
         //asynchronously retrieve all documents
+        ArrayList<Disco> discos = new ArrayList<>();
         Map<String, Disco> coleccionDiscos = new HashMap<String, Disco>();
         ApiFuture<QuerySnapshot> future = bd.collection("Discos").get();
         // future.get() blocks on response
@@ -224,6 +225,7 @@ public class CRUD {
             List<QueryDocumentSnapshot> documents = future.get().getDocuments();
             for (QueryDocumentSnapshot document : documents) {
                 //System.out.println(document.getId() + " => " + document.toObject(Disco.class));
+                discos.add(document.toObject(Disco.class));
                 coleccionDiscos.put(document.getId(), document.toObject(Disco.class));
                 obtenerUnDisco(document.getId());
             }
@@ -296,6 +298,7 @@ public class CRUD {
 
 
     public static Map<String, Disco> buscarDiscoCategoria(String terminoBusqueda, String categoria){
+               
         Map<String, Disco> resultados = new HashMap<>();
         Set<String> idResultados = new HashSet<>();
 
@@ -308,6 +311,7 @@ public class CRUD {
         switch(categoria){
             case "nombre" :
                 for (String key : idDiscos) {
+                    
                     mapaComparar.put(key, coleccionDiscos.get(key).getNombre());
                 }
                 break;
@@ -400,6 +404,22 @@ public class CRUD {
 
         return resultados;
     }
+        
+    public static void descontarDiscos(String disco, int cantidad){
+        DocumentReference docRef = bd.collection("Discos").document(disco);
+        ApiFuture<DocumentSnapshot> future = docRef.get();
+        try {
+            DocumentSnapshot document = future.get();
+            int cantidadDisco = Integer.parseInt(document.getData().get("cantidad").toString());
+            cantidadDisco = cantidadDisco - cantidad;
+            docRef.update("cantidad",cantidadDisco);
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return;
+        }
+        
+        
+    }
     
         /*
     * * * * * * * METODOS ORDEN * * * * * * 
@@ -416,6 +436,7 @@ public class CRUD {
         for(int i = 0; i<articulos.size(); i++){
             DetalleOrden detalleActual = articulos.get(i);
             Map<String, Object> docDetalle = new HashMap<>();
+            docDetalle.put("idDisco", detalleActual.getIdDisco());
             docDetalle.put("disco", detalleActual.getDisco());
             docDetalle.put("cantidad", detalleActual.getUnidades());
             docDetalle.put("precioUnidad", detalleActual.getPrecioUnidad());
@@ -462,12 +483,13 @@ public class CRUD {
                 List<QueryDocumentSnapshot> detalles = future.get().getDocuments();
                 
                 for(QueryDocumentSnapshot detalle: detalles){
+                    String idDisco = detalle.getData().get("idDisco").toString();
                     String disco = detalle.getData().get("disco").toString();
                     String unidadesString = detalle.getData().get("cantidad").toString();
                     int unidades = Integer.parseInt(unidadesString) ;
                     String precioUString = detalle.getData().get("precioUnidad").toString();
                     double precioUnidad = Double.parseDouble(precioUString);
-                    DetalleOrden detalleActual = new DetalleOrden(disco,unidades, precioUnidad);
+                    DetalleOrden detalleActual = new DetalleOrden(idDisco, disco,unidades, precioUnidad);
                     detallesOrden.add(detalleActual);
                 }
                 
@@ -512,12 +534,13 @@ public class CRUD {
                 ArrayList<DetalleOrden> detallesOrden = new ArrayList<>();
                 List<QueryDocumentSnapshot> detalles = futureDetalles.get().getDocuments();
                 for(QueryDocumentSnapshot detalle: detalles){
+                    String idDisco = detalle.getData().get("idDisco").toString();
                     String disco = detalle.getData().get("disco").toString();
                     String unidadesString = detalle.getData().get("cantidad").toString();
                     int unidades = Integer.parseInt(unidadesString) ;
                     String precioUString = detalle.getData().get("precioUnidad").toString();
                     double precioUnidad = Double.parseDouble(precioUString);
-                    DetalleOrden detalleActual = new DetalleOrden(disco,unidades, precioUnidad);
+                    DetalleOrden detalleActual = new DetalleOrden(idDisco,disco,unidades, precioUnidad);
                     detallesOrden.add(detalleActual);
                 }
                 carrito.setDiscos(detallesOrden);
@@ -539,10 +562,18 @@ public class CRUD {
         for(int i = 0; i<discos.size(); i++){
             DetalleOrden detalleActual = discos.get(i);
             Map<String, Object> docDetalle = new HashMap<>();
+            docDetalle.put("idDisco", detalleActual.getIdDisco());
             docDetalle.put("disco", detalleActual.getDisco());
             docDetalle.put("cantidad", detalleActual.getUnidades());
             docDetalle.put("precioUnidad", detalleActual.getPrecioUnidad());
-            bd.collection("Carritos").document(username).collection("detallesOrden").document("detalle_"+i).set(docDetalle);
+            System.out.println("intentando ingresar detalle_"+i+" : "+detalleActual.toString());
+            ApiFuture<WriteResult> apifdetalle = bd.collection("Carritos").document(username).collection("detallesOrden").document("detalle_"+i).set(docDetalle);
+            try{
+                System.out.println("Detalle agregado : "+apifdetalle.get().getUpdateTime());
+            }catch(InterruptedException | ExecutionException e) {
+                
+                System.out.println("No se pudo ingresar doc detalle_"+i);
+            }
         }
         try {
             System.out.println("Carritos Update : " + future.get().getUpdateTime());
@@ -553,10 +584,61 @@ public class CRUD {
         return true;
     }
     
+    public static void borrarDelCarrito(String username, String idDisco){
+        ApiFuture<DocumentSnapshot> future = bd.collection("Carritos").document(username).get();
+        String detalleId;
+        try {
+            DocumentSnapshot document = future.get();
+            if(document.exists()){            
+                ApiFuture<QuerySnapshot> futureDetalles = bd.collection("Carritos").document(username).collection("detallesOrden").get();
+                List<QueryDocumentSnapshot> detalles = futureDetalles.get().getDocuments();
+                for(QueryDocumentSnapshot detalle: detalles){
+                    if(idDisco.equals(detalle.getData().get("idDisco").toString())){
+                        detalleId = detalle.getId();
+                        bd.collection("Carritos").document(username).collection("detallesOrden").document(detalleId).delete();
+                    }                    
+                }
+                
+                
+            }
+            else{
+                return;
+            }
+        } catch (InterruptedException|ExecutionException ex) {
+            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+    }
+    
     public static void vaciarCarrito(String username,Carrito carrito) {
-        ArrayList<DetalleOrden> discos = carrito.getDiscos();
-        for(int i = 0; i<discos.size(); i++){
-            bd.collection("Carritos").document(username).collection("detallesOrden").document("detalle_"+i).delete();
+        String detalleId;
+        ApiFuture<DocumentSnapshot> future = bd.collection("Carritos").document(username).get();
+        
+        try {
+            
+            DocumentSnapshot document = future.get();
+            if(document.exists()){            
+                ApiFuture<QuerySnapshot> futureDetalles = bd.collection("Carritos").document(username).collection("detallesOrden").get();
+                List<QueryDocumentSnapshot> detalles = futureDetalles.get().getDocuments();
+                for(QueryDocumentSnapshot detalle: detalles){
+                        bd.collection("Carritos").document(username).collection("detallesOrden").document(detalle.getId()).delete();                  
+                }
+                
+                
+            }
+            else{
+                return;
+            }
+            
+            if(document.getData().isEmpty()){
+                System.out.println("el carrito "+document.getId()+" está vacio");
+            }else{
+                System.out.println("el carrito "+document.getId()+" no está vacio");
+            }
+            
+        } catch (InterruptedException|ExecutionException ex) {
+            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+            return;
         }
     }
 }
