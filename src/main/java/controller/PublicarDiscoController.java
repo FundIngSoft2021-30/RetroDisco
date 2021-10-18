@@ -99,7 +99,7 @@ public class PublicarDiscoController {
             }
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Alerta!");
-            alert.setHeaderText("El disco se publicó correctamente.");
+            alert.setHeaderText("El disco se publicó correctamente.");            
             alert.showAndWait();
             CRUD.agregarDisco(disco);
             return;

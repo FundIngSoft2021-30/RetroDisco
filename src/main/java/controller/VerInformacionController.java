@@ -68,12 +68,14 @@ public class VerInformacionController implements Initializable{
     @FXML
     void agregarCarrito(ActionEvent event) {
         int unidades = cantidad.getValue();
+        String idDisco = AppLauncher.getDiscoActual().getId();
         String disco = AppLauncher.getDiscoActual().getNombre();
-        Carrito c = AppLauncher.getCarritoActual();
-        DetalleOrden detalle = new DetalleOrden(disco,unidades,Double.parseDouble(precio.getText()));
-        c.agregarDisco(detalle);
-        AppLauncher.setCarritoActual(c);
-        CRUD.actualizarCarrito(c, AppLauncher.getUsuarioActual().getUsername(),AppLauncher.getCarritoActual());
+        
+        DetalleOrden detalle = new DetalleOrden(idDisco, disco,unidades,Double.parseDouble(precio.getText()));
+        AppLauncher.getCarritoActual().agregarDisco(detalle);
+        
+        CRUD.actualizarCarrito(AppLauncher.getCarritoActual(), AppLauncher.getUsuarioActual().getUsername(),AppLauncher.getCarritoActual());
+        
         Stage stage= (Stage)regresar.getScene().getWindow();
         stage.close();
     }
