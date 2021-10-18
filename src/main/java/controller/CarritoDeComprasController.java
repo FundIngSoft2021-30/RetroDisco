@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Orden;
 
 public class CarritoDeComprasController implements Initializable {
 
@@ -54,6 +55,8 @@ public class CarritoDeComprasController implements Initializable {
         if(resultados.getSelectionModel().getSelectedItem()!=null){
             CRUD.vaciarCarrito(AppLauncher.getUsuarioActual().getUsername(),AppLauncher.getCarritoActual());
             AppLauncher.getCarritoActual().getDiscos().remove(resultados.getSelectionModel().getSelectedIndex());
+            System.out.println("El carrito tiene "+AppLauncher.getCarritoActual().size()+" discos");
+            System.out.println(AppLauncher.getCarritoActual().toString());
             CRUD.actualizarCarrito(AppLauncher.getCarritoActual(), AppLauncher.getUsuarioActual().getUsername(), AppLauncher.getCarritoActual());
             resultados.getItems().clear();
             Double suma = Double.parseDouble("0");
@@ -67,7 +70,20 @@ public class CarritoDeComprasController implements Initializable {
 
     @FXML
     void pagarCarrito(ActionEvent event) {
-
+        Orden nuevaOrden = new Orden(AppLauncher.getUsuarioActual(),AppLauncher.getCarritoActual().getDiscos());
+        for(DetalleOrden detalle: AppLauncher.getCarritoActual().getDiscos()){
+            CRUD.descontarDiscos(detalle.getIdDisco(), detalle.getUnidades());
+        }
+        CRUD.agregarOrden(nuevaOrden);
+        double totalCompra = AppLauncher.getCarritoActual().getTotalPagar();
+        CRUD.vaciarCarrito(AppLauncher.getUsuarioActual().getUsername(),AppLauncher.getCarritoActual());
+        AppLauncher.getCarritoActual().vaciarCarrito();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Compra realizada!");
+        alert.setHeaderText("Total compra: "+totalCompra);
+        alert.showAndWait();
+        resultados.getItems().clear();
+        totalpago.setText("0");
     }
 
     @FXML
