@@ -57,7 +57,7 @@ public class BuscarDiscoController implements Initializable {
     void buscarDisco(MouseEvent event) {
         resultados.getItems().clear();
         String c = filtro.getValue();
-
+        
         if (nombreDisco.getText().isEmpty()) {
             resultados.getItems().clear();
         } else {
