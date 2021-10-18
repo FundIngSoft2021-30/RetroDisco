@@ -47,33 +47,33 @@ public class BuscarSinLoginController implements Initializable{
 
     @FXML
     void buscarDisco(MouseEvent event) {
-        
-        
+        resultados.getItems().clear();
         String c = filtro.getValue();
-        filtro.setValue(null);
-        if(nombreDisco.getText().isEmpty()){
+        
+        if (nombreDisco.getText().isEmpty()) {
             resultados.getItems().clear();
-        }else{
-            //Mensaje de buscando discos
-            Map<String,Disco> resultadoBusqueda = new HashMap<>(); 
-            if(filtro.getValue()==null){
-               resultadoBusqueda = CRUD.busquedaGeneral(nombreDisco.getText()); 
-            }else{
+        } else {
+            Map<String, Disco> resultadoBusqueda = new HashMap<>();
+            if (filtro.getValue() == null) {
+                System.out.println("Busqueda sin filtro");
+                resultadoBusqueda = CRUD.busquedaGeneral(nombreDisco.getText());
+            } else {
+                System.out.println("Busqueda con filtro");
                 resultadoBusqueda = CRUD.buscarDiscoCategoria(nombreDisco.getText(), c);
             }
             ArrayList<Disco> discos = new ArrayList<Disco>(resultadoBusqueda.values());
-            if(discos.isEmpty()){
-            
-                //Mensaje de error
-                
-            }else{
+            if (discos.isEmpty()) {
+
+                // Mensaje de error
+
+            } else {
                 resultados.getItems().clear();
                 for (Disco discoA : discos) {
-                    resultados.getItems().add(discoA);            
+                    resultados.getItems().add(discoA);
                 }
             }
-            
         }
+        filtro.setValue(null);
     }
 
     @FXML
