@@ -73,9 +73,9 @@ public class PublicarDiscoController {
             int cantidadDiscosUsuario = CRUD.obtenerDiscosUsuario(AppLauncher.getUsuarioActual().getUsername()).size();
             String idDisco = "Disco-" + AppLauncher.getUsuarioActual().getUsername() + "-" + cantidadDiscosUsuario;
 
-            Disco disco = new Disco(idDisco, nombredisco.getText().trim(), nombreartista.getText().trim(), pub,
-                    formato.getText().trim(), pre, cant, AppLauncher.getUsuarioActual().getUsername(),
-                    genero.getText().trim());
+            Disco disco = new Disco(idDisco, nombredisco.getText().trim().toUpperCase(), nombreartista.getText().trim().toUpperCase(), pub,
+                    formato.getText().trim().toUpperCase(), pre, cant, AppLauncher.getUsuarioActual().getUsername(),
+                    genero.getText().trim().toUpperCase());
             System.out.println(disco.getArtista() + " - " + disco.getNombre() + " - " + disco.getId());
             System.out.println("CANTIDAD: " + disco.getCantidad() + " - FORMATO: " + disco.getFormato() + " - GENERO: "
                     + disco.getGenero());
@@ -98,7 +98,7 @@ public class PublicarDiscoController {
                 }
             }
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Alerta!");
+            alert.setTitle("Disco Publicado!");
             alert.setHeaderText("El disco se publicó correctamente.");            
             alert.showAndWait();
             CRUD.agregarDisco(disco);

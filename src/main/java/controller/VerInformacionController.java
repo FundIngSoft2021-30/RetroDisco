@@ -17,11 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-//import javafx.fxml.FXMLLoader;
-//import javafx.scene.Parent;
-//import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Carrito;
 import model.DetalleOrden;
 
 public class VerInformacionController implements Initializable{

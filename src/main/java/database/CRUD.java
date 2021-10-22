@@ -132,7 +132,7 @@ public class CRUD {
     }
     
     public static boolean desactivarUsuarioBD(String username){
-        boolean r;
+
         DocumentReference docRef = bd.collection("Usuarios").document(username);
         ApiFuture<WriteResult> future = docRef.update("activo", false);
         
@@ -297,57 +297,61 @@ public class CRUD {
     }
 
 
-    public static Map<String, Disco> buscarDiscoCategoria(String terminoBusqueda, String categoria){
+    public static Map<String, Disco> buscarDiscoCategoria(String terminoBusqueda, String categoria) throws InterruptedException, ExecutionException{
                
         Map<String, Disco> resultados = new HashMap<>();
-        Set<String> idResultados = new HashSet<>();
-
-        Map<String, Disco> coleccionDiscos = obtenerColeccionDiscos();
-        Set<String> idDiscos = coleccionDiscos.keySet();
-
-        Map<String, String> mapaComparar = new HashMap<String, String>();
-        
-        
+        CollectionReference discs = bd.collection("Discos");
+        Query query;
+        ApiFuture<QuerySnapshot> querySnapshot;
         switch(categoria){
             case "nombre" :
-                for (String key : idDiscos) {
-                    
-                    mapaComparar.put(key, coleccionDiscos.get(key).getNombre());
+                query = discs.whereEqualTo("nombre", terminoBusqueda);
+                querySnapshot = query.get();
+                for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+                    resultados.put(document.getId(), document.toObject(Disco.class));
                 }
                 break;
             case "artista" :
-                for (String key : idDiscos) {
-                    mapaComparar.put(key, coleccionDiscos.get(key).getArtista());
+                query = discs.whereEqualTo("artista", terminoBusqueda);
+                querySnapshot = query.get();
+                for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+                    resultados.put(document.getId(), document.toObject(Disco.class));
                 }
                 break;
             case "formato" :
-                for (String key : idDiscos) {
-                    mapaComparar.put(key, coleccionDiscos.get(key).getFormato());
+                query = discs.whereEqualTo("formato", terminoBusqueda);
+                querySnapshot = query.get();
+                for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+                    resultados.put(document.getId(), document.toObject(Disco.class));
                 }
                 break;
             case "vendedor" :
-                for (String key : idDiscos) {
-                    mapaComparar.put(key, coleccionDiscos.get(key).getVendedor());
+                query = discs.whereEqualTo("vendedor", terminoBusqueda);
+                querySnapshot = query.get();
+                for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+                    resultados.put(document.getId(), document.toObject(Disco.class));
                 }
                 break;
             case "genero" :
-                for (String key : idDiscos) {
-                    mapaComparar.put(key, coleccionDiscos.get(key).getGenero());
+                query = discs.whereEqualTo("genero", terminoBusqueda);
+                querySnapshot = query.get();
+                for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+                    resultados.put(document.getId(), document.toObject(Disco.class));
                 }
                 break;
             default: System.out.println("categoría invalida");
         }
         
-        idResultados = compararStrMap(terminoBusqueda, mapaComparar);
+        /* idResultados = compararStrMap(terminoBusqueda, mapaComparar);
         for (String id : idResultados) {
             resultados.put(id, coleccionDiscos.get(id));
         }
-
+ */
         return resultados;
 
     }
 
-	public static Map<String, Disco> busquedaGeneral(String terminoBusqueda){
+	public static Map<String, Disco> busquedaGeneral(String terminoBusqueda) throws InterruptedException, ExecutionException{
         Map<String, Disco> resultados = new HashMap<>();
 
         Map<String, Disco> resultadosNombre = buscarDiscoCategoria(terminoBusqueda, "nombre");
@@ -611,31 +615,19 @@ public class CRUD {
     }
     
     public static void vaciarCarrito(String username,Carrito carrito) {
-        String detalleId;
         ApiFuture<DocumentSnapshot> future = bd.collection("Carritos").document(username).get();
         
         try {
-            
             DocumentSnapshot document = future.get();
             if(document.exists()){            
                 ApiFuture<QuerySnapshot> futureDetalles = bd.collection("Carritos").document(username).collection("detallesOrden").get();
                 List<QueryDocumentSnapshot> detalles = futureDetalles.get().getDocuments();
                 for(QueryDocumentSnapshot detalle: detalles){
-                        bd.collection("Carritos").document(username).collection("detallesOrden").document(detalle.getId()).delete();                  
+                    bd.collection("Carritos").document(username).collection("detallesOrden").document(detalle.getId()).delete();                  
                 }
-                
-                
-            }
-            else{
-                return;
-            }
-            
-            if(document.getData().isEmpty()){
-                System.out.println("el carrito "+document.getId()+" está vacio");
             }else{
-                System.out.println("el carrito "+document.getId()+" no está vacio");
-            }
-            
+                return;
+            } 
         } catch (InterruptedException|ExecutionException ex) {
             Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
             return;

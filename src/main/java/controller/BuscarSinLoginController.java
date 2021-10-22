@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
 import java.util.*;
 
 public class BuscarSinLoginController implements Initializable{
@@ -46,24 +47,20 @@ public class BuscarSinLoginController implements Initializable{
     private ListView<Disco> resultados;
 
     @FXML
-    void buscarDisco(MouseEvent event) {
+    void buscarDisco(MouseEvent event) throws InterruptedException, ExecutionException {
         resultados.getItems().clear();
-        String c = filtro.getValue();
-        
+        String c = filtro.getSelectionModel().getSelectedItem();
         if (nombreDisco.getText().isEmpty()) {
             resultados.getItems().clear();
         } else {
             Map<String, Disco> resultadoBusqueda = new HashMap<>();
-            if (filtro.getValue() == null) {
-                System.out.println("Busqueda sin filtro");
+            if (filtro.getSelectionModel().getSelectedItem() == null || filtro.getValue().equalsIgnoreCase("[Seleccione opcion]")) {
                 resultadoBusqueda = CRUD.busquedaGeneral(nombreDisco.getText());
             } else {
-                System.out.println("Busqueda con filtro");
                 resultadoBusqueda = CRUD.buscarDiscoCategoria(nombreDisco.getText(), c);
             }
             ArrayList<Disco> discos = new ArrayList<Disco>(resultadoBusqueda.values());
             if (discos.isEmpty()) {
-
                 // Mensaje de error
 
             } else {
@@ -73,7 +70,6 @@ public class BuscarSinLoginController implements Initializable{
                 }
             }
         }
-        filtro.setValue(null);
     }
 
     @FXML
@@ -121,9 +117,12 @@ public class BuscarSinLoginController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        filtro.getItems().add("[Seleccione opcion]");
         filtro.getItems().add("artista");
         filtro.getItems().add("genero");
         filtro.getItems().add("formato");
         filtro.getItems().add("nombre");
+        filtro.getItems().add("vendedor");
+        filtro.setValue("[Seleccione opcion]");
     }
 }
