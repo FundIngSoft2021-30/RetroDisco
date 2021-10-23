@@ -55,8 +55,6 @@ public class CarritoDeComprasController implements Initializable {
         if(resultados.getSelectionModel().getSelectedItem()!=null){
             CRUD.vaciarCarrito(AppLauncher.getUsuarioActual().getUsername(),AppLauncher.getCarritoActual());
             AppLauncher.getCarritoActual().getDiscos().remove(resultados.getSelectionModel().getSelectedIndex());
-            System.out.println("El carrito tiene "+AppLauncher.getCarritoActual().size()+" discos");
-            System.out.println(AppLauncher.getCarritoActual().toString());
             CRUD.actualizarCarrito(AppLauncher.getCarritoActual(), AppLauncher.getUsuarioActual().getUsername(), AppLauncher.getCarritoActual());
             resultados.getItems().clear();
             Double suma = Double.parseDouble("0");

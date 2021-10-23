@@ -111,6 +111,24 @@ public class Disco {
     }
 
     public String toString(){
-        return this.artista+" - "+this.nombre;
+        return capitalizar(this.artista.toLowerCase())+" - "+capitalizar(this.nombre.toLowerCase())+"["+this.formato+"]";
+    }
+
+    public String capitalizar(String message){
+        char[] charArray = message.toCharArray();
+        boolean foundSpace = true;
+        for(int i = 0; i < charArray.length; i++) {
+            if(Character.isLetter(charArray[i])) {
+                if(foundSpace) {
+                    charArray[i] = Character.toUpperCase(charArray[i]);
+                    foundSpace = false;
+                }
+            }
+            else {
+                foundSpace = true;
+            }
+        }
+        message = String.valueOf(charArray);
+        return message;
     }
 }

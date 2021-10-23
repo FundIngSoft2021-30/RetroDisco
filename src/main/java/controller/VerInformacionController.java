@@ -7,16 +7,11 @@ import java.util.ResourceBundle;
 import database.CRUD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.DetalleOrden;
 
@@ -29,16 +24,7 @@ public class VerInformacionController implements Initializable{
     private Label anio;
 
     @FXML
-    private ImageView ayuda;
-
-    @FXML
     private Spinner<Integer> cantidad;
-
-    @FXML
-    private ImageView carrito;
-
-    @FXML
-    private ImageView cuenta;
 
     @FXML
     private Label formato;
@@ -51,9 +37,6 @@ public class VerInformacionController implements Initializable{
 
     @FXML
     private Label nombreDisco;
-
-    @FXML
-    private ImageView notificaciones;
 
     @FXML
     private Label precio;
@@ -80,36 +63,6 @@ public class VerInformacionController implements Initializable{
     void regresarBusqueda(ActionEvent event) throws IOException {
         Stage stage= (Stage)regresar.getScene().getWindow();
         stage.close();
-    }
-
-    @FXML
-    void verAyuda(MouseEvent event) {
-
-    }
-
-    @FXML
-    void verCarrito(MouseEvent event) throws IOException {
-        if(AppLauncher.getUsuarioActual()!=null)
-        {
-            Stage stage= (Stage)regresar.getScene().getWindow();
-            stage.close();
-            Parent root = FXMLLoader.load(getClass().getResource("../view/CarritoCompras.fxml"));
-            stage.close();
-            Scene scene = new Scene(root);
-            stage.setTitle("Carrito de compras - RetroDisco");
-            stage.setScene(scene);
-            stage.show();
-        }
-    }
-
-    @FXML
-    void verCuenta(MouseEvent event) {
-
-    }
-
-    @FXML
-    void verNotificaciones(MouseEvent event) {
-
     }
 
     @Override

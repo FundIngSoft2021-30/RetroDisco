@@ -49,7 +49,7 @@ public class IniciarSesionController {
         String password = txtContraseña.getText().trim();
         if(txtUsuario.getText().isEmpty()||txtContraseña.getText().isEmpty()){
             errorLogin.setTextFill(Paint.valueOf("#ef2121"));
-            errorLogin.setText("ESP Complete todos los espacios");
+            errorLogin.setText("Complete todos los espacios!");
         }else{
             if(CRUD.existeUsername(username)){
                 if(CRUD.autenticarPassword(username, password)){
@@ -71,12 +71,12 @@ public class IniciarSesionController {
                     
                 }else{
                     errorLogin.setTextFill(Paint.valueOf("#ef2121"));
-                    errorLogin.setText("C.I La contraseña es incorrecta");
+                    errorLogin.setText("La contraseña es incorrecta.");
                 }
             }
             else{
                 errorLogin.setTextFill(Paint.valueOf("#ef2121"));
-                errorLogin.setText("USU El usuario no existe");
+                errorLogin.setText("El usuario digitado no existe.");
             }
         }
     }

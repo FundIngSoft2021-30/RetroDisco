@@ -58,13 +58,24 @@ public class DetalleOrden {
     }
 
     public String toString() {
-        if (disco != null) {
-            
-            return this.disco + " - $" + this.precioUnidad+" - Cantidad: "+this.unidades;
-        } else {
-            return "La información de este disco no está disponible\n";
-        }
-
+        return capitalizar(this.disco.toLowerCase()) + " - $" + this.precioUnidad+" - Cantidad: "+this.unidades;
     }
 
+    public String capitalizar(String message){
+        char[] charArray = message.toCharArray();
+        boolean foundSpace = true;
+        for(int i = 0; i < charArray.length; i++) {
+            if(Character.isLetter(charArray[i])) {
+                if(foundSpace) {
+                    charArray[i] = Character.toUpperCase(charArray[i]);
+                    foundSpace = false;
+                }
+            }
+            else {
+                foundSpace = true;
+            }
+        }
+        message = String.valueOf(charArray);
+        return message;
+    }
 }

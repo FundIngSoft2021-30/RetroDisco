@@ -24,16 +24,16 @@
             <Label layoutX="86.0" layoutY="200.0" prefHeight="17.0" prefWidth="44.0" text="Genero" />
             <Label layoutX="89.0" layoutY="230.0" prefHeight="17.0" prefWidth="39.0" text="Precio" />
             <Button fx:id="publicar" layoutX="251.0" layoutY="293.0" mnemonicParsing="false" onAction="#publicarDisco" text="Publicar Disco" />
-            <Button fx:id="cancelar" layoutX="156.0" layoutY="293.0" mnemonicParsing="false" onAction="#VolverInicio" text="Cancelar" />
+            <Button fx:id="cancelar" layoutX="156.0" layoutY="293.0" mnemonicParsing="false" onAction="#VolverInicio" text="Atrás" />
             <TextField fx:id="nombredisco" layoutX="156.0" layoutY="111.0" prefHeight="25.0" prefWidth="183.0" promptText="Ingrese el nombre del disco..." />
-            <TextField fx:id="nombreartista" layoutX="156.0" layoutY="138.0" prefHeight="25.0" prefWidth="183.0" />
-            <TextField fx:id="publicacion" layoutX="156.0" layoutY="169.0" prefHeight="25.0" prefWidth="39.0" />
-            <TextField fx:id="formato" layoutX="256.0" layoutY="169.0" prefHeight="25.0" prefWidth="83.0" />
-            <TextField fx:id="genero" layoutX="156.0" layoutY="196.0" prefHeight="25.0" prefWidth="183.0" />
-            <TextField fx:id="precio" layoutX="156.0" layoutY="226.0" prefHeight="25.0" prefWidth="183.0" />
+            <TextField fx:id="nombreartista" layoutX="156.0" layoutY="138.0" prefHeight="25.0" prefWidth="183.0" promptText="Ingrese el artista..." />
+            <TextField fx:id="publicacion" layoutX="156.0" layoutY="169.0" prefHeight="25.0" prefWidth="50.0" promptText="XXXX" />
+            <TextField fx:id="formato" layoutX="256.0" layoutY="169.0" prefHeight="25.0" prefWidth="83.0" promptText="CD o Vinilo" />
+            <TextField fx:id="genero" layoutX="156.0" layoutY="196.0" prefHeight="25.0" prefWidth="183.0" promptText="Ingrese el género del album..." />
+            <TextField fx:id="precio" layoutX="156.0" layoutY="226.0" prefHeight="25.0" prefWidth="183.0" promptText="Ingrese el valor del disco..." />
             <ImageView fitHeight="183.0" fitWidth="200.0" layoutX="360.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="89.0" layoutY="261.0" prefHeight="17.0" prefWidth="50.0" text="Cantidad" />
-            <TextField fx:id="cantidad" layoutX="156.0" layoutY="257.0" prefHeight="25.0" prefWidth="183.0" />
+            <TextField fx:id="cantidad" layoutX="156.0" layoutY="257.0" prefHeight="25.0" prefWidth="183.0" promptText="Ingrese la cantidad disponible... " />
          </children>
       </Pane>
       <Label text="Nombre" />

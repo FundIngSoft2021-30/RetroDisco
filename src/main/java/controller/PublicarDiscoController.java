@@ -62,7 +62,7 @@ public class PublicarDiscoController {
                 || nombreartista.getText().isEmpty() || nombredisco.getText().isEmpty() || precio.getText().isEmpty()
                 || publicacion.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Alerta!");
+            alert.setTitle("Datos Incompletos");
             alert.setHeaderText("Es necesario llenar todos los campos!");
             alert.showAndWait();
             return;
@@ -76,32 +76,11 @@ public class PublicarDiscoController {
             Disco disco = new Disco(idDisco, nombredisco.getText().trim().toUpperCase(), nombreartista.getText().trim().toUpperCase(), pub,
                     formato.getText().trim().toUpperCase(), pre, cant, AppLauncher.getUsuarioActual().getUsername(),
                     genero.getText().trim().toUpperCase());
-            System.out.println(disco.getArtista() + " - " + disco.getNombre() + " - " + disco.getId());
-            System.out.println("CANTIDAD: " + disco.getCantidad() + " - FORMATO: " + disco.getFormato() + " - GENERO: "
-                    + disco.getGenero());
-            System.out.println("VENDEDOR: " + disco.getVendedor() + " PRECIO: " + disco.getPrecio() + " PUBLICACION: "
-                    + disco.getPublicacion());
-            boolean b = CRUD.agregarDisco(disco);
-            if (b) {
-                Stage stage = (Stage) publicar.getScene().getWindow();
-                stage.close();
-                Parent root;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("../view/BuscarDisco.fxml"));
-                    stage.close();
-                    Scene scene = new Scene(root);
-                    stage.setTitle("Buscador - RetroDisco");
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            CRUD.agregarDisco(disco);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Disco Publicado!");
             alert.setHeaderText("El disco se publicó correctamente.");            
             alert.showAndWait();
-            CRUD.agregarDisco(disco);
             return;
         }
 

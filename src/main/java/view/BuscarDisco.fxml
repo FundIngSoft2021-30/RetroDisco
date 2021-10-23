@@ -63,22 +63,22 @@
                   <ComboBox fx:id="filtro" prefWidth="150.0" promptText="Filtro" />
                </children>
             </VBox>
-            <ImageView fx:id="carrito" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="56.0" layoutY="8.0" onMouseClicked="#verCarrito">
+            <ImageView fx:id="carrito" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="71.0" layoutY="9.0" onMouseClicked="#verCarrito" preserveRatio="true">
                <image>
                   <Image url="@iconos/Carrito_i.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="usuario" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="13.0" layoutY="8.0" onMouseClicked="#verUsuario">
+            <ImageView fx:id="usuario" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="25.0" layoutY="9.0" onMouseClicked="#verUsuario" preserveRatio="true">
                <image>
                   <Image url="@iconos/Cuenta_i.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="notificaciones" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="99.0" layoutY="5.0" onMouseClicked="#verNotificaciones">
+            <ImageView fx:id="notificaciones" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="114.0" layoutY="5.0" onMouseClicked="#verNotificaciones" preserveRatio="true">
                <image>
                   <Image url="@iconos/campana_i.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ayuda" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="142.0" layoutY="5.0" onMouseClicked="#verAyuda">
+            <ImageView fx:id="ayuda" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="151.0" layoutY="5.0" onMouseClicked="#verAyuda" preserveRatio="true">
                <image>
                   <Image url="@iconos/Ayuda_i.png" />
                </image>

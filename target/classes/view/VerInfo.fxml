@@ -37,26 +37,6 @@
                   <Image url="@iconos/LogoRD.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="carrito" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="457.0" layoutY="25.0" onMouseClicked="#verCarrito">
-               <image>
-                  <Image url="@iconos/Carrito_i.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="cuenta" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="487.0" layoutY="25.0" onMouseClicked="#verCuenta">
-               <image>
-                  <Image url="@iconos/Cuenta_i.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="notificaciones" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="517.0" layoutY="21.0" onMouseClicked="#verNotificaciones">
-               <image>
-                  <Image url="@iconos/campana_i.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="ayuda" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="547.0" layoutY="21.0" onMouseClicked="#verAyuda">
-               <image>
-                  <Image url="@iconos/Ayuda_i.png" />
-               </image>
-            </ImageView>
             <Spinner fx:id="cantidad" editable="true" layoutX="87.0" layoutY="257.0" prefHeight="25.0" prefWidth="73.0" />
             <Label layoutX="21.0" layoutY="261.0" text="Cantidad:" />
          </children>

@@ -305,21 +305,21 @@ public class CRUD {
         ApiFuture<QuerySnapshot> querySnapshot;
         switch(categoria){
             case "nombre" :
-                query = discs.whereEqualTo("nombre", terminoBusqueda);
+                query = discs.whereEqualTo("nombre", terminoBusqueda.toUpperCase());
                 querySnapshot = query.get();
                 for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
                     resultados.put(document.getId(), document.toObject(Disco.class));
                 }
                 break;
             case "artista" :
-                query = discs.whereEqualTo("artista", terminoBusqueda);
+                query = discs.whereEqualTo("artista", terminoBusqueda.toUpperCase());
                 querySnapshot = query.get();
                 for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
                     resultados.put(document.getId(), document.toObject(Disco.class));
                 }
                 break;
             case "formato" :
-                query = discs.whereEqualTo("formato", terminoBusqueda);
+                query = discs.whereEqualTo("formato", terminoBusqueda.toUpperCase());
                 querySnapshot = query.get();
                 for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
                     resultados.put(document.getId(), document.toObject(Disco.class));
@@ -333,20 +333,13 @@ public class CRUD {
                 }
                 break;
             case "genero" :
-                query = discs.whereEqualTo("genero", terminoBusqueda);
+                query = discs.whereEqualTo("genero", terminoBusqueda.toUpperCase());
                 querySnapshot = query.get();
                 for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
                     resultados.put(document.getId(), document.toObject(Disco.class));
                 }
                 break;
-            default: System.out.println("categoría invalida");
         }
-        
-        /* idResultados = compararStrMap(terminoBusqueda, mapaComparar);
-        for (String id : idResultados) {
-            resultados.put(id, coleccionDiscos.get(id));
-        }
- */
         return resultados;
 
     }
@@ -570,7 +563,6 @@ public class CRUD {
             docDetalle.put("disco", detalleActual.getDisco());
             docDetalle.put("cantidad", detalleActual.getUnidades());
             docDetalle.put("precioUnidad", detalleActual.getPrecioUnidad());
-            System.out.println("intentando ingresar detalle_"+i+" : "+detalleActual.toString());
             ApiFuture<WriteResult> apifdetalle = bd.collection("Carritos").document(username).collection("detallesOrden").document("detalle_"+i).set(docDetalle);
             try{
                 System.out.println("Detalle agregado : "+apifdetalle.get().getUpdateTime());
