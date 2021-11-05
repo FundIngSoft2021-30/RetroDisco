@@ -43,7 +43,10 @@ public class VerInformacionController implements Initializable{
 
     @FXML
     private Button regresar;
-
+    /**
+     * Agrega al carrito nuevos discos con la informacion de cada uno
+     * @param event
+     */
     @FXML
     void agregarCarrito(ActionEvent event) {
         int unidades = cantidad.getValue();
@@ -58,13 +61,16 @@ public class VerInformacionController implements Initializable{
         Stage stage= (Stage)regresar.getScene().getWindow();
         stage.close();
     }
-
+    /**
+     * Permite regresar a la búsqueda y muestra la ventana
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void regresarBusqueda(ActionEvent event) throws IOException {
         Stage stage= (Stage)regresar.getScene().getWindow();
         stage.close();
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         nombreDisco.setText(AppLauncher.getDiscoActual().getNombre());

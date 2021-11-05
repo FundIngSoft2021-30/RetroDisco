@@ -54,6 +54,12 @@ public class BuscarDiscoController implements Initializable {
     @FXML
     private Button vender;
 
+    /**
+     * Busca el disco despues de haber utilizado el cursor y haber seleccionado la opcion
+     * @param event Despliega los resultados 
+     * @throws InterruptedException
+     * @throws ExecutionException
+     */
     @FXML
     void buscarDisco(MouseEvent event) throws InterruptedException, ExecutionException {
         resultados.getItems().clear();
@@ -79,7 +85,11 @@ public class BuscarDiscoController implements Initializable {
             }
         }
     }
-
+    /**
+     * Cierra la sesión después de haber seleccionado el botón
+     * @param event Se activa la animación al cerrar sesión
+     * @throws IOException
+     */
     @FXML
     void cerrarSesion(ActionEvent event) throws IOException {
         Stage stage = (Stage) salir.getScene().getWindow();
@@ -92,7 +102,11 @@ public class BuscarDiscoController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * Vende el disco al haber presionado el botón
+     * @param event Hace la animación después de haber presionado el botón
+     * @throws IOException
+     */
     @FXML
     void venderDisco(ActionEvent event) throws IOException {
         Stage stage = (Stage) vender.getScene().getWindow();
@@ -104,12 +118,19 @@ public class BuscarDiscoController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * 
+     * @param event
+     */
     @FXML
     void verAyuda(MouseEvent event) {
 
     }
-
+    /**
+     * El usuario puede ver el carrito después de haber presionado el botón 
+     * @param event Muestra el carrito cuando se acciona el evento
+     * @throws IOException
+     */
     @FXML
     void verCarrito(MouseEvent event) throws IOException {
         Stage stage = (Stage) carrito.getScene().getWindow();
@@ -122,7 +143,11 @@ public class BuscarDiscoController implements Initializable {
         stage.show();
 
     }
-
+    /**
+     * Se puede ver la información del disco después de haber presionado el botón
+     * @param event Despliega la animación al elegir el disco
+     * @throws IOException
+     */
     @FXML
     void verDisco(MouseEvent event) throws IOException {
         if (resultados.getSelectionModel().getSelectedItem() != null) {
@@ -146,7 +171,7 @@ public class BuscarDiscoController implements Initializable {
     void verUsuario(MouseEvent event) {
 
     }
-
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         filtro.getItems().add("[Seleccione opcion]");

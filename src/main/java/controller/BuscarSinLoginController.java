@@ -45,7 +45,12 @@ public class BuscarSinLoginController implements Initializable{
 
     @FXML
     private ListView<Disco> resultados;
-
+    /**
+     * Busca el disco sin haber sido registrado
+     * @param event despliega la información al haber buscado el disco
+     * @throws InterruptedException
+     * @throws ExecutionException
+     */
     @FXML
     void buscarDisco(MouseEvent event) throws InterruptedException, ExecutionException {
         resultados.getItems().clear();
@@ -71,7 +76,11 @@ public class BuscarSinLoginController implements Initializable{
             }
         }
     }
-
+    /**
+     * Permite crear una cuenta a un usuario no registrado
+     * @param event Muestra la secuencia al haber presionado el botón 
+     * @throws IOException
+     */
     @FXML
     void crearCuenta(ActionEvent event) throws IOException {
         Stage stage= (Stage)crearCuenta.getScene().getWindow();
@@ -83,7 +92,11 @@ public class BuscarSinLoginController implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * Permite iniciar sesión después de haber creado una cuenta
+     * @param event Muestra la sucesión de eventos al presionar el botón
+     * @throws IOException
+     */
     @FXML
     void iniciarSesion(ActionEvent event) throws IOException {
         Stage stage= (Stage)iniciarSesion.getScene().getWindow();
@@ -99,7 +112,11 @@ public class BuscarSinLoginController implements Initializable{
     void verAyuda(MouseEvent event) {
 
     }
-
+    /**
+     * Permite ver el disco
+     * @param event muestra el disco cuando se presiona el botón
+     * @throws IOException
+     */
     @FXML
     void verDisco(MouseEvent event) throws IOException {
         if(resultados.getSelectionModel().getSelectedItem()!=null)
@@ -114,7 +131,7 @@ public class BuscarSinLoginController implements Initializable{
             stage.show();
         }
     }
-
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         filtro.getItems().add("[Seleccione opcion]");

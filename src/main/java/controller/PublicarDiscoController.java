@@ -42,7 +42,11 @@ public class PublicarDiscoController {
 
     @FXML
     private Button publicar;
-
+    /**
+     * Permite regresar al inicio de la aplicación 
+     * @param event 
+     * @throws IOException
+     */
     @FXML
     void VolverInicio(ActionEvent event) throws IOException {
         Stage stage = (Stage) cancelar.getScene().getWindow();
@@ -54,7 +58,10 @@ public class PublicarDiscoController {
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * Permite publicar un disco que no exista 
+     * @param event
+     */
     @FXML
     void publicarDisco(ActionEvent event) {
 

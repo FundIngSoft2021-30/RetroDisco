@@ -42,7 +42,11 @@ public class IniciarSesionController {
 
     @FXML
     private Label errorLogin;
-
+    /**
+     * Inicia sesión de un usuario registrado
+     * @param event 
+     * @throws IOException
+     */
     @FXML
     void IniciarSesion(ActionEvent event) throws IOException{
         String username = txtUsuario.getText().trim();
@@ -80,7 +84,11 @@ public class IniciarSesionController {
             }
         }
     }
-
+    /**
+     * Crea cuenta de un usuario 
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void crearCuenta(ActionEvent event) throws IOException {
         Stage stage= (Stage)Cuenta.getScene().getWindow();
@@ -92,7 +100,11 @@ public class IniciarSesionController {
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * Permite iniciar sesión como invitado
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void iniciarInvitado(ActionEvent event) throws IOException {
         AppLauncher.setUsuarioActual(null);

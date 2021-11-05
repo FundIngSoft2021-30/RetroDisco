@@ -42,7 +42,10 @@ public class CrearCuentaController {
 
     @FXML
     private Label errorCrearCuenta;
-
+    /**
+     * Crea la cuenta de un usuario nuevo
+     * @param event
+     */
     @FXML
     void CrearCuenta(ActionEvent event) {
         if(txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty()
@@ -79,7 +82,11 @@ public class CrearCuentaController {
             errorCrearCuenta.setText("El username "+txtUsername.getText()+" ya se encuentra en uso.");
         }
     }
-
+    /**
+     * Regresa a la interfaz del inicio 
+     * @param event Devuelve a la página principal 
+     * @throws IOException
+     */
     @FXML
     void regresarInicio(ActionEvent event) throws IOException {
         Stage stage= (Stage)botonRegresar.getScene().getWindow();

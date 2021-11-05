@@ -37,7 +37,11 @@ public class CarritoDeComprasController implements Initializable {
 
     @FXML
     private ListView<DetalleOrden> resultados;
-
+    /**
+     * Vuelve a la interfaz de búsqueda una vez se haya presionado el botón
+     * @param event Despliega la interfaz principal 
+     * @throws IOException
+     */
     @FXML
     void RegresaInterfazBusqueda(ActionEvent event) throws IOException {
         Stage stage = (Stage) regresarAbusqeda.getScene().getWindow();
@@ -49,7 +53,10 @@ public class CarritoDeComprasController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * Elimina los discos que estén en el carrito del usuario y los que se encuentren en la aplicación
+     * @param event Retira los discos escogidos
+     */
     @FXML
     void eliminarDiscos(ActionEvent event) {
         if(resultados.getSelectionModel().getSelectedItem()!=null){
@@ -65,7 +72,10 @@ public class CarritoDeComprasController implements Initializable {
             totalpago.setText(Double.toString(suma));
         }
     }
-
+    /**
+     * Permite pagar por el contenido que yace en el carrito 
+     * @param event
+     */
     @FXML
     void pagarCarrito(ActionEvent event) {
         Orden nuevaOrden = new Orden(AppLauncher.getUsuarioActual(),AppLauncher.getCarritoActual().getDiscos());
@@ -83,7 +93,10 @@ public class CarritoDeComprasController implements Initializable {
         resultados.getItems().clear();
         totalpago.setText("0");
     }
-
+    /**
+     * Elimina el contenido del carrito 
+     * @param event
+     */
     @FXML
     void vaciarCarrito(ActionEvent event) {
         CRUD.vaciarCarrito(AppLauncher.getUsuarioActual().getUsername(),AppLauncher.getCarritoActual());
