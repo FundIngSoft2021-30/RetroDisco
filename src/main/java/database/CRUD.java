@@ -44,10 +44,14 @@ public class CRUD {
         }
         return true;
     }
-
     
     /*
      * * * * * * * METODOS USUARIO * * * * * * * * * * * * *
+     */
+    /**
+     * Agrega un nuevo usuario a la base de datos
+     * @param user llega un nuevo usuario
+     * @return rectifica si fue añadido o no
      */
     public static boolean agregarUsuario(Usuario user)
     {
@@ -71,7 +75,11 @@ public class CRUD {
         }
         return true;
     }
-
+    /**
+     * Busca el username de un usuario
+     * @param username nombre del usuario
+     * @return un usuario
+     */
     public static Usuario obtenerUsuario(String username){
         DocumentReference docRef = bd.collection("Usuarios").document(username);
         ApiFuture<DocumentSnapshot> future = docRef.get();
@@ -91,7 +99,11 @@ public class CRUD {
         
         return usuario;
     }
-
+    /**
+     * Se asegura que exista el usuario
+     * @param username nombre del usuario
+     * @return si existe o no el usuario
+     */
     public static boolean existeUsername(String username)
     {
         boolean existe = false;
@@ -109,7 +121,12 @@ public class CRUD {
         }
         return existe;
     }
-
+    /**
+     * Se autentica que la contraseña sea la del usuario
+     * @param username nombre del usuario
+     * @param password contraseña del usuario
+     * @return si la contraseña fue autenticada
+     */
     public static boolean autenticarPassword(String username, String password)
     {
         boolean retorno = false;
@@ -130,7 +147,11 @@ public class CRUD {
 
         return retorno;
     }
-    
+    /**
+     * Desactiva al usuario de la base de datos
+     * @param username nombre del usuario
+     * @returnn si el usuario se desactivó o no
+     */
     public static boolean desactivarUsuarioBD(String username){
 
         DocumentReference docRef = bd.collection("Usuarios").document(username);
@@ -148,6 +169,11 @@ public class CRUD {
     /*
     * * * * * * * METODOS DISCO * * * * * * * * * * *
     */
+    /**
+     * Añade un nuevo disco a la base de datos
+     * @param disc Un nuevo disco
+     * @return Si fue añadido a la base de datos o no
+     */
     public static boolean agregarDisco(Disco disc)
     {   
         Map<String, Object> docDisco = new HashMap<>();
@@ -171,7 +197,11 @@ public class CRUD {
         return true;
     }
     
-    
+    /**
+     * Califica el disco
+     * @param review Información de la calificación
+     * @return Si se realizó o no la calificación
+     */
     public static boolean agregarCalificacion(Calificacion review)
     {
         Map<String, Object> docCalificacion = new HashMap<>();
@@ -188,7 +218,11 @@ public class CRUD {
         }
         return true;
     }
-
+    /**
+     * Busca un disco 
+     * @param documentoID Numero del disco que se desea buscar
+     * @return El disco segun el ID
+     */
     public static Disco obtenerUnDisco(String documentoID)
     {
         Disco retorno = null;
@@ -213,7 +247,10 @@ public class CRUD {
         return retorno;
         
     }
-
+    /**
+     * Obtiene una colección de discos
+     * @return Discos Encontrados
+     */
     public static Map<String, Disco> obtenerColeccionDiscos()
     {
         //asynchronously retrieve all documents
@@ -234,7 +271,11 @@ public class CRUD {
         }
         return coleccionDiscos;
     }
-    
+    /**
+     * Obtiene una lista con los discos del usuario
+     * @param username un usuario registrado
+     * @return la lista con los discos 
+     */
     public static ArrayList<Disco> obtenerDiscosUsuario(String username){
         ArrayList<Disco> discos = new ArrayList<>();
         Query query = bd.collection("Discos").whereEqualTo("vendedor", username);
@@ -253,14 +294,23 @@ public class CRUD {
         return discos;        
     }
 
-    
+    /**
+     * Arregla la cadena y pone todo en mayúsculas
+     * @param cadena una cadena de caracteres cualquiera
+     * @return la cadena arreglada
+     */
     public static String arreglarCadena(String cadena){
         cadena = Normalizer.normalize(cadena, Normalizer.Form.NFD);
         cadena = cadena.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
         String retorno = cadena.toUpperCase();
         return retorno;
     }
-
+    /**
+     * 
+     * @param A
+     * @param B
+     * @return
+     */
     public static boolean contenidas(String A, String B)
     {
         boolean retorno = false;
@@ -296,7 +346,14 @@ public class CRUD {
         return Coincidencias;       
     }
 
-
+    /**
+     * Se encarga de buscar la categoria del disco
+     * @param terminoBusqueda Algún dato del disco, nombre, artista...
+     * @param categoria Tipo de categoria 
+     * @return Las categorias encontradas segun las encontradas
+     * @throws InterruptedException Si se queda 'pensando' o si se detiene
+     * @throws ExecutionException Se detiene si no devuelve el resultado
+     */
     public static Map<String, Disco> buscarDiscoCategoria(String terminoBusqueda, String categoria) throws InterruptedException, ExecutionException{
                
         Map<String, Disco> resultados = new HashMap<>();
@@ -343,7 +400,13 @@ public class CRUD {
         return resultados;
 
     }
-
+    /**
+     * Hace una busqueda global en los discos con el parametro recibido
+     * @param terminoBusqueda Alguna especificación que compone el disco
+     * @return Mapa con la busqueda recibida
+     * @throws InterruptedException Si se queda 'pensando' o si se detiene
+     * @throws ExecutionExceptionse Detiene si no devuelve el resultado
+     */
 	public static Map<String, Disco> busquedaGeneral(String terminoBusqueda) throws InterruptedException, ExecutionException{
         Map<String, Disco> resultados = new HashMap<>();
 
@@ -421,6 +484,11 @@ public class CRUD {
         /*
     * * * * * * * METODOS ORDEN * * * * * * 
     */
+    /**
+     * Agrega el orden segun la fecha realizada por el comprador
+     * @param orden Recibe una fecha o un comprador
+     * @return Si se realizó la orden de manera correcta o no se realizó
+     */
     public static boolean agregarOrden(Orden orden){ 
         Map<String, Object> docOrden = new HashMap<>();
         docOrden.put("comprador", orden.getComprador().getUsername());
@@ -450,7 +518,9 @@ public class CRUD {
         return true;
         
     }   
-    
+    /**
+     * Prueba si se estan llegando las ordenes del usuario
+     */
     public static void probarObtenerOrdenes(){
         ArrayList<Orden> ordenesJuanito = obtenerOrdenesUsuario("Juanito");
         if(ordenesJuanito.isEmpty()){
@@ -462,7 +532,11 @@ public class CRUD {
             }
         }
     }
-    
+    /**
+     * Obtiene una lista con las ordenes de los usuarios
+     * @param username Un usuario resgitrado 
+     * @return una lista con las ordenes realizadas por el usuario
+     */
     public static ArrayList<Orden> obtenerOrdenesUsuario(String username){
         Query query = bd.collection("Ordenes").whereEqualTo("comprador", username);
         ArrayList<Orden> ordenes = new ArrayList<>();
@@ -508,6 +582,11 @@ public class CRUD {
     /*
     * * * * * * METODOS CARRITO* * * * * * 
     */
+    /**
+     * Añade al carrito los discos seleccionados por un usuario
+     * @param username Un usuario registrado
+     * @return devuelve si se añadió o no en el carrito el disco 
+     */
     public static boolean agregarCarrito(String username){
         Map<String, Object> docData = new HashMap<>();
         ApiFuture<WriteResult> future = bd.collection("Carritos").document(username).set(docData);
@@ -519,7 +598,11 @@ public class CRUD {
         }
         return true;
     }
-    
+    /**
+     * Obtiene el carrito de un usuario 
+     * @param username Un usuario registrado
+     * @return Un carrito segun lo que haya elegido el usuario
+     */
     public static Carrito obtenerCarrito(String username){
         Carrito carrito = new Carrito();
         DocumentReference docRef = bd.collection("Carritos").document(username);
@@ -550,7 +633,13 @@ public class CRUD {
         }
         return carrito;
     }
-    
+    /**
+     * Se hace la actualización del contenido del carrito
+     * @param carrito valores del carrito
+     * @param username Usuario registrado
+     * @param actual valores del carrito antes de ser actualizado
+     * @return informa si fue actualizado o no el carrito
+     */
     public static boolean actualizarCarrito(Carrito carrito, String username, Carrito actual){
         vaciarCarrito(username, actual);
         Map<String, Object> docCarrito = new HashMap<>();
@@ -579,7 +668,11 @@ public class CRUD {
         }
         return true;
     }
-    
+    /**
+     * Borra un disco que esta contenida en el carrito 
+     * @param username Usuario al que esta asignado el carrito
+     * @param idDisco ID del disco que se desea eliminar
+     */
     public static void borrarDelCarrito(String username, String idDisco){
         ApiFuture<DocumentSnapshot> future = bd.collection("Carritos").document(username).get();
         String detalleId;
@@ -605,7 +698,11 @@ public class CRUD {
             return;
         }
     }
-    
+    /**
+     * Elimina el contenido que esta en el carrito
+     * @param username Usario relacionado con el carrito
+     * @param carrito informacion del carrito que se desea eliminar
+     */
     public static void vaciarCarrito(String username,Carrito carrito) {
         ApiFuture<DocumentSnapshot> future = bd.collection("Carritos").document(username).get();
         
