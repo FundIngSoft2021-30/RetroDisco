@@ -10,39 +10,42 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CarritoDeComprasController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #222121;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CarritoDeComprasController">
    <children>
-      <ScrollPane prefHeight="400.0" prefWidth="602.0">
+      <ScrollPane prefHeight="400.0" prefWidth="602.0" style="-fx-background-color: #3631d0;">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="589.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="589.0" style="-fx-background-color: #3631d0;">
                <children>
-                  <Label layoutX="143.0" layoutY="14.0" text="Carrito de compras">
+                  <Label layoutX="91.0" layoutY="31.0" prefHeight="51.0" prefWidth="274.0" text="Carrito de compras" textFill="#030000">
                      <font>
-                        <Font size="36.0" />
+                        <Font name="Garamond" size="36.0" />
                      </font>
                   </Label>
                   <Button fx:id="regresarAbusqeda" layoutX="34.0" layoutY="342.0" mnemonicParsing="false" onAction="#RegresaInterfazBusqueda" prefHeight="25.0" prefWidth="91.0" text="Regresar" />
                   <Button fx:id="pagar" layoutX="447.0" layoutY="342.0" mnemonicParsing="false" onAction="#pagarCarrito" text="Proceder al pago" />
                   <Button fx:id="eliminarDiscos" layoutX="134.0" layoutY="342.0" mnemonicParsing="false" onAction="#eliminarDiscos" text="Eliminar Disco" />
                   <Button fx:id="VaciarCarrito" layoutX="243.0" layoutY="342.0" mnemonicParsing="false" onAction="#vaciarCarrito" text="Vaciar Carrito" />
-                  <Label layoutX="407.0" layoutY="131.0" prefHeight="23.0" prefWidth="40.0" text="Total: $" />
+                  <Label layoutX="434.0" layoutY="82.0" prefHeight="55.0" prefWidth="102.0" text="Total: $">
+                     <font>
+                        <Font name="Garamond" size="12.0" />
+                     </font></Label>
                   <Label fx:id="totalpago" layoutX="447.0" layoutY="134.0" prefHeight="17.0" prefWidth="129.0" />
-                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="470.0" layoutY="28.0">
+                  <ImageView accessibleRole="BUTTON" fitHeight="19.0" fitWidth="23.0" layoutX="432.0" layoutY="13.0" style="-fx-focus-traversable: #222121;">
                      <image>
                         <Image url="@iconos/Cuenta_i.png" />
                      </image>
                   </ImageView>
-                  <ImageView accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="501.0" layoutY="25.0">
+                  <ImageView accessibleRole="BUTTON" fitHeight="23.0" fitWidth="26.0" layoutX="473.0" layoutY="11.0">
                      <image>
                         <Image url="@iconos/campana_i.png" />
                      </image>
                   </ImageView>
-                  <ImageView accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="531.0" layoutY="25.0">
+                  <ImageView accessibleRole="BUTTON" fitHeight="21.0" fitWidth="22.0" layoutX="512.0" layoutY="12.0">
                      <image>
                         <Image url="@iconos/Ayuda_i.png" />
                      </image>
                   </ImageView>
-                  <ListView fx:id="resultados" layoutX="41.0" layoutY="117.0" prefHeight="162.0" prefWidth="349.0" />
+                  <ListView fx:id="resultados" layoutX="34.0" layoutY="117.0" prefHeight="162.0" prefWidth="349.0" />
                </children>
             </AnchorPane>
         </content>

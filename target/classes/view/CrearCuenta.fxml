@@ -13,16 +13,16 @@
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CrearCuentaController">
    <children>
-      <VBox prefHeight="272.0" prefWidth="302.0">
+      <VBox prefHeight="272.0" prefWidth="302.0" style="-fx-background-color: #3F50DF;">
          <children>
             <Label alignment="TOP_LEFT" text="  Crear Cuenta" textAlignment="CENTER">
                <font>
-                  <Font size="40.0" />
+                  <Font name="Garamond" size="40.0" />
                </font>
             </Label>
             <Label text="Nombre">
                <font>
-                  <Font size="20.0" />
+                  <Font name="Garamond" size="20.0" />
                </font>
             </Label>
             <TextField fx:id="txtNombre">
@@ -32,7 +32,7 @@
             </TextField>
             <Label text="Apellido">
                <font>
-                  <Font size="20.0" />
+                  <Font name="Garamond" size="20.0" />
                </font>
             </Label>
             <TextField fx:id="txtApellido">
@@ -42,17 +42,17 @@
             </TextField>
             <Label text="Username">
                <font>
-                  <Font size="20.0" />
+                  <Font name="Garamond" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="txtUsername" layoutX="10.0" layoutY="167.0">
+            <TextField fx:id="txtUsername" layoutX="10.0" layoutY="167.0" prefHeight="39.0" prefWidth="314.0">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
             <Label text="Contraseña">
                <font>
-                  <Font size="20.0" />
+                  <Font name="Garamond" size="20.0" />
                </font>
             </Label>
             <PasswordField fx:id="txtPassword" layoutX="10.0" layoutY="236.0">
@@ -61,16 +61,16 @@
                </font>
             </PasswordField>
             <Label fx:id="errorCrearCuenta" />
-            <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
+            <SplitPane dividerPositions="0.22742474916387959" prefHeight="45.0" prefWidth="301.0" style="-fx-background-color: #3F50DF;">
                <items>
                   <Button fx:id="botonRegresar" mnemonicParsing="false" onAction="#regresarInicio" text="Regresar">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Garamond" size="14.0" />
                      </font>
                   </Button>
                   <Button fx:id="crearCuenta" mnemonicParsing="false" onAction="#CrearCuenta" text="Crear Cuenta">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Garamond" size="14.0" />
                      </font>
                   </Button>
                </items>
