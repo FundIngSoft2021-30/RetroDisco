@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
-<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -15,33 +16,35 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BuscarDiscoController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BuscarDiscoController">
    <children>
-      <Pane prefHeight="400.0" prefWidth="209.0">
-         <effect>
-            <Bloom threshold="1.0" />
-         </effect>
-      </Pane>
-      <Pane prefHeight="400.0" prefWidth="185.0">
+      <Pane prefHeight="400.0" prefWidth="598.0" style="-fx-background-color: #3631d0;">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-9.0" layoutY="7.0" prefHeight="17.0" prefWidth="174.0" text="Retro Disco" textAlignment="CENTER">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <TextField fx:id="nombreDisco" layoutX="-193.0" layoutY="144.0" prefHeight="25.0" prefWidth="347.0" promptText="Ingrese el disco a buscar..." />
-            <Button fx:id="vender" blendMode="LIGHTEN" layoutX="148.0" layoutY="12.0" mnemonicParsing="false" onAction="#venderDisco" prefHeight="21.0" prefWidth="47.0" text="Vender" textAlignment="CENTER" wrapText="true">
+            <Label layoutX="479.0" layoutY="121.0" text="Buscar por" />
+            <TextField fx:id="nombreDisco" layoutX="47.0" layoutY="117.0" prefHeight="25.0" prefWidth="347.0" promptText="Ingrese el disco a buscar..." />
+            <Button fx:id="vender" layoutX="24.0" layoutY="11.0" mnemonicParsing="false" onAction="#venderDisco" prefHeight="21.0" prefWidth="47.0" text="Vender" textAlignment="CENTER">
                <font>
                   <Font size="10.0" />
                </font>
-               <effect>
-                  <Blend />
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
             </Button>
-            <ImageView fx:id="buscar" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="36.0" layoutX="147.0" layoutY="141.0" onMouseClicked="#buscarDisco">
+            <VBox layoutX="36.0" layoutY="117.0" prefHeight="25.0" prefWidth="144.0" />
+            <ImageView fx:id="carrito" accessibleRole="BUTTON" fitHeight="19.0" fitWidth="19.0" layoutX="521.0" layoutY="12.0" onMouseClicked="#verCarrito" preserveRatio="true">
+               <image>
+                  <Image url="@iconos/Carrito_i.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="notificaciones" accessibleRole="BUTTON" fitHeight="21.0" fitWidth="19.0" layoutX="488.0" layoutY="12.0" onMouseClicked="#verNotificaciones" preserveRatio="true">
+               <image>
+                  <Image url="@iconos/campana_i.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ayuda" accessibleRole="BUTTON" fitHeight="21.0" fitWidth="25.0" layoutX="555.0" layoutY="11.0" onMouseClicked="#verAyuda" preserveRatio="true">
+               <image>
+                  <Image url="@iconos/Ayuda_i.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="salir" layoutX="473.0" layoutY="353.0" mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar Sesion" />
+            <ImageView fx:id="buscar" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="27.0" layoutX="412.0" layoutY="117.0" onMouseClicked="#buscarDisco">
                <image>
                   <Image url="@iconos/Buscar_i.png" />
                </image>
@@ -49,41 +52,28 @@
                   <Blend />
                </effect>
             </ImageView>
-            <ListView fx:id="resultados" layoutY="186.0" onMouseClicked="#verDisco" prefHeight="200.0" prefWidth="200.0" />
-         </children>
-         <effect>
-            <Bloom threshold="1.0" />
-         </effect>
-      </Pane>
-      <Pane prefHeight="400.0" prefWidth="204.0">
-         <children>
-            <Label layoutX="86.0" layoutY="128.0" text="Buscar por" />
-            <VBox layoutX="40.0" layoutY="145.0" prefHeight="25.0" prefWidth="144.0">
-               <children>
-                  <ComboBox fx:id="filtro" prefWidth="150.0" promptText="Filtro" />
-               </children>
-            </VBox>
-            <ImageView fx:id="carrito" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="56.0" layoutY="8.0" onMouseClicked="#verCarrito">
-               <image>
-                  <Image url="@iconos/Carrito_i.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="usuario" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="13.0" layoutY="8.0" onMouseClicked="#verUsuario">
+            <ImageView fx:id="usuario" accessibleRole="BUTTON" fitHeight="21.0" fitWidth="19.0" layoutX="454.0" layoutY="12.0" onMouseClicked="#verUsuario" preserveRatio="true">
                <image>
                   <Image url="@iconos/Cuenta_i.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="notificaciones" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="99.0" layoutY="5.0" onMouseClicked="#verNotificaciones">
-               <image>
-                  <Image url="@iconos/campana_i.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="ayuda" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="142.0" layoutY="5.0" onMouseClicked="#verAyuda">
-               <image>
-                  <Image url="@iconos/Ayuda_i.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="salir" layoutX="65.0" layoutY="357.0" mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar Sesion" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="139.0" layoutY="14.0" prefHeight="75.0" prefWidth="267.0" text="Retro Disco" textAlignment="CENTER">
+               <font>
+                  <Font name="Garamond" size="38.0" />
+               </font>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+            </Label>
+            <ComboBox fx:id="filtro" layoutX="423.0" layoutY="164.0" prefWidth="150.0" promptText="Filtro" />
+            <ListView fx:id="resultados" layoutX="53.0" layoutY="164.0" onMouseClicked="#verDisco" prefHeight="227.0" prefWidth="347.0" />
          </children>
       </Pane>
    </children>
