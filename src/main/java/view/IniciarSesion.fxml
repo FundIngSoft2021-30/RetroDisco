@@ -14,18 +14,18 @@
 
 <HBox prefHeight="503.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IniciarSesionController">
    <children>
-      <VBox fx:id="containerLeft" alignment="CENTER" prefWidth="427.0" style="-fx-background-color: #3F50DF;" HBox.hgrow="ALWAYS">
+      <VBox fx:id="containerLeft" alignment="CENTER" prefWidth="427.0" HBox.hgrow="ALWAYS">
          <children>
             <Label text="Iniciar Sesión">
                <font>
-                  <Font name="Garamond" size="40.0" />
+                  <Font size="40.0" />
                </font>
             </Label>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label text="Usuario">
                      <font>
-                        <Font name="Garamond" size="20.0" />
+                        <Font size="20.0" />
                      </font>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -41,7 +41,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="Garamond" size="20.0" />
+                        <Font size="20.0" />
                      </font>
                   </Label>
                   <PasswordField fx:id="txtContraseña">
@@ -57,20 +57,17 @@
             </VBox>
             <Pane prefHeight="121.0" prefWidth="427.0">
                <children>
-                  <Button fx:id="Ingresar" layoutX="32.0" layoutY="17.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#IniciarSesion" prefHeight="39.0" prefWidth="94.0" text="Ingresar">
+                  <Button fx:id="Ingresar" layoutX="32.0" layoutY="17.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#IniciarSesion" text="Ingresar">
                      <font>
-                        <Font name="Garamond" size="20.0" />
+                        <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="Invitado" layoutX="201.0" layoutY="17.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#iniciarInvitado" text="Iniciar como Invitado">
+                  <Button fx:id="Invitado" layoutX="195.0" layoutY="17.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#iniciarInvitado" text="Iniciar como Invitado">
                      <font>
-                        <Font name="Garamond" size="20.0" />
+                        <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="Cuenta" layoutX="87.0" layoutY="102.0" mnemonicParsing="false" onAction="#crearCuenta" prefHeight="25.0" prefWidth="153.0" text="Crear Cuenta">
-                     <font>
-                        <Font name="Garamond" size="20.0" />
-                     </font></Button>
+                  <Button fx:id="Cuenta" layoutX="195.0" layoutY="74.0" mnemonicParsing="false" onAction="#crearCuenta" prefHeight="39.0" prefWidth="212.0" text="Crear Cuenta" />
                </children>
             </Pane>
          </children>
