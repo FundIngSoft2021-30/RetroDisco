@@ -13,29 +13,32 @@
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BuscarSinLoginController">
    <children>
-      <Pane prefHeight="400.0" prefWidth="604.0">
+      <Pane prefHeight="400.0" prefWidth="604.0" style="-fx-background-color: #3631d0;">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="213.0" layoutY="8.0" prefHeight="17.0" prefWidth="174.0" text="Retro Disco" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="23.0" prefHeight="62.0" prefWidth="232.0" text="Retro Disco" textAlignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font name="Garamond" size="36.0" />
                </font>
             </Label>
-            <TextField fx:id="nombreDisco" layoutX="6.0" layoutY="98.0" prefHeight="25.0" prefWidth="347.0" promptText="Ingrese el disco a buscar..." />
-            <ImageView fx:id="buscar" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="36.0" layoutX="341.0" layoutY="95.0" onMouseClicked="#buscarDisco">
+            <TextField fx:id="nombreDisco" layoutX="20.0" layoutY="98.0" prefHeight="25.0" prefWidth="336.0" promptText="Ingrese el disco a buscar..." />
+            <ImageView fx:id="buscar" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="30.0" layoutX="363.0" layoutY="98.0" onMouseClicked="#buscarDisco">
                <image>
                   <Image url="@iconos/Buscar_i.png" />
                </image>
             </ImageView>
-            <Label layoutX="433.0" layoutY="78.0" text="Buscar por" />
-            <ComboBox fx:id="filtro" layoutX="397.0" layoutY="98.0" prefWidth="150.0" promptText="Filtro" />
-            <Button fx:id="crearCuenta" layoutX="377.0" layoutY="12.0" mnemonicParsing="false" onAction="#crearCuenta" text="Crear Cuenta" />
-            <Button fx:id="iniciarSesion" layoutX="472.0" layoutY="12.0" mnemonicParsing="false" onAction="#iniciarSesion" text="Iniciar sesión" />
-            <ImageView fx:id="ayuda" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="30.0" layoutX="555.0" layoutY="10.0" onMouseClicked="#verAyuda">
+            <Label layoutX="452.0" layoutY="82.0" prefHeight="32.0" prefWidth="85.0" text="Buscar por" textAlignment="CENTER">
+               <font>
+                  <Font name="Garamond" size="12.0" />
+               </font></Label>
+            <ComboBox fx:id="filtro" layoutX="419.0" layoutY="123.0" prefWidth="150.0" promptText="Filtro" />
+            <Button fx:id="crearCuenta" layoutX="370.0" layoutY="41.0" mnemonicParsing="false" onAction="#crearCuenta" prefHeight="25.0" prefWidth="99.0" text="Crear Cuenta" />
+            <Button fx:id="iniciarSesion" layoutX="484.0" layoutY="41.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="25.0" prefWidth="93.0" text="Iniciar sesión" />
+            <ImageView fx:id="ayuda" accessibleRole="BUTTON" fitHeight="18.0" fitWidth="20.0" layoutX="567.0" layoutY="14.0" onMouseClicked="#verAyuda">
                <image>
                   <Image url="@iconos/Ayuda_i.png" />
                </image>
             </ImageView>
-            <ListView fx:id="resultados" layoutX="73.0" layoutY="152.0" onMouseClicked="#verDisco" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="resultados" layoutX="26.0" layoutY="136.0" onMouseClicked="#verDisco" prefHeight="244.0" prefWidth="308.0" />
          </children>
       </Pane>
    </children>
