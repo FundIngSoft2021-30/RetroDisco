@@ -296,112 +296,82 @@ public class CRUD {
         return Coincidencias;       
     }
 
-
-    public static Map<String, Disco> buscarDiscoCategoria(String terminoBusqueda, String categoria){
-               
-        Map<String, Disco> resultados = new HashMap<>();
-        Set<String> idResultados = new HashSet<>();
-
-        Map<String, Disco> coleccionDiscos = obtenerColeccionDiscos();
-        Set<String> idDiscos = coleccionDiscos.keySet();
-
-        Map<String, String> mapaComparar = new HashMap<String, String>();
-        
-        
-        switch(categoria){
-            case "nombre" :
-                for (String key : idDiscos) {
-                    
-                    mapaComparar.put(key, coleccionDiscos.get(key).getNombre());
-                }
-                break;
-            case "artista" :
-                for (String key : idDiscos) {
-                    mapaComparar.put(key, coleccionDiscos.get(key).getArtista());
-                }
-                break;
-            case "formato" :
-                for (String key : idDiscos) {
-                    mapaComparar.put(key, coleccionDiscos.get(key).getFormato());
-                }
-                break;
-            case "vendedor" :
-                for (String key : idDiscos) {
-                    mapaComparar.put(key, coleccionDiscos.get(key).getVendedor());
-                }
-                break;
-            case "genero" :
-                for (String key : idDiscos) {
-                    mapaComparar.put(key, coleccionDiscos.get(key).getGenero());
-                }
-                break;
-            default: System.out.println("categoría invalida");
+    
+    public static Map<String, Disco> buscarPorNombre(String termino){
+        Map<String, Disco> retorno = new HashMap<>();
+        Map<String, Disco> coleccion = obtenerColeccionDiscos();
+        Set<String> keys = coleccion.keySet();
+        String terminoArreglado = arreglarCadena(termino);
+        String nombre;
+        Disco discoActual = new Disco();
+        for(String k: keys){
+            discoActual = coleccion.get(k);
+            nombre = arreglarCadena(discoActual.getNombre());
+            if(contenidas(terminoArreglado,nombre)){
+                retorno.put(discoActual.getId(),discoActual);
+            }
         }
-        
-        idResultados = compararStrMap(terminoBusqueda, mapaComparar);
-        for (String id : idResultados) {
-            resultados.put(id, coleccionDiscos.get(id));
-        }
-
-        return resultados;
-
+        return retorno;
     }
-
-	public static Map<String, Disco> busquedaGeneral(String terminoBusqueda){
-        Map<String, Disco> resultados = new HashMap<>();
-
-        Map<String, Disco> resultadosNombre = buscarDiscoCategoria(terminoBusqueda, "nombre");
-        Map<String, Disco> resultadosArtista = buscarDiscoCategoria(terminoBusqueda, "artista");
-        Map<String, Disco> resultadosFormato = buscarDiscoCategoria(terminoBusqueda, "formato");
-        Map<String, Disco> resultadosVendedor = buscarDiscoCategoria(terminoBusqueda, "vendedor");
-        Map<String, Disco> resultadosGenero = buscarDiscoCategoria(terminoBusqueda, "genero");
-
-        Set<String> idResultados = new HashSet<>();
-        if(resultadosNombre.size()>0){
-            idResultados = resultadosNombre.keySet();
-            for (String id : idResultados) {
-                if(resultados.containsKey(id)==false){
-                    resultados.put(id, resultadosNombre.get(id));
-                }
+    
+    public static Map<String, Disco> buscarPorArtista(String termino){
+        Map<String, Disco> retorno = new HashMap<>();
+        Map<String, Disco> coleccion = obtenerColeccionDiscos();
+        Set<String> keys = coleccion.keySet();
+        String terminoArreglado = arreglarCadena(termino);
+        String artista;
+        Disco discoActual = new Disco();
+        for(String k: keys){
+            discoActual = coleccion.get(k);
+            artista = arreglarCadena(discoActual.getArtista());
+            if(contenidas(terminoArreglado,artista)){
+                retorno.put(discoActual.getId(),discoActual);
             }
         }
-
-        if(resultadosArtista.size()>0){
-            idResultados = resultadosArtista.keySet();
-            for (String id : idResultados) {
-                if(resultados.containsKey(id)==false){
-                    resultados.put(id, resultadosArtista.get(id));
-                }
+        return retorno;
+    }
+    
+    public static Map<String, Disco> buscarPorFormato(String termino){
+        Map<String, Disco> retorno = new HashMap<>();
+        Map<String, Disco> coleccion = obtenerColeccionDiscos();
+        Set<String> keys = coleccion.keySet();
+        String terminoArreglado = arreglarCadena(termino);
+        String formato;
+        Disco discoActual = new Disco();
+        for(String k: keys){
+            discoActual = coleccion.get(k);
+            formato = arreglarCadena(discoActual.getFormato());
+            if(contenidas(terminoArreglado,formato)){
+                retorno.put(discoActual.getId(),discoActual);
             }
         }
-
-        if(resultadosFormato.size()>0){
-            idResultados = resultadosFormato.keySet();
-            for (String id : idResultados) {
-                if(resultados.containsKey(id)==false){
-                    resultados.put(id, resultadosFormato.get(id));
-                }
+        return retorno;
+    }
+    
+    public static Map<String, Disco> buscarPorGenero(String termino){
+        Map<String, Disco> retorno = new HashMap<>();
+        Map<String, Disco> coleccion = obtenerColeccionDiscos();
+        Set<String> keys = coleccion.keySet();
+        String terminoArreglado = arreglarCadena(termino);
+        String genero;
+        Disco discoActual = new Disco();
+        for(String k: keys){
+            discoActual = coleccion.get(k);
+            genero = arreglarCadena(discoActual.getGenero());
+            if(contenidas(terminoArreglado,genero)){
+                retorno.put(discoActual.getId(),discoActual);
             }
         }
-
-        if(resultadosVendedor.size()>0){
-            idResultados = resultadosVendedor.keySet();
-            for (String id : idResultados) {
-                if(resultados.containsKey(id)==false){
-                    resultados.put(id, resultadosVendedor.get(id));
-                }
-            }
-        }
-
-        if(resultadosGenero.size()>0){
-            idResultados = resultadosGenero.keySet();
-            for (String id : idResultados) {
-                if(resultados.containsKey(id)==false){
-                    resultados.put(id, resultadosGenero.get(id));
-                }
-            }
-        }
-
+        return retorno;
+    }
+    
+    public static Map<String, Disco> busquedaGeneral(String terminoBusqueda){
+        Map<String, Disco> resultados = buscarPorNombre(terminoBusqueda);
+        Map<String, Disco> resultadosArtista = buscarPorArtista(terminoBusqueda);
+        Map<String, Disco> resultadosGenero = buscarPorGenero(terminoBusqueda);
+        
+        resultados.putAll(resultadosArtista);
+        resultados.putAll(resultadosGenero);
         return resultados;
     }
         

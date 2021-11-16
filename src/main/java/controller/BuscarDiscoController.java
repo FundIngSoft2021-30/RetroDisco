@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.*;
+import javafx.scene.control.Alert;
 
 public class BuscarDiscoController implements Initializable {
 
@@ -64,14 +65,36 @@ public class BuscarDiscoController implements Initializable {
             Map<String, Disco> resultadoBusqueda = new HashMap<>();
             if (filtro.getValue() == null) {
                 System.out.println("Busqueda sin filtro");
-                resultadoBusqueda = CRUD.busquedaGeneral(nombreDisco.getText());
+                resultadoBusqueda = CRUD.buscarPorNombre(nombreDisco.getText());
+                resultadoBusqueda.putAll(CRUD.buscarPorArtista(nombreDisco.getText()));
+                
             } else {
                 System.out.println("Busqueda con filtro");
-                resultadoBusqueda = CRUD.buscarDiscoCategoria(nombreDisco.getText(), c);
+                switch(c){
+                    case "nombre":
+                    resultadoBusqueda = CRUD.buscarPorNombre(nombreDisco.getText());
+                    break;
+                    case "artista":
+                    resultadoBusqueda = CRUD.buscarPorArtista(nombreDisco.getText());
+                    break;
+                    case "formato":
+                    resultadoBusqueda = CRUD.buscarPorFormato(nombreDisco.getText());
+                    break;
+                    case "genero":
+                    resultadoBusqueda = CRUD.buscarPorGenero(nombreDisco.getText());
+                    break;
+                    default:
+                    resultadoBusqueda = CRUD.busquedaGeneral(nombreDisco.getText());
+                }
             }
+            
             ArrayList<Disco> discos = new ArrayList<Disco>(resultadoBusqueda.values());
             if (discos.isEmpty()) {
-
+                System.out.println("sin resultados");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Alerta!");
+                alert.setHeaderText("Sin resultados");
+                alert.showAndWait();
                 // Mensaje de error
 
             } else {
